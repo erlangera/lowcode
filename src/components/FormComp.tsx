@@ -1,4 +1,4 @@
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import { ElForm } from "element-plus"
 import FormItemComp from "./FormItemComp";
 import { config2Form } from "../utils/converter.js"
@@ -12,13 +12,12 @@ export default defineComponent({
     },
     setup(props, ctx) {
         const { config } = props;
-        const from = config2Form(config);
-        console.log(from);
+        const form = ref(config2Form(config));
+        console.log(form);
         const { fields } = config;
-        return () => <ElForm >
+        return () => <ElForm model={form}>
             {
                 fields.map(field => <FormItemComp config={field}></FormItemComp>)
-
             }
         </ElForm >;
     },

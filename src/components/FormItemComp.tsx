@@ -1,5 +1,5 @@
 import { defineComponent } from "vue";
-import { ElFormItem, ElInput } from "element-plus";
+import { ElFormItem } from "element-plus";
 import Block from "./Block";
 
 export default defineComponent({
