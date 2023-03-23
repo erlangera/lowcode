@@ -1,5 +1,7 @@
 import { defineComponent } from "vue";
-import { ElForm, ElFormItem, ElInput } from "element-plus"
+import { ElForm } from "element-plus"
+import FormItemComp from "./FormItemComp";
+import { config2Form } from "../utils/converter.js"
 
 export default defineComponent({
     props: {
@@ -10,13 +12,12 @@ export default defineComponent({
     },
     setup(props, ctx) {
         const { config } = props;
+        const from = config2Form(config);
+        console.log(from);
         const { fields } = config;
-        return () => <ElForm>
+        return () => <ElForm >
             {
-                fields.map(field => <ElFormItem label-width='50px'>{{
-                    label: () => field.key,
-                    default: () => <ElInput />
-                }}</ElFormItem>)
+                fields.map(field => <FormItemComp config={field}></FormItemComp>)
 
             }
         </ElForm >;

@@ -4,31 +4,57 @@ import { ref } from 'vue';
 
 const formConfig = ref({
   type: 'form',
+  tag: 'el-form',
   fields: [
     {
+      type: 'field',
       key: 'name',
-      type: 'string',
+      valueType: 'string',
       default: '',
       required: true,
-      label: {
-        type: 'string',
-        value: 'Name'
+      tag: 'el-form-item',
+      slots: {
+        label: {
+          tag: 'span',
+          value: 'Name'
+        },
+        default: {
+          tag: 'el-input'
+        }
       },
-      display: {
-        type: 'el-input'
+    },
+    {
+      type: 'field',
+      key: 'birthday',
+      valueType: 'string',
+      default: '',
+      required: true,
+      tag: 'el-form-item',
+      slots: {
+        label: {
+          tag: 'span',
+          value: 'Name'
+        },
+        default: {
+          tag: 'el-date-picker'
+        }
       }
     },
     {
-      key: 'birthday',
-      type: 'string',
-      default: null,
+      type: 'field',
+      key: 'country',
+      valueType: 'string',
+      default: '',
       required: true,
-      label: {
-        type: 'string',
-        value: 'Name'
-      },
-      display: {
-        type: 'el-date-picker'
+      tag: 'el-form-item',
+      slots: {
+        label: {
+          tag: 'span',
+          value: 'Country'
+        },
+        default: {
+          tag: 'el-select'
+        }
       }
     }
   ],
