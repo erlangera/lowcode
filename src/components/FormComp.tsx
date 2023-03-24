@@ -1,24 +1,66 @@
-import { defineComponent, ref } from "vue";
-import { ElForm } from "element-plus"
+import { defineComponent, reactive, ref, provide } from "vue";
+import { ElForm, ElDialog, ElButton } from "element-plus"
 import FormItemComp from "./FormItemComp";
-import { config2Form } from "../utils/converter.js"
+import { formCompContextKey } from "./constant";
+import { config2Form } from "../utils/converter"
 
-export default defineComponent({
+const FormComp = defineComponent({
+    name: 'FormComp',
     props: {
         config: {
             type: Object,
             required: true
         }
     },
+    // emits: ['open-dialog'],
     setup(props, ctx) {
-        const { config } = props;
-        const form = ref(config2Form(config));
-        console.log(form);
-        const { fields } = config;
-        return () => <ElForm model={form}>
-            {
+        // 后代组件暴露属性和方法
+        const model = reactive(config2Form(props.config));
+        const dialog = reactive({
+            key: null,
+            visible: false,
+            formConfig: null
+        });
+        // 实现弹窗的功能可放到FormComp组件此时可实现多层弹窗
+        const formCompRef = ref(null)
+        const openDialog = (key, formConfig) => {
+            // ctx.emit('open-dialog', formConfig)
+            dialog.key = key;
+            dialog.visible = true;
+            dialog.formConfig = formConfig;
+        };
+        const closeDialog = () => {
+            dialog.key = null;
+            dialog.visible = false;
+            dialog.formConfig = null;
+        }
+        const handleOk = () => {
+            const { model: subModel } = formCompRef.value;
+            console.log(dialog.key, subModel);
+            model[dialog.key] = subModel;
+            closeDialog();
+        }
+        provide(formCompContextKey, {
+            model,
+            openDialog
+        });
+        // 向父组件暴露属性
+        ctx.expose({ model });
+        // 渲染模板，此处使用了递归组件的方式渲染对话框中的表单
+        const { fields } = props.config;
+        return () => [
+            <ElForm model={model}>{
                 fields.map(field => <FormItemComp config={field}></FormItemComp>)
-            }
-        </ElForm >;
-    },
-})
+            }</ElForm >,
+            dialog.visible ? <ElDialog v-model={dialog.visible}>{{
+                default: () => dialog.formConfig ? <FormComp ref={formCompRef} config={dialog.formConfig}></FormComp> : null,
+                footer: () => <div>
+                    <ElButton onClick={closeDialog}>Cancel</ElButton>
+                    <ElButton type="primary" onClick={handleOk}>Confirm</ElButton>
+                </div>
+            }}</ElDialog> : null
+        ];
+    }
+});
+
+export default FormComp;
