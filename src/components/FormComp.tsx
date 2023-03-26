@@ -17,20 +17,20 @@ const FormComp = defineComponent({
         // 后代组件暴露属性和方法
         const model = reactive(config2Form(props.config));
         const dialog = reactive({
-            key: null,
+            key: '',
             visible: false,
             formConfig: null
         });
         // 实现弹窗的功能可放到FormComp组件此时可实现多层弹窗
         const formCompRef = ref(null)
-        const openDialog = (key, formConfig) => {
+        const openDialog = (key: string, formConfig) => {
             // ctx.emit('open-dialog', formConfig)
             dialog.key = key;
             dialog.visible = true;
             dialog.formConfig = formConfig;
         };
         const closeDialog = () => {
-            dialog.key = null;
+            dialog.key = '';
             dialog.visible = false;
             dialog.formConfig = null;
         }
@@ -48,18 +48,18 @@ const FormComp = defineComponent({
         ctx.expose({ model });
         // 渲染模板，此处使用了递归组件的方式渲染对话框中的表单
         const { fields } = props.config;
-        return () => [
+        return () => <div>
             <ElForm model={model}>{
                 fields.map(field => <FormItemComp config={field}></FormItemComp>)
-            }</ElForm >,
-            dialog.visible ? <ElDialog v-model={dialog.visible}>{{
+            }</ElForm >
+            {dialog.visible ? <ElDialog v-model={dialog.visible}>{{
                 default: () => dialog.formConfig ? <FormComp ref={formCompRef} config={dialog.formConfig}></FormComp> : null,
                 footer: () => <div>
                     <ElButton onClick={closeDialog}>Cancel</ElButton>
                     <ElButton type="primary" onClick={handleOk}>Confirm</ElButton>
                 </div>
-            }}</ElDialog> : null
-        ];
+            }}</ElDialog> : null}
+        </div>;
     }
 });
 
