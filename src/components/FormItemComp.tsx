@@ -12,7 +12,7 @@ export default defineComponent({
     },
     setup(props, ctx) {
         const { config } = props;
-        return () => <ElFormItem prop={config.key}>{{
+        return () => <ElFormItem prop={config.key} {...config.attrs}>{{
             label: () => <Block config={config.slots.label} field={config}></Block>,
             default: () => <Block config={config.slots.default} field={config}></Block>
         }}</ElFormItem >

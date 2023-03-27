@@ -38,8 +38,11 @@ const formConfig = ref({
         },
         default: {
           tag: 'el-input'
+          // bindValue: true
         }
       },
+      attrs: {
+      }
     },
     {
       type: 'field',
@@ -56,6 +59,8 @@ const formConfig = ref({
         default: {
           tag: 'el-date-picker'
         }
+      },
+      attrs: {
       }
     },
     {
@@ -92,6 +97,8 @@ const formConfig = ref({
             ]
           }
         }
+      },
+      attrs: {
       }
     },
     {
@@ -106,7 +113,7 @@ const formConfig = ref({
         },
         default: [
           {
-            tag: 'el-input'
+            tag: 'plain-text-comp'
           },
           {
             tag: 'el-button',
@@ -162,40 +169,45 @@ const formConfig = ref({
                         tag: 'span',
                         value: 'Father'
                       },
-                      default: {
-                        tag: 'el-button',
-                        trigger: 'click',
-                        triggerCb: {
-                          type: 'dialog',
-                          tag: 'el-dialog',
-                          form: {
-                            type: 'form',
-                            tag: 'el-form',
-                            fields: [
-                              {
-                                type: 'field',
-                                key: 'name',
-                                valueType: 'string',
-                                default: '',
-                                required: true,
-                                tag: 'el-form-item',
-                                slots: {
-                                  label: {
-                                    tag: 'span',
-                                    value: 'Name'
-                                  },
-                                  default: {
-                                    tag: 'el-input'
-                                  }
-                                },
-                              }
-                            ]
-                          }
+                      default: [
+                        {
+                          tag: 'plain-text-comp'
                         },
-                        attrs: {
+                        {
+                          tag: 'el-button',
+                          trigger: 'click',
+                          triggerCb: {
+                            type: 'dialog',
+                            tag: 'el-dialog',
+                            form: {
+                              type: 'form',
+                              tag: 'el-form',
+                              fields: [
+                                {
+                                  type: 'field',
+                                  key: 'name',
+                                  valueType: 'string',
+                                  default: '',
+                                  required: true,
+                                  tag: 'el-form-item',
+                                  slots: {
+                                    label: {
+                                      tag: 'span',
+                                      value: 'Name'
+                                    },
+                                    default: {
+                                      tag: 'el-input'
+                                    }
+                                  },
+                                }
+                              ]
+                            }
+                          },
+                          attrs: {
 
+                          }
                         }
-                      }
+                      ]
                     }
                   }
                 ]
@@ -206,11 +218,13 @@ const formConfig = ref({
             }
           }
         ]
+      },
+      attrs: {
       }
     }
   ],
   attrs: {
-
+    labelWidth: '120px'
   }
 })
 

@@ -1,5 +1,6 @@
 import { defineComponent, resolveComponent, inject } from "vue";
 import { ElInput, ElSelect, ElOption, ElDatePicker, ElButton } from "element-plus";
+import PlainTextComp from "./PlainTextComp";
 import { formCompContextKey } from "./constant";
 import { upperFirstCharacter } from "../utils/converter";
 
@@ -8,7 +9,7 @@ const reserveTags = ['span', 'div', 'p']
 const Block = defineComponent({
     name: 'Block',
     components: {
-        ElInput, ElSelect, ElOption, ElDatePicker, ElButton
+        ElInput, ElSelect, ElOption, ElDatePicker, ElButton, PlainTextComp
     },
     props: {
         config: {
@@ -54,11 +55,11 @@ const Block = defineComponent({
         // 渲染
         if (reserveTags.includes(config.tag)) {
             // 原生标签
-            return () => <config.tag>{config.value}</config.tag>
+            return () => <config.tag {...config.attrs}>{config.value}</config.tag>
         } else {
             // 组件
             const component = resolveComponent(config.tag);
-            return () => <component v-model={model[fieldConfig.key]} {...config} {...listeners}>{{
+            return () => <component v-model={model[fieldConfig.key]} {...config.attrs} {...listeners}>{{
                 ...slots
             }}</component>;
         }

@@ -47,19 +47,17 @@ const FormComp = defineComponent({
         // 向父组件暴露属性
         ctx.expose({ model });
         // 渲染模板，此处使用了递归组件的方式渲染对话框中的表单
-        const { fields } = props.config;
-        return () => <div>
-            <ElForm model={model}>{
-                fields.map(field => <FormItemComp config={field}></FormItemComp>)
-            }</ElForm >
-            {dialog.visible ? <ElDialog v-model={dialog.visible}>{{
+        const { fields, attrs } = props.config;
+        return () => <ElForm model={model} {...attrs}>{[
+            ...fields.map(field => <FormItemComp config={field}></FormItemComp>),
+            dialog.visible ? <ElDialog v-model={dialog.visible} appendToBody>{{
                 default: () => dialog.formConfig ? <FormComp ref={formCompRef} config={dialog.formConfig}></FormComp> : null,
                 footer: () => <div>
                     <ElButton onClick={closeDialog}>Cancel</ElButton>
                     <ElButton type="primary" onClick={handleOk}>Confirm</ElButton>
                 </div>
-            }}</ElDialog> : null}
-        </div>;
+            }}</ElDialog> : null
+        ]}</ElForm>;
     }
 });
 
