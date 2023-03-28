@@ -1,5 +1,6 @@
 import { defineComponent, resolveComponent, inject } from "vue";
 import { ElInput, ElSelect, ElOption, ElDatePicker, ElButton } from "element-plus";
+import { Edit } from '@element-plus/icons-vue';
 import PlainTextComp from "./PlainTextComp";
 import { formCompContextKey } from "./constant";
 import { upperFirstCharacter } from "../utils/converter";
@@ -9,7 +10,7 @@ const reserveTags = ['span', 'div', 'p']
 const Block = defineComponent({
     name: 'Block',
     components: {
-        ElInput, ElSelect, ElOption, ElDatePicker, ElButton, PlainTextComp
+        ElInput, ElSelect, ElOption, ElDatePicker, ElButton, PlainTextComp, Edit
     },
     props: {
         config: {
@@ -23,7 +24,7 @@ const Block = defineComponent({
     },
     setup(props, ctx) {
         const { config, field: fieldConfig } = props;
-        
+
         if (Array.isArray(config)) {
             return () => config.map(item => <Block config={item} field={fieldConfig}></Block>)
         }

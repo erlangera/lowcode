@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <FormComp v-if="flag" ref="formCompRef" :config="formConfig" class="left" />
+    <FormComp v-if="flag" v-model="model" :config="formConfig" class="left" />
     
     <div class="middle">
       <ElButton @click="render">&lt;&lt;渲染表单</ElButton>
@@ -13,13 +13,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, nextTick } from 'vue';
+import { ref, reactive, nextTick } from 'vue';
 import { ElButton } from 'element-plus';
 import FormComp from './components/FormComp';
 import EditorComp from './components/EditorComp';
+import { config2Form } from "./utils/converter";
 
 const flag = ref(true);
-const formCompRef = ref(null);
 const formConfig = ref({
   type: 'form',
   tag: 'el-form',
@@ -200,21 +200,38 @@ const formConfig = ref({
                                     }
                                   },
                                 }
-                              ]
+                              ],
+                              attrs: {
+                                labelWidth: '120px'
+                              }
+                            }
+                          },
+                          slots: {
+                            icon: {
+                              tag: 'edit'
                             }
                           },
                           attrs: {
-
+                            link: true,
                           }
                         }
                       ]
                     }
                   }
-                ]
+                ],
+                attrs: {
+                  labelWidth: '120px'
+                }
+              }
+            },
+            slots: {
+              icon: {
+                tag: 'edit'
               }
             },
             attrs: {
-
+              link: true,
+              // icon: 'Edit'
             }
           }
         ]
@@ -227,6 +244,9 @@ const formConfig = ref({
     labelWidth: '120px'
   }
 })
+// 因为会使用v-model更新model所以不能使用const，此处也可以使用ref或者对象的字段代替
+// 后期将仿照el-form使用model属性，届时将无此限制，不过使用model时字段值双向绑定时时将会比较困难
+let model = reactive(config2Form(formConfig.value))
 
 const editFlag = ref(true);
 const content = ref('');
@@ -241,6 +261,7 @@ const render = () => {
     }
     if (json && json.type === 'form') {
       formConfig.value = json
+      model = reactive(config2Form(formConfig.value))
     }
     flag.value = true;
   })
@@ -256,7 +277,8 @@ const getForm = () => {
   editFlag.value = false;
   nextTick(() => {
     editFlag.value = true;
-    content.value = JSON.stringify(formCompRef.value.model, null, 2);
+    content.value = JSON.stringify(model, null, 2);
+    console.log(model);
   })
 }
 </script>
