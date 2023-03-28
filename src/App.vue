@@ -208,7 +208,7 @@ const formConfig = ref({
                           },
                           slots: {
                             icon: {
-                              tag: 'edit'
+                              tag: 'Edit'
                             }
                           },
                           attrs: {
@@ -226,7 +226,7 @@ const formConfig = ref({
             },
             slots: {
               icon: {
-                tag: 'edit'
+                tag: 'Edit'
               }
             },
             attrs: {
