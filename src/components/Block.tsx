@@ -1,6 +1,6 @@
 import { defineComponent, resolveComponent, inject } from "vue";
 import { ElInput, ElSelect, ElOption, ElDatePicker, ElButton } from "element-plus";
-import { Edit } from '@element-plus/icons-vue';
+import { Edit, Plus } from '@element-plus/icons-vue';
 import PlainTextComp from "./PlainTextComp";
 import { formCompContextKey } from "./constant";
 import { upperFirstCharacter } from "../utils/converter";
@@ -10,7 +10,7 @@ const reserveTags = ['span', 'div', 'p']
 const Block = defineComponent({
     name: 'Block',
     components: {
-        ElInput, ElSelect, ElOption, ElDatePicker, ElButton, PlainTextComp, Edit
+        ElInput, ElSelect, ElOption, ElDatePicker, ElButton, PlainTextComp, Edit, Plus
     },
     props: {
         config: {
@@ -26,18 +26,39 @@ const Block = defineComponent({
         const { config, field: fieldConfig } = props;
 
         if (Array.isArray(config)) {
-            return () => config.map(item => <Block config={item} field={fieldConfig}></Block>)
+            return () => config.map(item => <Block config={item} field={fieldConfig} {...item.attrs}></Block>)
         }
 
         // 处理FormComp provide的属性
-        const formContext = inject(formCompContextKey);
-        const { model, openDialog } = formContext;
+        const { model, openDialog } = inject(formCompContextKey);
 
         // 处理监听
         const listeners = {};
         if (config.trigger) {
             listeners[`on${upperFirstCharacter(config.trigger)}`] = () => {
-                openDialog(fieldConfig.key, config.triggerCb.form);
+                switch (config.triggerCb.type) {
+                    case 'dialog':
+                        openDialog(fieldConfig.key, config.triggerCb.form);
+                        break;
+                    case 'insert':
+                        const defaultSlot = fieldConfig.slots.default;
+                        const index = defaultSlot.length - 1;
+                        // 配置中传入index方便绑定值及相关操作
+                        const item = Array.isArray(config.triggerCb.item)
+                            ?
+                            config.triggerCb.item.map(item => ({ ...JSON.parse(JSON.stringify(item)), index }))
+                            :
+                            { ...config.triggerCb.item, index };
+                        defaultSlot.splice(index, 0, item);
+                        // 初始化值
+                        model[fieldConfig.key][index] = config.triggerCb.default;
+                        break;
+                    case 'remove':
+                        model[fieldConfig.key].splice(config.index, 1);
+                        fieldConfig.slots.default.splice(config.index, 1);
+                    default:
+                        break;
+                }
             }
         }
 
@@ -60,9 +81,15 @@ const Block = defineComponent({
         } else {
             // 组件
             const component = resolveComponent(config.tag);
-            return () => <component v-model={model[fieldConfig.key]} {...config.attrs} {...listeners}>{{
-                ...slots
-            }}</component>;
+            return () => config.index !== undefined
+                ?
+                <component v-model={model[fieldConfig.key][config.index]} {...config.attrs} {...listeners}>{{
+                    ...slots
+                }}</component>
+                :
+                <component v-model={model[fieldConfig.key]} {...config.attrs} {...listeners}>{{
+                    ...slots
+                }}</component>;
         }
     }
 });
