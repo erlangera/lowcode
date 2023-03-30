@@ -1,6 +1,5 @@
-import { defineComponent } from "vue";
+import { defineComponent, defineAsyncComponent } from "vue";
 import { ElFormItem } from "element-plus";
-import Block from "./Block";
 
 export default defineComponent({
     name: 'FormItemComp',
@@ -9,6 +8,10 @@ export default defineComponent({
             type: Object,
             required: true
         }
+    },
+    components: {
+        // 通过异步组件解决循环依赖问题
+        Block: defineAsyncComponent(() => import("./Block"))
     },
     setup(props, ctx) {
         const { config } = props;

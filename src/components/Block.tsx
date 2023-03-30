@@ -1,16 +1,18 @@
 import { defineComponent, resolveComponent, inject } from "vue";
 import { ElInput, ElSelect, ElOption, ElDatePicker, ElButton } from "element-plus";
-import { Edit, Plus } from '@element-plus/icons-vue';
+import { Edit, Plus, Minus } from '@element-plus/icons-vue';
 import PlainTextComp from "./PlainTextComp";
+import FormComp from "./FormComp";
 import { formCompContextKey } from "./constant";
 import { upperFirstCharacter } from "../utils/converter";
+import { config2Form } from "../utils/converter";
 
 const reserveTags = ['span', 'div', 'p']
 
 const Block = defineComponent({
     name: 'Block',
     components: {
-        ElInput, ElSelect, ElOption, ElDatePicker, ElButton, PlainTextComp, Edit, Plus
+        ElInput, ElSelect, ElOption, ElDatePicker, ElButton, Edit, Plus, Minus, PlainTextComp, FormComp
     },
     props: {
         config: {
@@ -25,12 +27,28 @@ const Block = defineComponent({
     setup(props, ctx) {
         const { config, field: fieldConfig } = props;
 
+        // 处理FormComp provide的属性
+        const { model, openDialog } = inject(formCompContextKey);
+
+        // 子表单
+        if (config.type === 'form') {
+            // 初始化值
+            if (config.index !== undefined) {
+                model[fieldConfig.key][config.index] = config2Form(config);
+            } else {
+                model[fieldConfig.key] = config2Form(config);
+            }
+            return () => config.index !== undefined
+                ?
+                <FormComp v-model={model[fieldConfig.key][config.index]} config={config} ></FormComp>
+                :
+                <FormComp v-model={model[fieldConfig.key]} config={config} ></FormComp>;
+        }
+
         if (Array.isArray(config)) {
             return () => config.map(item => <Block config={item} field={fieldConfig} {...item.attrs}></Block>)
         }
 
-        // 处理FormComp provide的属性
-        const { model, openDialog } = inject(formCompContextKey);
 
         // 处理监听
         const listeners = {};
@@ -43,15 +61,16 @@ const Block = defineComponent({
                     case 'insert':
                         const defaultSlot = fieldConfig.slots.default;
                         const index = defaultSlot.length - 1;
+                        const template = config.triggerCb.item;
                         // 配置中传入index方便绑定值及相关操作
-                        const item = Array.isArray(config.triggerCb.item)
+                        const itemSlots = Array.isArray(template.slots)
                             ?
-                            config.triggerCb.item.map(item => ({ ...JSON.parse(JSON.stringify(item)), index }))
+                            template.slots.map(item => ({ ...JSON.parse(JSON.stringify(item)), index }))
                             :
-                            { ...config.triggerCb.item, index };
-                        defaultSlot.splice(index, 0, item);
+                            { ...template.slots, index };
+                        defaultSlot.splice(index, 0, itemSlots);
                         // 初始化值
-                        model[fieldConfig.key][index] = config.triggerCb.default;
+                        model[fieldConfig.key][index] = template.default;
                         break;
                     case 'remove':
                         model[fieldConfig.key].splice(config.index, 1);

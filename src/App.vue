@@ -237,6 +237,56 @@ const formConfig = ref({
     },
     {
       type: "field",
+      key: "nickname",
+      valueType: "array",
+      default: [],
+      slots: {
+        label: {
+          tag: "span",
+          value: "Nickname",
+        },
+        default: [
+          {
+            tag: "el-button",
+            trigger: "click",
+            triggerCb: {
+              type: "insert",
+              item: {
+                slots: [
+                  {
+                    tag: "el-input",
+                  },
+                  {
+                    tag: "el-button",
+                    trigger: "click",
+                    triggerCb: {
+                      type: "remove",
+                    },
+                    slots: {
+                      icon: {
+                        tag: "Minus",
+                      },
+                    },
+                  },
+                ],
+                default: "",
+              },
+            },
+            slots: {
+              icon: {
+                tag: "Plus",
+              },
+            },
+            attrs: {
+              link: true,
+              key: "insert",
+            },
+          },
+        ],
+      },
+    },
+    {
+      type: "field",
       key: "children",
       valueType: "array",
       default: [],
@@ -251,20 +301,69 @@ const formConfig = ref({
             trigger: "click",
             triggerCb: {
               type: "insert",
-              item: [
-                {
-                  tag: "el-input",
-                },
-                {
-                  tag: "el-button",
-                  trigger: "click",
-                  triggerCb: {
-                    type: "remove",
+              item: {
+                slots: [
+                  {
+                    type: "form",
+                    tag: "el-form",
+                    fields: [
+                      {
+                        type: "field",
+                        key: "name",
+                        valueType: "string",
+                        default: "dd",
+                        required: true,
+                        tag: "el-form-item",
+                        slots: {
+                          label: {
+                            tag: "span",
+                            value: "Name",
+                          },
+                          default: {
+                            tag: "el-input",
+                          },
+                        },
+                      },
+                      {
+                        type: "field",
+                        key: "age",
+                        valueType: "number",
+                        default: null,
+                        required: true,
+                        tag: "el-form-item",
+                        slots: {
+                          label: {
+                            tag: "span",
+                            value: "Age",
+                          },
+                          default: {
+                            tag: "el-input",
+                          },
+                        },
+                      },
+                    ],
+                    attrs: {
+                      labelWidth: "80px",
+                    },
                   },
+                  {
+                    tag: "el-button",
+                    trigger: "click",
+                    triggerCb: {
+                      type: "remove",
+                    },
+                    slots: {
+                      icon: {
+                        tag: "Minus",
+                      },
+                    },
+                  },
+                ],
+                default: {
+                  name: "",
+                  age: null,
                 },
-              ],
-              // 此处的默认值方式待优化，最好转移至item模板 TODO
-              default: "",
+              },
             },
             slots: {
               icon: {
@@ -285,7 +384,7 @@ const formConfig = ref({
   },
 });
 // 因为会使用v-model更新model所以不能使用const，此处也可以使用ref或者对象的字段代替
-// 后期将仿照el-form使用model属性，届时将无此限制，不过使用model时字段值双向绑定时时将会比较困难
+// 后期将仿照el-form使用model属性，届时将无此限制，不过使用model时字段值双向绑定时时将会比较困难 TODO
 let model = reactive(config2Form(formConfig.value));
 
 const editFlag = ref(true);
@@ -318,7 +417,6 @@ const getForm = () => {
   nextTick(() => {
     editFlag.value = true;
     content.value = JSON.stringify(model, null, 2);
-    console.log(model);
   });
 };
 </script>
