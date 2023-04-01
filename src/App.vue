@@ -378,6 +378,107 @@ const formConfig = ref({
         ],
       },
     },
+    {
+      type: "field",
+      key: "brother",
+      valueType: "array",
+      default: [],
+      slots: {
+        label: {
+          tag: "span",
+          value: "Brother",
+        },
+        default: [
+          {
+            tag: "el-button",
+            trigger: "click",
+            triggerCb: {
+              type: "insert",
+              item: {
+                slots: [
+                  {
+                    tag: "plain-text-comp",
+                  },
+                  {
+                    tag: "el-button",
+                    trigger: "click",
+                    triggerCb: {
+                      type: "dialog",
+                      tag: "el-dialog",
+                      form: {
+                        type: "form",
+                        tag: "el-form",
+                        fields: [
+                          {
+                            type: "field",
+                            key: "name",
+                            valueType: "string",
+                            default: "",
+                            required: true,
+                            tag: "el-form-item",
+                            slots: {
+                              label: {
+                                tag: "span",
+                                value: "Name",
+                              },
+                              default: {
+                                tag: "el-input",
+                              },
+                            },
+                          },
+                          {
+                            type: "field",
+                            key: "age",
+                            valueType: "number",
+                            default: null,
+                            required: true,
+                            tag: "el-form-item",
+                            slots: {
+                              label: {
+                                tag: "span",
+                                value: "Age",
+                              },
+                              default: {
+                                tag: "el-input",
+                              },
+                            },
+                          },
+                        ],
+                        attrs: {
+                          labelWidth: "120px",
+                        },
+                      },
+                    },
+                  },
+                  {
+                    tag: "el-button",
+                    trigger: "click",
+                    triggerCb: {
+                      type: "remove",
+                    },
+                    slots: {
+                      icon: {
+                        tag: "Minus",
+                      },
+                    },
+                  },
+                ],
+                default: null,
+              },
+            },
+            slots: {
+              icon: {
+                tag: "Plus",
+              },
+            },
+            attrs: {
+              link: true,
+              key: "insert",
+            },
+          },
+        ],
+      },
+    },
   ],
   attrs: {
     labelWidth: "120px",

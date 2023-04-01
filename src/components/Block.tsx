@@ -56,7 +56,7 @@ const Block = defineComponent({
             listeners[`on${upperFirstCharacter(config.trigger)}`] = () => {
                 switch (config.triggerCb.type) {
                     case 'dialog':
-                        openDialog(fieldConfig.key, config.triggerCb.form);
+                        openDialog(fieldConfig.key, config.triggerCb.form, config.index);
                         break;
                     case 'insert':
                         const defaultSlot = fieldConfig.slots.default;

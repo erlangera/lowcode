@@ -27,14 +27,20 @@ const FormComp = defineComponent({
             key: '',
             visible: false,
             formConfig: null,
-            model: {}
+            model: {},
+            index: undefined,
         });
-        const openDialog = (key: string, formConfig) => {
+        const openDialog = (key: string, formConfig, index: undefined | number) => {
             // ctx.emit('open-dialog', formConfig)
             dialog.key = key;
             dialog.visible = true;
             dialog.formConfig = formConfig;
-            dialog.model = model[key];
+            dialog.index = index;
+            if (dialog.index === undefined) {
+                dialog.model = model[key];
+            } else {
+                dialog.model = model[key][dialog.index];
+            }
         };
         const closeDialog = () => {
             dialog.key = '';
@@ -43,8 +49,13 @@ const FormComp = defineComponent({
             dialog.model = {};
         }
         const handleOk = () => {
-            console.log(dialog.key, dialog.model);
-            model[dialog.key] = dialog.model;
+            console.log('handle', dialog);
+
+            if (dialog.index === undefined) {
+                model[dialog.key] = dialog.model;
+            } else {
+                model[dialog.key][dialog.index] = dialog.model;
+            }
             closeDialog();
         }
 
