@@ -1,11 +1,20 @@
 <template>
   <div class="container">
-    <FormComp v-if="flag" v-model="model" :config="formConfig" class="left" />
+    <FormComp
+      ref="formCompRef"
+      v-if="flag"
+      v-model="model"
+      :config="formConfig"
+      class="left"
+    />
 
     <div class="middle">
       <ElButton @click="render">&lt;&lt;渲染表单</ElButton>
       <ElButton @click="getRenderConfig">&gt;&gt;获取渲染配置</ElButton>
       <ElButton @click="getForm">&gt;&gt;获取表单值</ElButton>
+      <ElButton @click="validateForm">验证表单</ElButton>
+      <ElButton @click="resetForm">重置表单</ElButton>
+      <ElButton @click="clearValidate">清除表单验证</ElButton>
     </div>
 
     <EditorComp v-if="editFlag" class="right" v-model="content" />
@@ -30,6 +39,17 @@ const formConfig = ref({
       valueType: "string",
       default: "",
       required: true,
+      rules: [
+        {
+          max: 10,
+          min: 2,
+          message: "长度2-10",
+        },
+        {
+          pattern: /^[a-zA-Z ]+$/,
+          message: "只允许输入字母和空格",
+        },
+      ],
       tag: "el-form-item",
       slots: {
         label: {
@@ -93,6 +113,9 @@ const formConfig = ref({
                 label: "America",
               },
             ],
+          },
+          attrs: {
+            clearable: true,
           },
         },
       },
@@ -519,6 +542,23 @@ const getForm = () => {
     editFlag.value = true;
     content.value = JSON.stringify(model, null, 2);
   });
+};
+const formCompRef = ref(null);
+const validateForm = () => {
+  formCompRef.value.validate((valid) => {
+    if (valid) {
+      console.log("submit!");
+    } else {
+      console.log("error submit!");
+      return false;
+    }
+  });
+};
+const resetForm = () => {
+  formCompRef.value.resetFields();
+};
+const clearValidate = () => {
+  formCompRef.value.clearValidate();
 };
 </script>
 

@@ -1,4 +1,4 @@
-import { defineComponent, reactive, provide } from "vue";
+import { defineComponent, reactive, ref, provide } from "vue";
 import { ElForm, ElDialog, ElButton } from "element-plus";
 import FormItemComp from "./FormItemComp";
 import { formCompContextKey } from "./constant";
@@ -64,11 +64,29 @@ const FormComp = defineComponent({
             model,
             openDialog
         });
+
         // 向父组件暴露属性
-        // ctx.expose({ model });
+        const formRef = ref(null);
+        ctx.expose({
+            get validate() {
+                return formRef.value.validate
+            },
+            get validateField() {
+                return formRef.value.validateField
+            },
+            get clearValidate() {
+                return formRef.value.clearValidate
+            },
+            get resetFields() {
+                return formRef.value.resetFields
+            },
+            get scrollToField() {
+                return formRef.value.scrollToField
+            },
+        });
         // 渲染模板，此处使用了递归组件的方式渲染对话框中的表单
         const { fields, attrs } = props.config;
-        return () => <ElForm model={model} {...attrs}>{[
+        return () => <ElForm ref={formRef} model={model} {...attrs}>{[
             ...fields.map(field => <FormItemComp config={field}></FormItemComp>),
             dialog.visible ? <ElDialog v-model={dialog.visible} appendToBody>{{
                 default: () => dialog.formConfig ? <FormComp v-model={dialog.model} config={dialog.formConfig}></FormComp> : null,
