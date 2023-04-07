@@ -1,7 +1,7 @@
 import { defineComponent, defineAsyncComponent } from "vue";
 import { ElFormItem } from "element-plus";
 
-function formatToElementRules(config) : any[] {
+function formatToElementRules(config) {
     let res = [];
     if (config.required) {
         res.push({

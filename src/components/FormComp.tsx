@@ -23,6 +23,7 @@ const FormComp = defineComponent({
         ctx.emit('update:model-value', model);
 
         // 实现弹窗的功能可放到FormComp组件此时可实现多层弹窗
+        const dialogFormRef = ref(null);
         const dialog = reactive({
             key: '',
             visible: false,
@@ -49,14 +50,17 @@ const FormComp = defineComponent({
             dialog.model = {};
         }
         const handleOk = () => {
-            console.log('handle', dialog);
-
-            if (dialog.index === undefined) {
-                model[dialog.key] = dialog.model;
-            } else {
-                model[dialog.key][dialog.index] = dialog.model;
-            }
-            closeDialog();
+            // 提交校验
+            dialogFormRef.value.validate((valid) => {
+                if (valid) {
+                    if (dialog.index === undefined) {
+                        model[dialog.key] = dialog.model;
+                    } else {
+                        model[dialog.key][dialog.index] = dialog.model;
+                    }
+                    closeDialog();
+                }
+            })
         }
 
         // 后代组件暴露属性和方法
@@ -89,7 +93,7 @@ const FormComp = defineComponent({
         return () => <ElForm ref={formRef} model={model} {...attrs}>{[
             ...fields.map(field => <FormItemComp config={field}></FormItemComp>),
             dialog.visible ? <ElDialog v-model={dialog.visible} appendToBody>{{
-                default: () => dialog.formConfig ? <FormComp v-model={dialog.model} config={dialog.formConfig}></FormComp> : null,
+                default: () => dialog.formConfig ? <FormComp ref={dialogFormRef} v-model={dialog.model} config={dialog.formConfig}></FormComp> : null,
                 footer: () => <div>
                     <ElButton onClick={closeDialog}>Cancel</ElButton>
                     <ElButton type="primary" onClick={handleOk}>Confirm</ElButton>
