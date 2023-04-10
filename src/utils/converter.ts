@@ -4,7 +4,11 @@ export function config2Form(config) {
   }
   const res = {};
   for (let item of config.fields) {
-    res[item.key] = item.default;
+    let temp = item.default;
+    if (Array.isArray(item.default) || (item.default !== null && typeof item.default === 'object')) {
+      temp = JSON.parse(JSON.stringify(temp));
+    }
+    res[item.key] = temp;
   }
   return res;
 }
