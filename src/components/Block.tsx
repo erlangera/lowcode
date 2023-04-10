@@ -6,13 +6,14 @@ import FormComp from "./FormComp";
 import { formCompContextKey, formItemCompContextKey } from "./constant";
 import { upperFirstCharacter } from "../utils/converter";
 import CustomInputComp from "./custom/CustomInputComp";
+import CustomTextareaComp from "./custom/CustomTextareaComp";
 
 const reserveTags = ['span', 'div', 'p']
 
 const Block = defineComponent({
     name: 'Block',
     components: {
-        ElInput, ElSelect, ElOption, ElDatePicker, ElButton, Edit, Plus, Minus, PlainTextComp, FormComp, CustomInputComp
+        ElInput, ElSelect, ElOption, ElDatePicker, ElButton, Edit, Plus, Minus, PlainTextComp, FormComp, CustomInputComp, CustomTextareaComp
     },
     props: {
         config: {
@@ -60,7 +61,7 @@ const Block = defineComponent({
             listeners[`on${upperFirstCharacter(config.trigger)}`] = () => {
                 switch (config.triggerCb.type) {
                     case 'dialog':
-                        openDialog(fieldConfig.key, config.triggerCb.form, index);
+                        openDialog(fieldConfig.key, config.triggerCb.config, index);
                         break;
                     case 'insert':
                         let value = config.triggerCb.value;

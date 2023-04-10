@@ -111,10 +111,692 @@
                   "tag": "el-input"
                 }
               }
+            },
+            {
+              "type": "field",
+              "key": "countryCodes",
+              "valueType": "array",
+              "default": [
+                "us"
+              ],
+              "slots": {
+                "label": {
+                  "tag": "span",
+                  "value": "Country/Region"
+                },
+                "default": [
+                  {
+                    "tag": "plain-text-comp"
+                  },
+                  {
+                    "tag": "el-button",
+                    "trigger": "click",
+                    "triggerCb": {
+                      "type": "dialog",
+                      "tag": "el-dialog",
+                      "config": {
+                        "type": "list",
+                        "tag": "custom-transfer-comp",
+                        "data": [
+                          {
+                            "label": "Afghanistan",
+                            "key": "af"
+                          },
+                          {
+                            "label": "Albania",
+                            "key": "al"
+                          },
+                          {
+                            "label": "Haiti",
+                            "key": "ht"
+                          },
+                          {
+                            "label": "Holy See (Vatican City State)",
+                            "key": "va"
+                          },
+                          {
+                            "label": "Honduras",
+                            "key": "hn"
+                          },
+                          {
+                            "label": "Somalia",
+                            "key": "so"
+                          },
+                          {
+                            "label": "South Africa",
+                            "key": "za"
+                          },
+                          {
+                            "label": "South Georgia And The South Sandwich Islands",
+                            "key": "gs"
+                          },
+                          {
+                            "label": "South Korea",
+                            "key": "kr"
+                          },
+                          {
+                            "label": "Soviet Union",
+                            "key": "suhh"
+                          },
+                          {
+                            "label": "Spain",
+                            "key": "es"
+                          },
+                          {
+                            "label": "Swaziland",
+                            "key": "sz"
+                          },
+                          {
+                            "label": "Sweden",
+                            "key": "se"
+                          },
+                          {
+                            "label": "Tonga",
+                            "key": "to"
+                          },
+                          {
+                            "label": "Tuvalu",
+                            "key": "tv"
+                          },
+                          {
+                            "label": "U.S. Virgin Islands",
+                            "key": "vi"
+                          },
+                          {
+                            "label": "UK",
+                            "key": "gb"
+                          },
+                          {
+                            "label": "USA",
+                            "key": "us"
+                          },
+                          {
+                            "label": "Vietnam",
+                            "key": "vn"
+                          },
+                          {
+                            "label": "West Germany",
+                            "key": "xwg"
+                          },
+                          {
+                            "label": "Western Sahara",
+                            "key": "eh"
+                          },
+                          {
+                            "label": "Yemen",
+                            "key": "ye"
+                          },
+                          {
+                            "label": "Yugoslavia",
+                            "key": "xyu"
+                          }
+                        ]
+                      }
+                    },
+                    "slots": {
+                      "icon": {
+                        "tag": "Edit"
+                      }
+                    },
+                    "attrs": {
+                      "link": true
+                    }
+                  }
+                ]
+              },
+              "attrs": {}
+            },
+            {
+              "type": "field",
+              "key": "storyCountryCodes",
+              "valueType": "array",
+              "default": [],
+              "slots": {
+                "label": {
+                  "tag": "span",
+                  "value": "Country of Story"
+                },
+                "default": [
+                  {
+                    "tag": "plain-text-comp"
+                  },
+                  {
+                    "tag": "el-button",
+                    "trigger": "click",
+                    "triggerCb": {
+                      "type": "dialog",
+                      "tag": "el-dialog",
+                      "config": {
+                        "type": "list",
+                        "tag": "custom-transfer-comp",
+                        "data": [
+                          {
+                            "label": "Afghanistan",
+                            "key": "af"
+                          },
+                          {
+                            "label": "Albania",
+                            "key": "al"
+                          },
+                          {
+                            "label": "Haiti",
+                            "key": "ht"
+                          },
+                          {
+                            "label": "Holy See (Vatican City State)",
+                            "key": "va"
+                          },
+                          {
+                            "label": "Honduras",
+                            "key": "hn"
+                          },
+                          {
+                            "label": "Somalia",
+                            "key": "so"
+                          },
+                          {
+                            "label": "South Africa",
+                            "key": "za"
+                          },
+                          {
+                            "label": "South Georgia And The South Sandwich Islands",
+                            "key": "gs"
+                          },
+                          {
+                            "label": "South Korea",
+                            "key": "kr"
+                          },
+                          {
+                            "label": "Soviet Union",
+                            "key": "suhh"
+                          },
+                          {
+                            "label": "Spain",
+                            "key": "es"
+                          },
+                          {
+                            "label": "Swaziland",
+                            "key": "sz"
+                          },
+                          {
+                            "label": "Sweden",
+                            "key": "se"
+                          },
+                          {
+                            "label": "Tonga",
+                            "key": "to"
+                          },
+                          {
+                            "label": "Tuvalu",
+                            "key": "tv"
+                          },
+                          {
+                            "label": "U.S. Virgin Islands",
+                            "key": "vi"
+                          },
+                          {
+                            "label": "UK",
+                            "key": "gb"
+                          },
+                          {
+                            "label": "USA",
+                            "key": "us"
+                          },
+                          {
+                            "label": "Vietnam",
+                            "key": "vn"
+                          },
+                          {
+                            "label": "West Germany",
+                            "key": "xwg"
+                          },
+                          {
+                            "label": "Western Sahara",
+                            "key": "eh"
+                          },
+                          {
+                            "label": "Yemen",
+                            "key": "ye"
+                          },
+                          {
+                            "label": "Yugoslavia",
+                            "key": "xyu"
+                          }
+                        ]
+                      }
+                    },
+                    "slots": {
+                      "icon": {
+                        "tag": "Edit"
+                      }
+                    },
+                    "attrs": {
+                      "link": true
+                    }
+                  }
+                ]
+              },
+              "attrs": {}
+            },
+            {
+              "type": "field",
+              "key": "languageCodes",
+              "valueType": "array",
+              "default": [],
+              "slots": {
+                "label": {
+                  "tag": "span",
+                  "value": "language"
+                },
+                "default": [
+                  {
+                    "tag": "plain-text-comp"
+                  },
+                  {
+                    "tag": "el-button",
+                    "trigger": "click",
+                    "triggerCb": {
+                      "type": "dialog",
+                      "tag": "el-dialog",
+                      "config": {
+                        "type": "list",
+                        "tag": "custom-transfer-comp",
+                        "data": [
+                          {
+                            "key": "ab",
+                            "label": "Abkhazian"
+                          },
+                          {
+                            "key": "qac",
+                            "label": "Aboriginal languages"
+                          },
+                          {
+                            "key": "af",
+                            "label": "Afrikaans"
+                          },
+                          {
+                            "key": "grc",
+                            "label": "Ancient Greek (to 1453)"
+                          },
+                          {
+                            "key": "apa",
+                            "label": "Apache languages"
+                          },
+                          {
+                            "key": "ar",
+                            "label": "Arabic"
+                          },
+                          {
+                            "key": "ast",
+                            "label": "Bable"
+                          },
+                          {
+                            "key": "en",
+                            "label": "English"
+                          },
+                          {
+                            "key": "fr",
+                            "label": "French"
+                          },
+                          {
+                            "key": "ka",
+                            "label": "Georgian"
+                          },
+                          {
+                            "key": "de",
+                            "label": "German"
+                          }
+                        ]
+                      }
+                    },
+                    "slots": {
+                      "icon": {
+                        "tag": "Edit"
+                      }
+                    },
+                    "attrs": {
+                      "link": true
+                    }
+                  }
+                ]
+              },
+              "attrs": {}
+            },
+            {
+              "type": "field",
+              "key": "genreIds",
+              "valueType": "array",
+              "default": [],
+              "slots": {
+                "label": {
+                  "tag": "span",
+                  "value": "Genres"
+                },
+                "default": [
+                  {
+                    "tag": "plain-text-comp"
+                  },
+                  {
+                    "tag": "el-button",
+                    "trigger": "click",
+                    "triggerCb": {
+                      "type": "dialog",
+                      "tag": "el-dialog",
+                      "config": {
+                        "type": "list",
+                        "tag": "custom-transfer-comp",
+                        "data": [
+                          {
+                            "label": "Action",
+                            "key": 1
+                          },
+                          {
+                            "label": "Adult",
+                            "key": 109
+                          },
+                          {
+                            "label": "Adventure",
+                            "key": 2
+                          },
+                          {
+                            "label": "Animation",
+                            "key": 3
+                          },
+                          {
+                            "label": "Biography",
+                            "key": 103
+                          },
+                          {
+                            "label": "Comedy",
+                            "key": 4
+                          },
+                          {
+                            "label": "Crime",
+                            "key": 5
+                          },
+                          {
+                            "label": "Documentary",
+                            "key": 6
+                          },
+                          {
+                            "label": "Drama",
+                            "key": 7
+                          },
+                          {
+                            "label": "Family",
+                            "key": 8
+                          },
+                          {
+                            "label": "Fantasy",
+                            "key": 9
+                          },
+                          {
+                            "label": "Film-Noir",
+                            "key": 104
+                          },
+                          {
+                            "label": "Game Shows",
+                            "key": 106
+                          },
+                          {
+                            "label": "History",
+                            "key": 11
+                          },
+                          {
+                            "label": "Horror",
+                            "key": 12
+                          },
+                          {
+                            "label": "Music",
+                            "key": 13
+                          },
+                          {
+                            "label": "Musical",
+                            "key": 105
+                          },
+                          {
+                            "label": "Mystery",
+                            "key": 14
+                          },
+                          {
+                            "label": "News",
+                            "key": 108
+                          },
+                          {
+                            "label": "Reality-TV",
+                            "key": 102
+                          },
+                          {
+                            "label": "Romance",
+                            "key": 15
+                          },
+                          {
+                            "label": "Sci-Fi",
+                            "key": 101
+                          },
+                          {
+                            "label": "Short",
+                            "key": 111
+                          },
+                          {
+                            "label": "Sport",
+                            "key": 110
+                          },
+                          {
+                            "label": "Talk Shows",
+                            "key": 107
+                          },
+                          {
+                            "label": "Thriller",
+                            "key": 18
+                          },
+                          {
+                            "label": "War",
+                            "key": 19
+                          },
+                          {
+                            "label": "Western",
+                            "key": 20
+                          }
+                        ]
+                      }
+                    },
+                    "slots": {
+                      "icon": {
+                        "tag": "Edit"
+                      }
+                    },
+                    "attrs": {
+                      "link": true
+                    }
+                  }
+                ]
+              },
+              "attrs": {}
+            },
+            {
+              "type": "field",
+              "key": "mediaType",
+              "valueType": "number",
+              "default": null,
+              "required": true,
+              "tag": "el-form-item",
+              "slots": {
+                "label": {
+                  "tag": "span",
+                  "value": "Media Type"
+                },
+                "default": {
+                  "tag": "el-select",
+                  "slots": {
+                    "default": [
+                      {
+                        "tag": "el-option",
+                        "label": "Movie",
+                        "value": 3
+                      },
+                      {
+                        "tag": "el-option",
+                        "label": "Documentary",
+                        "value": 7
+                      },
+                      {
+                        "tag": "el-option",
+                        "label": "Short",
+                        "value": 8
+                      },
+                      {
+                        "tag": "el-option",
+                        "label": "Video",
+                        "value": 9
+                      },
+                      {
+                        "tag": "el-option",
+                        "label": "TV_Special",
+                        "value": 10
+                      },
+                      {
+                        "tag": "el-option",
+                        "label": "TV_Movie",
+                        "value": 11
+                      },
+                      {
+                        "tag": "el-option",
+                        "label": "TV_Short",
+                        "value": 12
+                      }
+                    ]
+                  },
+                  "attrs": {}
+                }
+              },
+              "attrs": {}
+            },
+            {
+              "type": "field",
+              "key": "displayTitleMap",
+              "valueType": "object",
+              "default": {
+                "en": "",
+                "es": "",
+                "pt": "a"
+              },
+              "slots": {
+                "label": {
+                  "tag": "span",
+                  "value": "Display Title"
+                },
+                "default": [
+                  {
+                    "tag": "plain-text-comp"
+                  },
+                  {
+                    "tag": "el-button",
+                    "trigger": "click",
+                    "triggerCb": {
+                      "type": "dialog",
+                      "tag": "el-dialog",
+                      "config": {
+                        "type": "form",
+                        "tag": "el-form",
+                        "fields": [
+                          {
+                            "type": "field",
+                            "key": "en",
+                            "valueType": "string",
+                            "default": "",
+                            "rules": [
+                              {
+                                "max": 5000,
+                                "message": "最大长度5000"
+                              }
+                            ],
+                            "tag": "el-form-item",
+                            "slots": {
+                              "label": {
+                                "tag": "span",
+                                "value": "En"
+                              },
+                              "default": {
+                                "tag": "custom-textarea-comp",
+                                "attrs": {
+                                  "maxLength": 5000
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "type": "field",
+                            "key": "es",
+                            "valueType": "string",
+                            "default": "",
+                            "rules": [
+                              {
+                                "max": 5000,
+                                "message": "最大长度5000"
+                              }
+                            ],
+                            "tag": "el-form-item",
+                            "slots": {
+                              "label": {
+                                "tag": "span",
+                                "value": "Es"
+                              },
+                              "default": {
+                                "tag": "custom-textarea-comp",
+                                "attrs": {
+                                  "maxLength": 5000
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "type": "field",
+                            "key": "pt",
+                            "valueType": "string",
+                            "default": "",
+                            "rules": [
+                              {
+                                "max": 5000,
+                                "message": "最大长度5000"
+                              }
+                            ],
+                            "tag": "el-form-item",
+                            "slots": {
+                              "label": {
+                                "tag": "span",
+                                "value": "Pt"
+                              },
+                              "default": {
+                                "tag": "custom-textarea-comp",
+                                "attrs": {
+                                  "maxLength": 5000
+                                }
+                              }
+                            }
+                          }
+                        ],
+                        "attrs": {
+                          "labelWidth": "120px"
+                        }
+                      }
+                    },
+                    "slots": {
+                      "icon": {
+                        "tag": "Edit"
+                      }
+                    },
+                    "attrs": {
+                      "link": true
+                    }
+                  }
+                ]
+              },
+              "attrs": {}
             }
           ],
           "attrs": {
-            "labelWidth": "120px"
+            "labelWidth": "180px"
           }
         }
       },
@@ -142,7 +824,7 @@
             "triggerCb": {
               "type": "dialog",
               "tag": "el-dialog",
-              "form": {
+              "config": {
                 "type": "form",
                 "tag": "el-form",
                 "fields": [
@@ -200,7 +882,7 @@
                           "triggerCb": {
                             "type": "dialog",
                             "tag": "el-dialog",
-                            "form": {
+                            "config": {
                               "type": "form",
                               "tag": "el-form",
                               "fields": [
@@ -270,30 +952,31 @@
         },
         "default": [
           {
+            "type": "list",
+            "item": [
+              {
+                "tag": "el-input"
+              },
+              {
+                "tag": "el-button",
+                "trigger": "click",
+                "triggerCb": {
+                  "type": "remove"
+                },
+                "slots": {
+                  "icon": {
+                    "tag": "Minus"
+                  }
+                }
+              }
+            ]
+          },
+          {
             "tag": "el-button",
             "trigger": "click",
             "triggerCb": {
               "type": "insert",
-              "item": {
-                "slots": [
-                  {
-                    "tag": "el-input"
-                  },
-                  {
-                    "tag": "el-button",
-                    "trigger": "click",
-                    "triggerCb": {
-                      "type": "remove"
-                    },
-                    "slots": {
-                      "icon": {
-                        "tag": "Minus"
-                      }
-                    }
-                  }
-                ],
-                "default": ""
-              }
+              "value": ""
             },
             "slots": {
               "icon": {
@@ -320,13 +1003,112 @@
         },
         "default": [
           {
+            "type": "list",
+            "item": [
+              {
+                "type": "form",
+                "tag": "el-form",
+                "fields": [
+                  {
+                    "type": "field",
+                    "key": "name",
+                    "valueType": "string",
+                    "default": "children",
+                    "required": true,
+                    "tag": "el-form-item",
+                    "slots": {
+                      "label": {
+                        "tag": "span",
+                        "value": "Name"
+                      },
+                      "default": {
+                        "tag": "el-input"
+                      }
+                    }
+                  },
+                  {
+                    "type": "field",
+                    "key": "age",
+                    "valueType": "number",
+                    "default": null,
+                    "required": true,
+                    "tag": "el-form-item",
+                    "slots": {
+                      "label": {
+                        "tag": "span",
+                        "value": "Age"
+                      },
+                      "default": {
+                        "tag": "el-input"
+                      }
+                    }
+                  }
+                ],
+                "attrs": {
+                  "labelWidth": "80px"
+                }
+              },
+              {
+                "tag": "el-button",
+                "trigger": "click",
+                "triggerCb": {
+                  "type": "remove"
+                },
+                "slots": {
+                  "icon": {
+                    "tag": "Minus"
+                  }
+                }
+              }
+            ]
+          },
+          {
             "tag": "el-button",
             "trigger": "click",
             "triggerCb": {
               "type": "insert",
-              "item": {
-                "slots": [
-                  {
+              "value": {
+                "name": "",
+                "age": null
+              }
+            },
+            "slots": {
+              "icon": {
+                "tag": "Plus"
+              }
+            },
+            "attrs": {
+              "link": true,
+              "key": "insert"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "field",
+      "key": "brother",
+      "valueType": "array",
+      "default": [],
+      "slots": {
+        "label": {
+          "tag": "span",
+          "value": "Brother"
+        },
+        "default": [
+          {
+            "type": "list",
+            "item": [
+              {
+                "tag": "plain-text-comp"
+              },
+              {
+                "tag": "el-button",
+                "trigger": "click",
+                "triggerCb": {
+                  "type": "dialog",
+                  "tag": "el-dialog",
+                  "form": {
                     "type": "form",
                     "tag": "el-form",
                     "fields": [
@@ -334,7 +1116,7 @@
                         "type": "field",
                         "key": "name",
                         "valueType": "string",
-                        "default": "dd",
+                        "default": "",
                         "required": true,
                         "tag": "el-form-item",
                         "slots": {
@@ -366,136 +1148,39 @@
                       }
                     ],
                     "attrs": {
-                      "labelWidth": "80px"
-                    }
-                  },
-                  {
-                    "tag": "el-button",
-                    "trigger": "click",
-                    "triggerCb": {
-                      "type": "remove"
-                    },
-                    "slots": {
-                      "icon": {
-                        "tag": "Minus"
-                      }
+                      "labelWidth": "120px"
                     }
                   }
-                ],
-                "default": {
-                  "name": "",
-                  "age": null
+                },
+                "slots": {
+                  "icon": {
+                    "tag": "Edit"
+                  }
+                },
+                "attrs": {
+                  "link": true
+                }
+              },
+              {
+                "tag": "el-button",
+                "trigger": "click",
+                "triggerCb": {
+                  "type": "remove"
+                },
+                "slots": {
+                  "icon": {
+                    "tag": "Minus"
+                  }
                 }
               }
-            },
-            "slots": {
-              "icon": {
-                "tag": "Plus"
-              }
-            },
-            "attrs": {
-              "link": true,
-              "key": "insert"
-            }
-          }
-        ]
-      }
-    },
-    {
-      "type": "field",
-      "key": "brother",
-      "valueType": "array",
-      "default": [],
-      "slots": {
-        "label": {
-          "tag": "span",
-          "value": "Brother"
-        },
-        "default": [
+            ]
+          },
           {
             "tag": "el-button",
             "trigger": "click",
             "triggerCb": {
               "type": "insert",
-              "item": {
-                "slots": [
-                  {
-                    "tag": "plain-text-comp"
-                  },
-                  {
-                    "tag": "el-button",
-                    "trigger": "click",
-                    "triggerCb": {
-                      "type": "dialog",
-                      "tag": "el-dialog",
-                      "form": {
-                        "type": "form",
-                        "tag": "el-form",
-                        "fields": [
-                          {
-                            "type": "field",
-                            "key": "name",
-                            "valueType": "string",
-                            "default": "",
-                            "required": true,
-                            "tag": "el-form-item",
-                            "slots": {
-                              "label": {
-                                "tag": "span",
-                                "value": "Name"
-                              },
-                              "default": {
-                                "tag": "el-input"
-                              }
-                            }
-                          },
-                          {
-                            "type": "field",
-                            "key": "age",
-                            "valueType": "number",
-                            "default": null,
-                            "required": true,
-                            "tag": "el-form-item",
-                            "slots": {
-                              "label": {
-                                "tag": "span",
-                                "value": "Age"
-                              },
-                              "default": {
-                                "tag": "el-input"
-                              }
-                            }
-                          }
-                        ],
-                        "attrs": {
-                          "labelWidth": "120px"
-                        }
-                      }
-                    },
-                    "slots": {
-                      "icon": {
-                        "tag": "Edit"
-                      }
-                    },
-                    "attrs": {
-                      "link": true
-                    }
-                  },
-                  {
-                    "tag": "el-button",
-                    "trigger": "click",
-                    "triggerCb": {
-                      "type": "remove"
-                    },
-                    "slots": {
-                      "icon": {
-                        "tag": "Minus"
-                      }
-                    }
-                  }
-                ],
-                "default": null
-              }
+              "value": null
             },
             "slots": {
               "icon": {
@@ -512,6 +1197,6 @@
     }
   ],
   "attrs": {
-    "labelWidth": "120px"
+    "labelWidth": "180px"
   }
 }

@@ -2,7 +2,7 @@ import { defineComponent, watch } from "vue";
 import { ElInput } from "element-plus";
 
 export default defineComponent({
-    name: 'CustomInputComp',
+    name: 'CustomTextareaComp',
     props: {
         modelValue: {
             type: String,
@@ -18,10 +18,11 @@ export default defineComponent({
         const handleChange = (value) => {
             ctx.emit('update:modelValue', value)
         }
-        return () => <ElInput modelValue={props.modelValue} onUpdate:modelValue={handleChange}>{{
-            append: () => <div style={{ color: props.modelValue.length > props.maxLength ? 'red' : '' }}>
+        return () => <div style={{width: '100%', position: 'relative'}}>{[
+            <ElInput modelValue={props.modelValue} onUpdate:modelValue={handleChange} type={'textarea'} autosize={{ minRows: 4, maxRows: 8 }}></ElInput >,
+            props.maxLength && <div style={{ color: props.modelValue.length > props.maxLength ? 'red' : '', position: 'absolute', right: '2px', bottom: '0' }}>
                 {props.modelValue.length + '/' + props.maxLength}
-            </div>
-        }}</ElInput >
+            </div> 
+            ]}</div>
     },
 });

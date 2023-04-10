@@ -1,8 +1,10 @@
-import { defineComponent, reactive, ref, provide } from "vue";
+import { defineComponent, reactive, ref, provide, computed } from "vue";
 import { ElForm, ElDialog, ElButton } from "element-plus";
 import FormItemComp from "./FormItemComp";
+import CustomTransferComp from "./custom/CustomTransferComp";
 import { formCompContextKey } from "./constant";
 import { config2Form } from "../utils/converter";
+import { formatFromList } from "../utils/format";
 
 const FormComp = defineComponent({
     name: 'FormComp',
@@ -27,15 +29,15 @@ const FormComp = defineComponent({
         const dialog = reactive({
             key: '',
             visible: false,
-            formConfig: null,
+            config: null,
             model: {},
             index: undefined,
         });
-        const openDialog = (key: string, formConfig, index: undefined | number) => {
-            // ctx.emit('open-dialog', formConfig)
+        const openDialog = (key: string, config, index: undefined | number) => {
+            // ctx.emit('open-dialog', config)
             dialog.key = key;
             dialog.visible = true;
-            dialog.formConfig = formConfig;
+            dialog.config = config;
             dialog.index = index;
             if (dialog.index === undefined) {
                 dialog.model = model[key];
@@ -46,21 +48,30 @@ const FormComp = defineComponent({
         const closeDialog = () => {
             dialog.key = '';
             dialog.visible = false;
-            dialog.formConfig = null;
+            dialog.config = null;
             dialog.model = {};
         }
         const handleOk = () => {
             // 提交校验
-            dialogFormRef.value.validate((valid) => {
-                if (valid) {
-                    if (dialog.index === undefined) {
-                        model[dialog.key] = dialog.model;
-                    } else {
-                        model[dialog.key][dialog.index] = dialog.model;
+            if (dialogFormRef.value) {
+                dialogFormRef.value.validate((valid) => {
+                    if (valid) {
+                        if (dialog.index === undefined) {
+                            model[dialog.key] = dialog.model;
+                        } else {
+                            model[dialog.key][dialog.index] = dialog.model;
+                        }
+                        closeDialog();
                     }
-                    closeDialog();
+                })
+            } else {
+                if (dialog.index === undefined) {
+                    model[dialog.key] = dialog.model;
+                } else {
+                    model[dialog.key][dialog.index] = dialog.model;
                 }
-            })
+                closeDialog();
+            }
         }
 
         // 后代组件暴露属性和方法
@@ -88,12 +99,22 @@ const FormComp = defineComponent({
                 return formRef.value.scrollToField
             },
         });
+        
         // 渲染模板，此处使用了递归组件的方式渲染对话框中的表单
         const { fields, attrs } = props.config;
         return () => <ElForm ref={formRef} model={model} {...attrs}>{[
             ...fields.map(field => <FormItemComp config={field}></FormItemComp>),
-            dialog.visible ? <ElDialog v-model={dialog.visible} appendToBody>{{
-                default: () => dialog.formConfig ? <FormComp ref={dialogFormRef} v-model={dialog.model} config={dialog.formConfig}></FormComp> : null,
+            dialog.visible ? <ElDialog v-model={dialog.visible} title={formatFromList(dialog.key, fields)} center appendToBody>{{
+                default: () => {
+                    switch(dialog.config.type) {
+                        case 'form':
+                            return <FormComp ref={dialogFormRef} v-model={dialog.model} config={dialog.config}></FormComp>;
+                        case 'list':
+                            return <CustomTransferComp v-model={dialog.model} config={dialog.config}></CustomTransferComp>
+                        default:
+                            return;
+                    }
+                }, 
                 footer: () => <div>
                     <ElButton onClick={closeDialog}>Cancel</ElButton>
                     <ElButton type="primary" onClick={handleOk}>Confirm</ElButton>
