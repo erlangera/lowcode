@@ -32,12 +32,12 @@ const formConfig = ref(null);
 let model = {};
 const configList = [
   {
-    value: '/demo.json',
-    label: 'Demo'
-  },
-  {
     value: '/movie.json',
     label: 'Movie'
+  },
+  {
+    value: '/demo.json',
+    label: 'Demo'
   },
   {
     value: '/tv.json',
@@ -46,6 +46,7 @@ const configList = [
 ]
 const currentConfig = ref(null)
 const loadConfig = (val) => {
+  flag.value = false;
   fetch(val).then(data => data.json()).then(data => {
     formConfig.value = data;
     model = reactive(config2Form(formConfig.value));

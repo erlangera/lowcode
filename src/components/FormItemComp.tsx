@@ -46,9 +46,20 @@ export default defineComponent({
             remove,
         })
         const rules = formatToElementRules(config) ?? [];
+        
+        // 处理插槽 利用了递归组件
+        const slots = {}
+        if (config.slots) {
+            for (let key in config.slots) {
+                let slot = config.slots[key];
+                if (!Array.isArray(slot)) {
+                    slot = [slot]
+                }
+                slots[key] = () => slot.map(item => <Block config={item} field={config} key={item.key || item.value} {...item.attrs}></Block>);
+            }
+        }
         return () => <ElFormItem prop={config.key} rules={rules} {...config.attrs}>{{
-            label: () => <Block config={config.slots.label} field={config}></Block>,
-            default: () => <Block config={config.slots.default} field={config}></Block>
+            ...slots
         }}</ElFormItem >
     }
 });

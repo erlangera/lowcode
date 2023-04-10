@@ -1,483 +1,517 @@
 {
-    "type": "form",
-    "tag": "el-form",
-    "fields": [
-      {
-        "type": "field",
-        "key": "peli_number",
-        "valueType": "number",
-        "default": 0,
-        "tag": "el-form-item",
-        "slots": {
-          "label": {
-            "tag": "span",
-            "value": "Country"
+  "type": "form",
+  "tag": "el-form",
+  "fields": [
+    {
+      "type": "field",
+      "key": "peli_number",
+      "valueType": "number",
+      "default": 0,
+      "required": true,
+      "tag": "el-form-item",
+      "slots": {
+        "label": {
+          "tag": "span",
+          "value": "peli_number"
+        },
+        "default": {
+          "tag": "el-select",
+          "slots": {
+            "default": [
+              {
+                "tag": "el-option",
+                "value": 0,
+                "label": "Auto generate when saved"
+              },
+              {
+                "tag": "el-option",
+                "value": 1,
+                "label": "Set a PP number"
+              }
+            ]
           },
-          "default": {
-            "tag": "el-select",
-            "slots": {
-              "default": [
+          "attrs": {}
+        }
+      },
+      "attrs": {}
+    },
+    {
+      "type": "field",
+      "key": "videoBase",
+      "valueType": "object",
+      "default": {},
+      "tag": "el-form-item",
+      "slots": {
+        "default": {
+          "type": "form",
+          "tag": "el-form",
+          "fields": [
+            {
+              "type": "field",
+              "key": "title",
+              "valueType": "string",
+              "default": "",
+              "required": true,
+              "rules": [
                 {
-                  "tag": "el-option",
-                  "value": "China",
-                  "label": "China"
-                },
-                {
-                  "tag": "el-option",
-                  "value": "Japan",
-                  "label": "Japan"
-                },
-                {
-                  "tag": "el-option",
-                  "value": "America",
-                  "label": "America"
+                  "max": 255,
+                  "message": "最大长度255"
                 }
-              ]
+              ],
+              "tag": "el-form-item",
+              "slots": {
+                "label": {
+                  "tag": "span",
+                  "value": "Original Title"
+                },
+                "default": {
+                  "type": "custom",
+                  "tag": "custom-input-comp",
+                  "attrs": {
+                    "maxLength": 255
+                  }
+                }
+              },
+              "attrs": {}
             },
-            "attrs": {
-              "clearable": true
+            {
+              "type": "field",
+              "key": "publicYear",
+              "valueType": "string",
+              "default": "",
+              "tag": "el-form-item",
+              "slots": {
+                "label": {
+                  "tag": "span",
+                  "value": "Production Year"
+                },
+                "default": {
+                  "tag": "el-date-picker",
+                  "attrs": {
+                    "type": "year",
+                    "value-format": "YYYY"
+                  }
+                }
+              },
+              "attrs": {}
+            },
+            {
+              "type": "field",
+              "key": "runTime",
+              "valueType": "string",
+              "default": "",
+              "required": true,
+              "tag": "el-form-item",
+              "slots": {
+                "label": {
+                  "tag": "span",
+                  "value": "Runtime(min)"
+                },
+                "default": {
+                  "tag": "el-input"
+                }
+              }
             }
+          ],
+          "attrs": {
+            "labelWidth": "120px"
           }
-        },
-        "attrs": {}
+        }
       },
-      {
-        "type": "field",
-        "key": "name",
-        "valueType": "string",
-        "default": "",
-        "required": true,
-        "rules": [
+      "attrs": {
+        "label-width": "0px"
+      }
+    },
+    {
+      "type": "field",
+      "key": "father",
+      "valueType": "object",
+      "default": null,
+      "slots": {
+        "label": {
+          "tag": "span",
+          "value": "Father"
+        },
+        "default": [
           {
-            "max": 10,
-            "min": 2,
-            "message": "长度2-10"
+            "tag": "plain-text-comp"
           },
           {
-            "pattern": "/^[a-zA-Z ]+$/",
-            "message": "只允许输入字母和空格"
-          }
-        ],
-        "tag": "el-form-item",
-        "slots": {
-          "label": {
-            "tag": "span",
-            "value": "Name"
-          },
-          "default": {
-            "tag": "el-input"
-          }
-        },
-        "attrs": {}
-      },
-      {
-        "type": "field",
-        "key": "birthday",
-        "valueType": "string",
-        "default": "",
-        "required": true,
-        "tag": "el-form-item",
-        "slots": {
-          "label": {
-            "tag": "span",
-            "value": "Birthday"
-          },
-          "default": {
-            "tag": "el-date-picker"
-          }
-        },
-        "attrs": {}
-      },
-      {
-        "type": "field",
-        "key": "father",
-        "valueType": "object",
-        "default": null,
-        "slots": {
-          "label": {
-            "tag": "span",
-            "value": "Father"
-          },
-          "default": [
-            {
-              "tag": "plain-text-comp"
-            },
-            {
-              "tag": "el-button",
-              "trigger": "click",
-              "triggerCb": {
-                "type": "dialog",
-                "tag": "el-dialog",
-                "form": {
-                  "type": "form",
-                  "tag": "el-form",
-                  "fields": [
-                    {
-                      "type": "field",
-                      "key": "name",
-                      "valueType": "string",
-                      "default": "",
-                      "required": true,
-                      "tag": "el-form-item",
-                      "slots": {
-                        "label": {
-                          "tag": "span",
-                          "value": "Name"
-                        },
-                        "default": {
-                          "tag": "el-input"
-                        }
+            "tag": "el-button",
+            "trigger": "click",
+            "triggerCb": {
+              "type": "dialog",
+              "tag": "el-dialog",
+              "form": {
+                "type": "form",
+                "tag": "el-form",
+                "fields": [
+                  {
+                    "type": "field",
+                    "key": "name",
+                    "valueType": "string",
+                    "default": "",
+                    "required": true,
+                    "tag": "el-form-item",
+                    "slots": {
+                      "label": {
+                        "tag": "span",
+                        "value": "Name"
+                      },
+                      "default": {
+                        "tag": "el-input"
                       }
-                    },
-                    {
-                      "type": "field",
-                      "key": "age",
-                      "valueType": "number",
-                      "default": null,
-                      "required": true,
-                      "tag": "el-form-item",
-                      "slots": {
-                        "label": {
-                          "tag": "span",
-                          "value": "Age"
-                        },
-                        "default": {
-                          "tag": "el-input"
-                        }
+                    }
+                  },
+                  {
+                    "type": "field",
+                    "key": "age",
+                    "valueType": "number",
+                    "default": null,
+                    "required": true,
+                    "tag": "el-form-item",
+                    "slots": {
+                      "label": {
+                        "tag": "span",
+                        "value": "Age"
+                      },
+                      "default": {
+                        "tag": "el-input"
                       }
-                    },
-                    {
-                      "type": "field",
-                      "key": "father",
-                      "valueType": "object",
-                      "default": null,
-                      "slots": {
-                        "label": {
-                          "tag": "span",
-                          "value": "Father"
+                    }
+                  },
+                  {
+                    "type": "field",
+                    "key": "father",
+                    "valueType": "object",
+                    "default": null,
+                    "slots": {
+                      "label": {
+                        "tag": "span",
+                        "value": "Father"
+                      },
+                      "default": [
+                        {
+                          "tag": "plain-text-comp"
                         },
-                        "default": [
-                          {
-                            "tag": "plain-text-comp"
-                          },
-                          {
-                            "tag": "el-button",
-                            "trigger": "click",
-                            "triggerCb": {
-                              "type": "dialog",
-                              "tag": "el-dialog",
-                              "form": {
-                                "type": "form",
-                                "tag": "el-form",
-                                "fields": [
-                                  {
-                                    "type": "field",
-                                    "key": "name",
-                                    "valueType": "string",
-                                    "default": "",
-                                    "required": true,
-                                    "tag": "el-form-item",
-                                    "slots": {
-                                      "label": {
-                                        "tag": "span",
-                                        "value": "Name"
-                                      },
-                                      "default": {
-                                        "tag": "el-input"
-                                      }
+                        {
+                          "tag": "el-button",
+                          "trigger": "click",
+                          "triggerCb": {
+                            "type": "dialog",
+                            "tag": "el-dialog",
+                            "form": {
+                              "type": "form",
+                              "tag": "el-form",
+                              "fields": [
+                                {
+                                  "type": "field",
+                                  "key": "name",
+                                  "valueType": "string",
+                                  "default": "",
+                                  "required": true,
+                                  "tag": "el-form-item",
+                                  "slots": {
+                                    "label": {
+                                      "tag": "span",
+                                      "value": "Name"
+                                    },
+                                    "default": {
+                                      "tag": "el-input"
                                     }
                                   }
-                                ],
-                                "attrs": {
-                                  "labelWidth": "120px"
                                 }
+                              ],
+                              "attrs": {
+                                "labelWidth": "120px"
                               }
-                            },
-                            "slots": {
-                              "icon": {
-                                "tag": "Edit"
-                              }
-                            },
-                            "attrs": {
-                              "link": true
                             }
-                          }
-                        ]
-                      }
-                    }
-                  ],
-                  "attrs": {
-                    "labelWidth": "120px"
-                  }
-                }
-              },
-              "slots": {
-                "icon": {
-                  "tag": "Edit"
-                }
-              },
-              "attrs": {
-                "link": true
-              }
-            }
-          ]
-        },
-        "attrs": {}
-      },
-      {
-        "type": "field",
-        "key": "nickname",
-        "valueType": "array",
-        "default": [],
-        "slots": {
-          "label": {
-            "tag": "span",
-            "value": "Nickname"
-          },
-          "default": [
-            {
-              "tag": "el-button",
-              "trigger": "click",
-              "triggerCb": {
-                "type": "insert",
-                "item": {
-                  "slots": [
-                    {
-                      "tag": "el-input"
-                    },
-                    {
-                      "tag": "el-button",
-                      "trigger": "click",
-                      "triggerCb": {
-                        "type": "remove"
-                      },
-                      "slots": {
-                        "icon": {
-                          "tag": "Minus"
-                        }
-                      }
-                    }
-                  ],
-                  "default": ""
-                }
-              },
-              "slots": {
-                "icon": {
-                  "tag": "Plus"
-                }
-              },
-              "attrs": {
-                "link": true,
-                "key": "insert"
-              }
-            }
-          ]
-        }
-      },
-      {
-        "type": "field",
-        "key": "children",
-        "valueType": "array",
-        "default": [],
-        "slots": {
-          "label": {
-            "tag": "span",
-            "value": "Children"
-          },
-          "default": [
-            {
-              "tag": "el-button",
-              "trigger": "click",
-              "triggerCb": {
-                "type": "insert",
-                "item": {
-                  "slots": [
-                    {
-                      "type": "form",
-                      "tag": "el-form",
-                      "fields": [
-                        {
-                          "type": "field",
-                          "key": "name",
-                          "valueType": "string",
-                          "default": "dd",
-                          "required": true,
-                          "tag": "el-form-item",
+                          },
                           "slots": {
-                            "label": {
-                              "tag": "span",
-                              "value": "Name"
-                            },
-                            "default": {
-                              "tag": "el-input"
+                            "icon": {
+                              "tag": "Edit"
                             }
-                          }
-                        },
-                        {
-                          "type": "field",
-                          "key": "age",
-                          "valueType": "number",
-                          "default": null,
-                          "required": true,
-                          "tag": "el-form-item",
-                          "slots": {
-                            "label": {
-                              "tag": "span",
-                              "value": "Age"
-                            },
-                            "default": {
-                              "tag": "el-input"
-                            }
-                          }
-                        }
-                      ],
-                      "attrs": {
-                        "labelWidth": "80px"
-                      }
-                    },
-                    {
-                      "tag": "el-button",
-                      "trigger": "click",
-                      "triggerCb": {
-                        "type": "remove"
-                      },
-                      "slots": {
-                        "icon": {
-                          "tag": "Minus"
-                        }
-                      }
-                    }
-                  ],
-                  "default": {
-                    "name": "",
-                    "age": null
-                  }
-                }
-              },
-              "slots": {
-                "icon": {
-                  "tag": "Plus"
-                }
-              },
-              "attrs": {
-                "link": true,
-                "key": "insert"
-              }
-            }
-          ]
-        }
-      },
-      {
-        "type": "field",
-        "key": "brother",
-        "valueType": "array",
-        "default": [],
-        "slots": {
-          "label": {
-            "tag": "span",
-            "value": "Brother"
-          },
-          "default": [
-            {
-              "tag": "el-button",
-              "trigger": "click",
-              "triggerCb": {
-                "type": "insert",
-                "item": {
-                  "slots": [
-                    {
-                      "tag": "plain-text-comp"
-                    },
-                    {
-                      "tag": "el-button",
-                      "trigger": "click",
-                      "triggerCb": {
-                        "type": "dialog",
-                        "tag": "el-dialog",
-                        "form": {
-                          "type": "form",
-                          "tag": "el-form",
-                          "fields": [
-                            {
-                              "type": "field",
-                              "key": "name",
-                              "valueType": "string",
-                              "default": "",
-                              "required": true,
-                              "tag": "el-form-item",
-                              "slots": {
-                                "label": {
-                                  "tag": "span",
-                                  "value": "Name"
-                                },
-                                "default": {
-                                  "tag": "el-input"
-                                }
-                              }
-                            },
-                            {
-                              "type": "field",
-                              "key": "age",
-                              "valueType": "number",
-                              "default": null,
-                              "required": true,
-                              "tag": "el-form-item",
-                              "slots": {
-                                "label": {
-                                  "tag": "span",
-                                  "value": "Age"
-                                },
-                                "default": {
-                                  "tag": "el-input"
-                                }
-                              }
-                            }
-                          ],
+                          },
                           "attrs": {
-                            "labelWidth": "120px"
+                            "link": true
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "attrs": {
+                  "labelWidth": "120px"
+                }
+              }
+            },
+            "slots": {
+              "icon": {
+                "tag": "Edit"
+              }
+            },
+            "attrs": {
+              "link": true
+            }
+          }
+        ]
+      },
+      "attrs": {}
+    },
+    {
+      "type": "field",
+      "key": "nickname",
+      "valueType": "array",
+      "default": [],
+      "slots": {
+        "label": {
+          "tag": "span",
+          "value": "Nickname"
+        },
+        "default": [
+          {
+            "tag": "el-button",
+            "trigger": "click",
+            "triggerCb": {
+              "type": "insert",
+              "item": {
+                "slots": [
+                  {
+                    "tag": "el-input"
+                  },
+                  {
+                    "tag": "el-button",
+                    "trigger": "click",
+                    "triggerCb": {
+                      "type": "remove"
+                    },
+                    "slots": {
+                      "icon": {
+                        "tag": "Minus"
+                      }
+                    }
+                  }
+                ],
+                "default": ""
+              }
+            },
+            "slots": {
+              "icon": {
+                "tag": "Plus"
+              }
+            },
+            "attrs": {
+              "link": true,
+              "key": "insert"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "field",
+      "key": "children",
+      "valueType": "array",
+      "default": [],
+      "slots": {
+        "label": {
+          "tag": "span",
+          "value": "Children"
+        },
+        "default": [
+          {
+            "tag": "el-button",
+            "trigger": "click",
+            "triggerCb": {
+              "type": "insert",
+              "item": {
+                "slots": [
+                  {
+                    "type": "form",
+                    "tag": "el-form",
+                    "fields": [
+                      {
+                        "type": "field",
+                        "key": "name",
+                        "valueType": "string",
+                        "default": "dd",
+                        "required": true,
+                        "tag": "el-form-item",
+                        "slots": {
+                          "label": {
+                            "tag": "span",
+                            "value": "Name"
+                          },
+                          "default": {
+                            "tag": "el-input"
                           }
                         }
                       },
-                      "slots": {
-                        "icon": {
-                          "tag": "Edit"
+                      {
+                        "type": "field",
+                        "key": "age",
+                        "valueType": "number",
+                        "default": null,
+                        "required": true,
+                        "tag": "el-form-item",
+                        "slots": {
+                          "label": {
+                            "tag": "span",
+                            "value": "Age"
+                          },
+                          "default": {
+                            "tag": "el-input"
+                          }
                         }
-                      },
-                      "attrs": {
-                        "link": true
                       }
+                    ],
+                    "attrs": {
+                      "labelWidth": "80px"
+                    }
+                  },
+                  {
+                    "tag": "el-button",
+                    "trigger": "click",
+                    "triggerCb": {
+                      "type": "remove"
                     },
-                    {
-                      "tag": "el-button",
-                      "trigger": "click",
-                      "triggerCb": {
-                        "type": "remove"
-                      },
-                      "slots": {
-                        "icon": {
-                          "tag": "Minus"
-                        }
+                    "slots": {
+                      "icon": {
+                        "tag": "Minus"
                       }
                     }
-                  ],
-                  "default": null
+                  }
+                ],
+                "default": {
+                  "name": "",
+                  "age": null
                 }
-              },
-              "slots": {
-                "icon": {
-                  "tag": "Plus"
-                }
-              },
-              "attrs": {
-                "link": true,
-                "key": "insert"
               }
+            },
+            "slots": {
+              "icon": {
+                "tag": "Plus"
+              }
+            },
+            "attrs": {
+              "link": true,
+              "key": "insert"
             }
-          ]
-        }
+          }
+        ]
       }
-    ],
-    "attrs": {
-      "labelWidth": "120px"
+    },
+    {
+      "type": "field",
+      "key": "brother",
+      "valueType": "array",
+      "default": [],
+      "slots": {
+        "label": {
+          "tag": "span",
+          "value": "Brother"
+        },
+        "default": [
+          {
+            "tag": "el-button",
+            "trigger": "click",
+            "triggerCb": {
+              "type": "insert",
+              "item": {
+                "slots": [
+                  {
+                    "tag": "plain-text-comp"
+                  },
+                  {
+                    "tag": "el-button",
+                    "trigger": "click",
+                    "triggerCb": {
+                      "type": "dialog",
+                      "tag": "el-dialog",
+                      "form": {
+                        "type": "form",
+                        "tag": "el-form",
+                        "fields": [
+                          {
+                            "type": "field",
+                            "key": "name",
+                            "valueType": "string",
+                            "default": "",
+                            "required": true,
+                            "tag": "el-form-item",
+                            "slots": {
+                              "label": {
+                                "tag": "span",
+                                "value": "Name"
+                              },
+                              "default": {
+                                "tag": "el-input"
+                              }
+                            }
+                          },
+                          {
+                            "type": "field",
+                            "key": "age",
+                            "valueType": "number",
+                            "default": null,
+                            "required": true,
+                            "tag": "el-form-item",
+                            "slots": {
+                              "label": {
+                                "tag": "span",
+                                "value": "Age"
+                              },
+                              "default": {
+                                "tag": "el-input"
+                              }
+                            }
+                          }
+                        ],
+                        "attrs": {
+                          "labelWidth": "120px"
+                        }
+                      }
+                    },
+                    "slots": {
+                      "icon": {
+                        "tag": "Edit"
+                      }
+                    },
+                    "attrs": {
+                      "link": true
+                    }
+                  },
+                  {
+                    "tag": "el-button",
+                    "trigger": "click",
+                    "triggerCb": {
+                      "type": "remove"
+                    },
+                    "slots": {
+                      "icon": {
+                        "tag": "Minus"
+                      }
+                    }
+                  }
+                ],
+                "default": null
+              }
+            },
+            "slots": {
+              "icon": {
+                "tag": "Plus"
+              }
+            },
+            "attrs": {
+              "link": true,
+              "key": "insert"
+            }
+          }
+        ]
+      }
     }
+  ],
+  "attrs": {
+    "labelWidth": "120px"
   }
+}

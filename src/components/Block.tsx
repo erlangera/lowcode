@@ -5,14 +5,14 @@ import PlainTextComp from "./PlainTextComp";
 import FormComp from "./FormComp";
 import { formCompContextKey, formItemCompContextKey } from "./constant";
 import { upperFirstCharacter } from "../utils/converter";
-import { config2Form } from "../utils/converter";
+import CustomInputComp from "./custom/CustomInputComp";
 
 const reserveTags = ['span', 'div', 'p']
 
 const Block = defineComponent({
     name: 'Block',
     components: {
-        ElInput, ElSelect, ElOption, ElDatePicker, ElButton, Edit, Plus, Minus, PlainTextComp, FormComp
+        ElInput, ElSelect, ElOption, ElDatePicker, ElButton, Edit, Plus, Minus, PlainTextComp, FormComp, CustomInputComp
     },
     props: {
         config: {
