@@ -122,6 +122,7 @@ onMounted(() => {
   width: 50px;
   margin: 10px;
   flex: 1;
+  overflow: hidden;
 }
 
 .container .right :deep(.cm-editor) {

@@ -8,6 +8,6 @@ export default defineComponent({
         }
     },
     setup(props, ctx) {
-        return () => <div>{JSON.stringify(props.modelValue)}</div>
+        return () => <div style={'word-break: break-word;'}>{JSON.stringify(props.modelValue)}</div>
     }
 });

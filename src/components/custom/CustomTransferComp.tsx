@@ -1,4 +1,4 @@
-import { defineComponent, resolveComponent, inject } from "vue";
+import { defineComponent } from "vue";
 import { ElTransfer } from "element-plus";
 
 export default defineComponent({
@@ -18,7 +18,7 @@ export default defineComponent({
         const handleChange = (value) => {
             ctx.emit('update:modelValue', value)
         }
-        return () => <ElTransfer modelValue={props.modelValue} onUpdate:modelValue={handleChange} 
-        titles={['Select items', 'Selected']} filterable filter-placeholder={"Search..."} data={props.config.data} />
+        return () => <ElTransfer modelValue={props.modelValue} onUpdate:modelValue={handleChange}
+            titles={['Select items', 'Selected']} filterable filter-placeholder={"Search..."} data={props.config.data} />
     }
 });

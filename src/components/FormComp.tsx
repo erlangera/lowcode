@@ -104,7 +104,7 @@ const FormComp = defineComponent({
         const { fields, attrs } = props.config;
         return () => <ElForm ref={formRef} model={model} {...attrs}>{[
             ...fields.map(field => <FormItemComp config={field}></FormItemComp>),
-            dialog.visible ? <ElDialog v-model={dialog.visible} title={formatFromList(dialog.key, fields)} center appendToBody>{{
+            dialog.visible ? <ElDialog v-model={dialog.visible} title={formatFromList(dialog.key, fields)} center close-on-click-modal={false} appendToBody>{{
                 default: () => {
                     switch(dialog.config.type) {
                         case 'form':
