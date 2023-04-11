@@ -793,6 +793,250 @@
                 ]
               },
               "attrs": {}
+            },
+            {
+              "type": "field",
+              "key": "languageStorylineMap",
+              "valueType": "object",
+              "default": {
+                "en": "",
+                "es": "",
+                "pt": "a"
+              },
+              "slots": {
+                "label": {
+                  "tag": "span",
+                  "value": "Storyline"
+                },
+                "default": [
+                  {
+                    "tag": "plain-text-comp"
+                  },
+                  {
+                    "tag": "el-button",
+                    "trigger": "click",
+                    "triggerCb": {
+                      "type": "dialog",
+                      "tag": "el-dialog",
+                      "config": {
+                        "type": "form",
+                        "tag": "el-form",
+                        "fields": [
+                          {
+                            "type": "field",
+                            "key": "en",
+                            "valueType": "string",
+                            "default": "",
+                            "rules": [
+                              {
+                                "max": 5000,
+                                "message": "最大长度5000"
+                              }
+                            ],
+                            "tag": "el-form-item",
+                            "slots": {
+                              "label": {
+                                "tag": "span",
+                                "value": "En"
+                              },
+                              "default": {
+                                "tag": "custom-textarea-comp",
+                                "attrs": {
+                                  "maxLength": 5000
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "type": "field",
+                            "key": "es",
+                            "valueType": "string",
+                            "default": "",
+                            "rules": [
+                              {
+                                "max": 5000,
+                                "message": "最大长度5000"
+                              }
+                            ],
+                            "tag": "el-form-item",
+                            "slots": {
+                              "label": {
+                                "tag": "span",
+                                "value": "Es"
+                              },
+                              "default": {
+                                "tag": "custom-textarea-comp",
+                                "attrs": {
+                                  "maxLength": 5000
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "type": "field",
+                            "key": "pt",
+                            "valueType": "string",
+                            "default": "",
+                            "rules": [
+                              {
+                                "max": 5000,
+                                "message": "最大长度5000"
+                              }
+                            ],
+                            "tag": "el-form-item",
+                            "slots": {
+                              "label": {
+                                "tag": "span",
+                                "value": "Pt"
+                              },
+                              "default": {
+                                "tag": "custom-textarea-comp",
+                                "attrs": {
+                                  "maxLength": 5000
+                                }
+                              }
+                            }
+                          }
+                        ],
+                        "attrs": {
+                          "labelWidth": "120px"
+                        }
+                      }
+                    },
+                    "slots": {
+                      "icon": {
+                        "tag": "Edit"
+                      }
+                    },
+                    "attrs": {
+                      "link": true
+                    }
+                  }
+                ]
+              },
+              "attrs": {}
+            },
+            {
+              "type": "field",
+              "key": "languageSynopsisMap",
+              "valueType": "object",
+              "default": {
+                "en": "",
+                "es": "",
+                "pt": "a"
+              },
+              "slots": {
+                "label": {
+                  "tag": "span",
+                  "value": "Synopsis"
+                },
+                "default": [
+                  {
+                    "tag": "plain-text-comp"
+                  },
+                  {
+                    "tag": "el-button",
+                    "trigger": "click",
+                    "triggerCb": {
+                      "type": "dialog",
+                      "tag": "el-dialog",
+                      "config": {
+                        "type": "form",
+                        "tag": "el-form",
+                        "fields": [
+                          {
+                            "type": "field",
+                            "key": "en",
+                            "valueType": "string",
+                            "default": "",
+                            "rules": [
+                              {
+                                "max": 5000,
+                                "message": "最大长度5000"
+                              }
+                            ],
+                            "tag": "el-form-item",
+                            "slots": {
+                              "label": {
+                                "tag": "span",
+                                "value": "En"
+                              },
+                              "default": {
+                                "tag": "custom-textarea-comp",
+                                "attrs": {
+                                  "maxLength": 5000
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "type": "field",
+                            "key": "es",
+                            "valueType": "string",
+                            "default": "",
+                            "rules": [
+                              {
+                                "max": 5000,
+                                "message": "最大长度5000"
+                              }
+                            ],
+                            "tag": "el-form-item",
+                            "slots": {
+                              "label": {
+                                "tag": "span",
+                                "value": "Es"
+                              },
+                              "default": {
+                                "tag": "custom-textarea-comp",
+                                "attrs": {
+                                  "maxLength": 5000
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "type": "field",
+                            "key": "pt",
+                            "valueType": "string",
+                            "default": "",
+                            "rules": [
+                              {
+                                "max": 5000,
+                                "message": "最大长度5000"
+                              }
+                            ],
+                            "tag": "el-form-item",
+                            "slots": {
+                              "label": {
+                                "tag": "span",
+                                "value": "Pt"
+                              },
+                              "default": {
+                                "tag": "custom-textarea-comp",
+                                "attrs": {
+                                  "maxLength": 5000
+                                }
+                              }
+                            }
+                          }
+                        ],
+                        "attrs": {
+                          "labelWidth": "120px"
+                        }
+                      }
+                    },
+                    "slots": {
+                      "icon": {
+                        "tag": "Edit"
+                      }
+                    },
+                    "attrs": {
+                      "link": true
+                    }
+                  }
+                ]
+              },
+              "attrs": {}
             }
           ],
           "attrs": {
@@ -802,6 +1046,155 @@
       },
       "attrs": {
         "label-width": "0px"
+      }
+    },
+    {
+      "type": "field",
+      "key": "mediaPoster",
+      "valueType": "object",
+      "default": {
+        "enVerticalPoster": "",
+        "esVerticalPoster": "",
+        "ptVerticalPoster": "",
+        "enHorizontalPoster": "",
+        "esHorizontalPoster": "",
+        "ptHorizontalPoster": ""
+      },
+      "slots": {
+        "label": {
+          "tag": "span",
+          "value": "Poster"
+        },
+        "default": [
+          {
+            "tag": "plain-text-comp"
+          },
+          {
+            "tag": "el-button",
+            "trigger": "click",
+            "triggerCb": {
+              "type": "dialog",
+              "tag": "el-dialog",
+              "config": {
+                "type": "form",
+                "tag": "el-form",
+                "fields": [
+                  {
+                    "type": "field",
+                    "key": "enVerticalPoster",
+                    "valueType": "string",
+                    "default": "",
+                    "tag": "el-form-item",
+                    "slots": {
+                      "label": {
+                        "tag": "span",
+                        "value": "Poster-EN"
+                      },
+                      "default": {
+                        "tag": "custom-image-upload-comp"
+                      }
+                    }
+                  },
+                  {
+                    "type": "field",
+                    "key": "esVerticalPoster",
+                    "valueType": "string",
+                    "default": "",
+                    "tag": "el-form-item",
+                    "slots": {
+                      "label": {
+                        "tag": "span",
+                        "value": "Poster-ES"
+                      },
+                      "default": {
+                        "tag": "custom-image-upload-comp"
+                      }
+                    }
+                  },
+                  {
+                    "type": "field",
+                    "key": "ptVerticalPoster",
+                    "valueType": "string",
+                    "default": "",
+                    "tag": "el-form-item",
+                    "slots": {
+                      "label": {
+                        "tag": "span",
+                        "value": "Poster-PT"
+                      },
+                      "default": {
+                        "tag": "custom-image-upload-comp"
+                      }
+                    }
+                  },
+                  {
+                    "type": "field",
+                    "key": "enHorizontalPoster",
+                    "valueType": "string",
+                    "default": "",
+                    "tag": "el-form-item",
+                    "slots": {
+                      "label": {
+                        "tag": "span",
+                        "value": "Poster-Horizontal-EN"
+                      },
+                      "default": {
+                        "tag": "custom-image-upload-comp"
+                      }
+                    }
+                  },
+                  {
+                    "type": "field",
+                    "key": "esHorizontalPoster",
+                    "valueType": "string",
+                    "default": "",
+                    "tag": "el-form-item",
+                    "slots": {
+                      "label": {
+                        "tag": "span",
+                        "value": "Poster-Horizontal-ES"
+                      },
+                      "default": {
+                        "tag": "custom-image-upload-comp"
+                      }
+                    }
+                  },
+                  {
+                    "type": "field",
+                    "key": "ptHorizontalPoster",
+                    "valueType": "string",
+                    "default": "",
+                    "tag": "el-form-item",
+                    "slots": {
+                      "label": {
+                        "tag": "span",
+                        "value": "Poster-Horizontal-PT"
+                      },
+                      "default": {
+                        "tag": "custom-image-upload-comp"
+                      }
+                    }
+                  }
+                ],
+                "attrs": {
+                  "labelWidth": "120px",
+                  "inline": true
+                }
+              },
+              "attrs": {
+                "width": "1000px"
+              }
+            },
+            "slots": {
+              "icon": {
+                "tag": "Edit"
+              }
+            },
+            "attrs": {
+              "link": true
+            }
+          }
+        ]
       }
     },
     {

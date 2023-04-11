@@ -30,14 +30,16 @@ const FormComp = defineComponent({
             key: '',
             visible: false,
             config: null,
+            attrs: null,
             model: {},
             index: undefined,
         });
-        const openDialog = (key: string, config, index: undefined | number) => {
+        const openDialog = (key: string, cbConfig, index: undefined | number) => {
             // ctx.emit('open-dialog', config)
             dialog.key = key;
             dialog.visible = true;
-            dialog.config = config;
+            dialog.config = cbConfig.config;
+            dialog.attrs = cbConfig.attrs;
             dialog.index = index;
             if (dialog.index === undefined) {
                 dialog.model = model[key];
@@ -49,6 +51,7 @@ const FormComp = defineComponent({
             dialog.key = '';
             dialog.visible = false;
             dialog.config = null;
+            dialog.attrs = null;
             dialog.model = {};
         }
         const handleOk = () => {
@@ -104,7 +107,7 @@ const FormComp = defineComponent({
         const { fields, attrs } = props.config;
         return () => <ElForm ref={formRef} model={model} {...attrs}>{[
             ...fields.map(field => <FormItemComp config={field}></FormItemComp>),
-            dialog.visible ? <ElDialog v-model={dialog.visible} title={formatFromList(dialog.key, fields)} center close-on-click-modal={false} appendToBody>{{
+            dialog.visible ? <ElDialog v-model={dialog.visible} title={formatFromList(dialog.key, fields)} center close-on-click-modal={false} appendToBody {...dialog.attrs}>{{
                 default: () => {
                     switch(dialog.config.type) {
                         case 'form':
