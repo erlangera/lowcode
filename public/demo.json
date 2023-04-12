@@ -109,7 +109,7 @@
             "triggerCb": {
               "type": "dialog",
               "tag": "el-dialog",
-              "form": {
+              "config": {
                 "type": "form",
                 "tag": "el-form",
                 "fields": [
@@ -167,7 +167,7 @@
                           "triggerCb": {
                             "type": "dialog",
                             "tag": "el-dialog",
-                            "form": {
+                            "config": {
                               "type": "form",
                               "tag": "el-form",
                               "fields": [
@@ -393,7 +393,7 @@
                 "triggerCb": {
                   "type": "dialog",
                   "tag": "el-dialog",
-                  "form": {
+                  "config": {
                     "type": "form",
                     "tag": "el-form",
                     "fields": [

@@ -2,6 +2,7 @@ import { defineComponent, reactive, ref, provide, computed } from "vue";
 import { ElForm, ElDialog, ElButton } from "element-plus";
 import FormItemComp from "./FormItemComp";
 import CustomTransferComp from "./custom/CustomTransferComp";
+import ListComp from "./ListComp";
 import { formCompContextKey } from "./constant";
 import { config2Form } from "../utils/converter";
 import { formatFromList } from "../utils/format";
@@ -20,8 +21,8 @@ const FormComp = defineComponent({
     },
     emits: ['update:model-value'],
     setup(props, ctx) {
-        // 合成model，并设置到父组件，
-        const model = reactive({ ...config2Form(props.config), ...props.modelValue });
+        // 合成model，并设置到父组件，这里只进行了一个层级的合并，如果字段为对象可能导致引用异常 TODO这使用JSON暴力解决，后期可参考其他框架定义merge方法
+        const model = reactive({ ...config2Form(props.config), ...JSON.parse(JSON.stringify(props.modelValue)) });
         ctx.emit('update:model-value', model);
 
         // 实现弹窗的功能可放到FormComp组件此时可实现多层弹窗
@@ -102,22 +103,24 @@ const FormComp = defineComponent({
                 return formRef.value.scrollToField
             },
         });
-        
+
         // 渲染模板，此处使用了递归组件的方式渲染对话框中的表单
         const { fields, attrs } = props.config;
         return () => <ElForm ref={formRef} model={model} {...attrs}>{[
             ...fields.map(field => <FormItemComp config={field}></FormItemComp>),
             dialog.visible ? <ElDialog v-model={dialog.visible} title={formatFromList(dialog.key, fields)} center close-on-click-modal={false} appendToBody {...dialog.attrs}>{{
                 default: () => {
-                    switch(dialog.config.type) {
+                    switch (dialog.config.type) {
                         case 'form':
                             return <FormComp ref={dialogFormRef} v-model={dialog.model} config={dialog.config}></FormComp>;
+                        case 'transfer':
+                            return <CustomTransferComp v-model={dialog.model} config={dialog.config}></CustomTransferComp>;
                         case 'list':
-                            return <CustomTransferComp v-model={dialog.model} config={dialog.config}></CustomTransferComp>
+                            return <ListComp v-model={dialog.model} config={dialog.config}></ListComp>;
                         default:
                             return;
                     }
-                }, 
+                },
                 footer: () => <div>
                     <ElButton onClick={closeDialog}>Cancel</ElButton>
                     <ElButton type="primary" onClick={handleOk}>Confirm</ElButton>

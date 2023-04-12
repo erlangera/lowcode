@@ -1,5 +1,5 @@
-import { defineComponent, resolveComponent, inject } from "vue";
-import { ElInput, ElSelect, ElOption, ElDatePicker, ElButton } from "element-plus";
+import { defineComponent, resolveComponent, inject, toRef } from "vue";
+import { ElInput, ElSelect, ElOption, ElDatePicker, ElButton, ElCascader } from "element-plus";
 import { Edit, Plus, Minus } from '@element-plus/icons-vue';
 import PlainTextComp from "./PlainTextComp";
 import FormComp from "./FormComp";
@@ -14,7 +14,7 @@ const reserveTags = ['span', 'div', 'p']
 const Block = defineComponent({
     name: 'Block',
     components: {
-        ElInput, ElSelect, ElOption, ElDatePicker, ElButton, Edit, Plus, Minus, PlainTextComp, FormComp, CustomInputComp, CustomTextareaComp, CustomImageUploadComp
+        ElInput, ElSelect, ElOption, ElDatePicker, ElButton, ElCascader, Edit, Plus, Minus, PlainTextComp, FormComp, CustomInputComp, CustomTextareaComp, CustomImageUploadComp
     },
     props: {
         config: {
@@ -34,21 +34,22 @@ const Block = defineComponent({
         const { config, field: fieldConfig, index } = props;
 
         // 处理FormComp FormItemComp provide的属性
-        const { model, openDialog } = inject(formCompContextKey);
+        const formInject = inject(formCompContextKey);
+        const { model, openDialog } = formInject;
         const { insert, remove } = inject(formItemCompContextKey);
+
+        const valueRef = fieldConfig?.key 
+            ? (index !== undefined ? toRef(model[fieldConfig.key], index) : toRef(model, fieldConfig.key))
+            : (index !== undefined ? toRef(model, index) : toRef(formInject, 'model'));
 
         // list
         if (config.type === 'list') {
-            return () => model[fieldConfig.key].map((_, i) => <Block config={config.item} field={fieldConfig} index={i}></Block>)
+            return () => valueRef.value.map((_, i) => <Block config={config.item} field={fieldConfig} index={i} key={`${valueRef.value.length}-${i}`}></Block>)
         }
 
         // 子表单
         if (config.type === 'form') {
-            return () => index !== undefined
-                ?
-                <FormComp v-model={model[fieldConfig.key][index]} index={index} config={config} ></FormComp>
-                :
-                <FormComp v-model={model[fieldConfig.key]} config={config} ></FormComp>;
+            return () => <FormComp v-model={valueRef.value} index={index} config={config} ></FormComp>;
         }
 
         if (Array.isArray(config)) {
@@ -99,15 +100,9 @@ const Block = defineComponent({
         } else {
             // 组件
             const component = resolveComponent(config.tag);
-            return () => index !== undefined
-                ?
-                <component v-model={model[fieldConfig.key][index]} index={index} {...config.attrs} {...listeners}>{{
-                    ...slots
-                }}</component>
-                :
-                <component v-model={model[fieldConfig.key]} {...config.attrs} {...listeners}>{{
-                    ...slots
-                }}</component>;
+            return () => <component v-model={valueRef.value} index={index} {...config.attrs} {...listeners}>{{
+                ...slots
+            }}</component>;
         }
     }
 });

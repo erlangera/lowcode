@@ -1,4 +1,4 @@
-import { defineComponent, toRef } from "vue";
+import { defineComponent } from "vue";
 
 export default defineComponent({
     name: 'PlainTextComp',
@@ -8,6 +8,8 @@ export default defineComponent({
         }
     },
     setup(props, ctx) {
-        return () => <div style={'word-break: break-word;'}>{JSON.stringify(props.modelValue)}</div>
+        return () => <div style={'word-break: break-word;'}>
+            { typeof props.modelValue === 'string' ? props.modelValue : JSON.stringify(props.modelValue)}
+        </div>
     }
 });

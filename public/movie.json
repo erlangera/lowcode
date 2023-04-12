@@ -135,7 +135,7 @@
                       "type": "dialog",
                       "tag": "el-dialog",
                       "config": {
-                        "type": "list",
+                        "type": "transfer",
                         "tag": "custom-transfer-comp",
                         "data": [
                           {
@@ -267,7 +267,7 @@
                       "type": "dialog",
                       "tag": "el-dialog",
                       "config": {
-                        "type": "list",
+                        "type": "transfer",
                         "tag": "custom-transfer-comp",
                         "data": [
                           {
@@ -399,7 +399,7 @@
                       "type": "dialog",
                       "tag": "el-dialog",
                       "config": {
-                        "type": "list",
+                        "type": "transfer",
                         "tag": "custom-transfer-comp",
                         "data": [
                           {
@@ -483,7 +483,7 @@
                       "type": "dialog",
                       "tag": "el-dialog",
                       "config": {
-                        "type": "list",
+                        "type": "transfer",
                         "tag": "custom-transfer-comp",
                         "data": [
                           {
@@ -1037,6 +1037,33 @@
                 ]
               },
               "attrs": {}
+            },
+            {
+              "type": "field",
+              "key": "imdbPopularity",
+              "valueType": "string",
+              "default": "",
+              "rules": [
+                {
+                  "max": 8,
+                  "message": "最大长度8"
+                }
+              ],
+              "tag": "el-form-item",
+              "slots": {
+                "label": {
+                  "tag": "span",
+                  "value": "Popularity hot"
+                },
+                "default": {
+                  "type": "custom",
+                  "tag": "custom-input-comp",
+                  "attrs": {
+                    "maxLength": 8
+                  }
+                }
+              },
+              "attrs": {}
             }
           ],
           "attrs": {
@@ -1199,13 +1226,13 @@
     },
     {
       "type": "field",
-      "key": "father",
-      "valueType": "object",
-      "default": null,
+      "key": "backdrops",
+      "valueType": "array",
+      "default": [],
       "slots": {
         "label": {
           "tag": "span",
-          "value": "Father"
+          "value": "Backdrop"
         },
         "default": [
           {
@@ -1218,105 +1245,163 @@
               "type": "dialog",
               "tag": "el-dialog",
               "config": {
-                "type": "form",
-                "tag": "el-form",
-                "fields": [
-                  {
-                    "type": "field",
-                    "key": "name",
-                    "valueType": "string",
-                    "default": "",
-                    "required": true,
-                    "tag": "el-form-item",
-                    "slots": {
-                      "label": {
-                        "tag": "span",
-                        "value": "Name"
-                      },
-                      "default": {
-                        "tag": "el-input"
+                "type": "list",
+                "config": {
+                  "header": null,
+                  "footer": {
+                    "tag": "el-button",
+                    "trigger": "click",
+                    "triggerCb": {
+                      "type": "insert",
+                      "value": {
+                        "url": "",
+                        "useType": null,
+                        "languageCode": null,
+                        "primary": null
                       }
+                    },
+                    "slots": {
+                      "icon": {
+                        "tag": "Plus"
+                      }
+                    },
+                    "attrs": {
+                      "link": true,
+                      "key": "insert"
                     }
                   },
-                  {
-                    "type": "field",
-                    "key": "age",
-                    "valueType": "number",
-                    "default": null,
-                    "required": true,
-                    "tag": "el-form-item",
-                    "slots": {
-                      "label": {
-                        "tag": "span",
-                        "value": "Age"
-                      },
-                      "default": {
-                        "tag": "el-input"
-                      }
-                    }
-                  },
-                  {
-                    "type": "field",
-                    "key": "father",
-                    "valueType": "object",
-                    "default": null,
-                    "slots": {
-                      "label": {
-                        "tag": "span",
-                        "value": "Father"
-                      },
-                      "default": [
+                  "item": [
+                    {
+                      "type": "form",
+                      "tag": "el-form",
+                      "fields": [
                         {
-                          "tag": "plain-text-comp"
+                          "type": "field",
+                          "key": "url",
+                          "valueType": "string",
+                          "default": "",
+                          "tag": "el-form-item",
+                          "slots": {
+                            "label": {
+                              "tag": "span",
+                              "value": "URL"
+                            },
+                            "default": {
+                              "tag": "custom-image-upload-comp"
+                            }
+                          }
                         },
                         {
-                          "tag": "el-button",
-                          "trigger": "click",
-                          "triggerCb": {
-                            "type": "dialog",
-                            "tag": "el-dialog",
-                            "config": {
-                              "type": "form",
-                              "tag": "el-form",
-                              "fields": [
-                                {
-                                  "type": "field",
-                                  "key": "name",
-                                  "valueType": "string",
-                                  "default": "",
-                                  "required": true,
-                                  "tag": "el-form-item",
-                                  "slots": {
-                                    "label": {
-                                      "tag": "span",
-                                      "value": "Name"
-                                    },
-                                    "default": {
-                                      "tag": "el-input"
-                                    }
-                                  }
-                                }
-                              ],
-                              "attrs": {
-                                "labelWidth": "120px"
-                              }
-                            }
-                          },
+                          "type": "field",
+                          "key": "useType",
+                          "valueType": "number",
+                          "default": null,
+                          "tag": "el-form-item",
                           "slots": {
-                            "icon": {
-                              "tag": "Edit"
+                            "label": {
+                              "tag": "span",
+                              "value": "Type"
+                            },
+                            "default": {
+                              "tag": "el-select",
+                              "slots": {
+                                "default": [
+                                  {
+                                    "tag": "el-option",
+                                    "value": 1,
+                                    "label": "Poster"
+                                  },
+                                  {
+                                    "tag": "el-option",
+                                    "value": 2,
+                                    "label": "Poster-Horizontal"
+                                  },
+                                  {
+                                    "tag": "el-option",
+                                    "value": 3,
+                                    "label": "Backdrop"
+                                  },
+                                  {
+                                    "tag": "el-option",
+                                    "value": 4,
+                                    "label": "Others"
+                                  }
+                                ]
+                              },
+                              "attrs": {}
                             }
-                          },
-                          "attrs": {
-                            "link": true
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "key": "languageCode",
+                          "valueType": "number",
+                          "default": null,
+                          "tag": "el-form-item",
+                          "slots": {
+                            "label": {
+                              "tag": "span",
+                              "value": "Language"
+                            },
+                            "default": {
+                              "tag": "el-select",
+                              "slots": {
+                                "default": [
+                                  {
+                                    "tag": "el-option",
+                                    "value": "en",
+                                    "label": "English"
+                                  },
+                                  {
+                                    "tag": "el-option",
+                                    "value": "es",
+                                    "label": "Spanish"
+                                  },
+                                  {
+                                    "tag": "el-option",
+                                    "value": "pt",
+                                    "label": "Portuguese"
+                                  }
+                                ]
+                              },
+                              "attrs": {}
+                            }
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "key": "primary",
+                          "valueType": "number",
+                          "default": null,
+                          "tag": "el-form-item",
+                          "slots": {
+                            "label": {
+                              "tag": "span",
+                              "value": "Primary"
+                            },
+                            "default": {
+                              "tag": "el-input"
+                            }
                           }
                         }
-                      ]
+                      ],
+                      "attrs": {
+                        "labelWidth": "80px"
+                      }
+                    },
+                    {
+                      "tag": "el-button",
+                      "trigger": "click",
+                      "triggerCb": {
+                        "type": "remove"
+                      },
+                      "slots": {
+                        "icon": {
+                          "tag": "Minus"
+                        }
+                      }
                     }
-                  }
-                ],
-                "attrs": {
-                  "labelWidth": "120px"
+                  ]
                 }
               }
             },
@@ -1335,144 +1420,1576 @@
     },
     {
       "type": "field",
-      "key": "nickname",
+      "key": "mediaTrailers",
       "valueType": "array",
       "default": [],
       "slots": {
         "label": {
           "tag": "span",
-          "value": "Nickname"
+          "value": "Trailers"
         },
         "default": [
           {
-            "type": "list",
-            "item": [
-              {
-                "tag": "el-input"
-              },
-              {
-                "tag": "el-button",
-                "trigger": "click",
-                "triggerCb": {
-                  "type": "remove"
-                },
-                "slots": {
-                  "icon": {
-                    "tag": "Minus"
-                  }
-                }
-              }
-            ]
+            "tag": "plain-text-comp"
           },
           {
             "tag": "el-button",
             "trigger": "click",
             "triggerCb": {
-              "type": "insert",
-              "value": ""
+              "type": "dialog",
+              "tag": "el-dialog",
+              "config": {
+                "type": "list",
+                "config": {
+                  "header": null,
+                  "footer": {
+                    "tag": "el-button",
+                    "trigger": "click",
+                    "triggerCb": {
+                      "type": "insert",
+                      "value": {
+                        "coverPath": "",
+                        "languageCode": null,
+                        "path": "",
+                        "quality": "",
+                        "source": null,
+                        "title": "",
+                        "type": null,
+                        "primary": ""
+                      }
+                    },
+                    "slots": {
+                      "icon": {
+                        "tag": "Plus"
+                      }
+                    },
+                    "attrs": {
+                      "link": true,
+                      "key": "insert"
+                    }
+                  },
+                  "item": [
+                    {
+                      "type": "form",
+                      "tag": "el-form",
+                      "fields": [
+                        {
+                          "type": "field",
+                          "key": "coverPath",
+                          "valueType": "string",
+                          "default": "",
+                          "tag": "el-form-item",
+                          "slots": {
+                            "label": {
+                              "tag": "span",
+                              "value": "Cover"
+                            },
+                            "default": {
+                              "tag": "custom-image-upload-comp"
+                            }
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "key": "type",
+                          "valueType": "number",
+                          "default": null,
+                          "tag": "el-form-item",
+                          "slots": {
+                            "label": {
+                              "tag": "span",
+                              "value": "Type"
+                            },
+                            "default": {
+                              "tag": "el-select",
+                              "slots": {
+                                "default": [
+                                  {
+                                    "tag": "el-option",
+                                    "value": 1,
+                                    "label": "Trailer"
+                                  },
+                                  {
+                                    "tag": "el-option",
+                                    "value": 2,
+                                    "label": "Teaser"
+                                  },
+                                  {
+                                    "tag": "el-option",
+                                    "value": 3,
+                                    "label": "Clip"
+                                  },
+                                  {
+                                    "tag": "el-option",
+                                    "value": 4,
+                                    "label": "Behind the Scenes"
+                                  },
+                                  {
+                                    "tag": "el-option",
+                                    "value": 5,
+                                    "label": "Bloopers"
+                                  },
+                                  {
+                                    "tag": "el-option",
+                                    "value": 6,
+                                    "label": "Featurette"
+                                  },
+                                  {
+                                    "tag": "el-option",
+                                    "value": 8,
+                                    "label": "Others"
+                                  }
+                                ]
+                              },
+                              "attrs": {}
+                            }
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "key": "languageCode",
+                          "valueType": "number",
+                          "default": null,
+                          "tag": "el-form-item",
+                          "slots": {
+                            "label": {
+                              "tag": "span",
+                              "value": "Language"
+                            },
+                            "default": {
+                              "tag": "el-select",
+                              "slots": {
+                                "default": [
+                                  {
+                                    "tag": "el-option",
+                                    "value": "en",
+                                    "label": "English"
+                                  },
+                                  {
+                                    "tag": "el-option",
+                                    "value": "es",
+                                    "label": "Spanish"
+                                  },
+                                  {
+                                    "tag": "el-option",
+                                    "value": "pt",
+                                    "label": "Portuguese"
+                                  }
+                                ]
+                              },
+                              "attrs": {}
+                            }
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "key": "source",
+                          "valueType": "number",
+                          "default": null,
+                          "tag": "el-form-item",
+                          "slots": {
+                            "label": {
+                              "tag": "span",
+                              "value": "Source Type"
+                            },
+                            "default": {
+                              "tag": "el-select",
+                              "slots": {
+                                "default": [
+                                  {
+                                    "tag": "el-option",
+                                    "value": 1,
+                                    "label": "YouTube"
+                                  },
+                                  {
+                                    "tag": "el-option",
+                                    "value": 2,
+                                    "label": "Vimeo"
+                                  },
+                                  {
+                                    "tag": "el-option",
+                                    "value": 4,
+                                    "label": "Jump Link"
+                                  }
+                                ]
+                              },
+                              "attrs": {}
+                            }
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "key": "path",
+                          "valueType": "number",
+                          "default": null,
+                          "tag": "el-form-item",
+                          "slots": {
+                            "label": {
+                              "tag": "span",
+                              "value": "Source Key/Link"
+                            },
+                            "default": {
+                              "tag": "el-input"
+                            }
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "key": "title",
+                          "valueType": "number",
+                          "default": null,
+                          "tag": "el-form-item",
+                          "slots": {
+                            "label": {
+                              "tag": "span",
+                              "value": "Video Title"
+                            },
+                            "default": {
+                              "tag": "el-input"
+                            }
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "key": "primary",
+                          "valueType": "number",
+                          "default": null,
+                          "tag": "el-form-item",
+                          "slots": {
+                            "label": {
+                              "tag": "span",
+                              "value": "Primary"
+                            },
+                            "default": {
+                              "tag": "el-input"
+                            }
+                          }
+                        }
+                      ],
+                      "attrs": {
+                        "labelWidth": "180px"
+                      }
+                    },
+                    {
+                      "tag": "el-button",
+                      "trigger": "click",
+                      "triggerCb": {
+                        "type": "remove"
+                      },
+                      "slots": {
+                        "icon": {
+                          "tag": "Minus"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
             },
             "slots": {
               "icon": {
-                "tag": "Plus"
+                "tag": "Edit"
               }
             },
             "attrs": {
-              "link": true,
-              "key": "insert"
+              "link": true
             }
           }
         ]
-      }
+      },
+      "attrs": {}
     },
     {
       "type": "field",
-      "key": "children",
+      "key": "mediaAkas",
       "valueType": "array",
       "default": [],
       "slots": {
         "label": {
           "tag": "span",
-          "value": "Children"
+          "value": "Also know as"
         },
         "default": [
           {
-            "type": "list",
-            "item": [
-              {
+            "tag": "plain-text-comp"
+          },
+          {
+            "tag": "el-button",
+            "trigger": "click",
+            "triggerCb": {
+              "type": "dialog",
+              "tag": "el-dialog",
+              "config": {
+                "type": "list",
+                "config": {
+                  "header": null,
+                  "footer": {
+                    "tag": "el-button",
+                    "trigger": "click",
+                    "triggerCb": {
+                      "type": "insert",
+                      "value": {
+                        "attribute": "",
+                        "title": "",
+                        "countryLanguage": []
+                      }
+                    },
+                    "slots": {
+                      "icon": {
+                        "tag": "Plus"
+                      }
+                    },
+                    "attrs": {
+                      "link": true,
+                      "key": "insert"
+                    }
+                  },
+                  "item": [
+                    {
+                      "type": "form",
+                      "tag": "el-form",
+                      "fields": [
+                        {
+                          "type": "field",
+                          "key": "countryLanguage",
+                          "valueType": "number",
+                          "default": null,
+                          "tag": "el-form-item",
+                          "slots": {
+                            "label": {
+                              "tag": "span",
+                              "value": "Country/Language"
+                            },
+                            "default": {
+                              "tag": "el-cascader",
+                              "attrs": {
+                                "options": [
+                                  {
+                                    "label": "Albania",
+                                    "value": "al",
+                                    "children": [
+                                      {
+                                        "label": "default",
+                                        "value": ""
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "label": "Algeria",
+                                    "value": "dz",
+                                    "children": [
+                                      {
+                                        "label": "Arabic",
+                                        "value": "ar"
+                                      },
+                                      {
+                                        "label": "French",
+                                        "value": "fr"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "label": "Argentina",
+                                    "value": "ar",
+                                    "children": [
+                                      {
+                                        "label": "default",
+                                        "value": ""
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "label": "Armenia",
+                                    "value": "am",
+                                    "children": [
+                                      {
+                                        "label": "default",
+                                        "value": ""
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "label": "Australia",
+                                    "value": "au",
+                                    "children": [
+                                      {
+                                        "label": "default",
+                                        "value": ""
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "key": "title",
+                          "valueType": "string",
+                          "default": "",
+                          "tag": "el-form-item",
+                          "slots": {
+                            "label": {
+                              "tag": "span",
+                              "value": "Title"
+                            },
+                            "default": {
+                              "tag": "el-input"
+                            }
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "key": "attribute",
+                          "valueType": "string",
+                          "default": "",
+                          "tag": "el-form-item",
+                          "slots": {
+                            "label": {
+                              "tag": "span",
+                              "value": "Remark"
+                            },
+                            "default": {
+                              "tag": "el-input"
+                            }
+                          }
+                        }
+                      ],
+                      "attrs": {
+                        "labelWidth": "180px"
+                      }
+                    },
+                    {
+                      "tag": "el-button",
+                      "trigger": "click",
+                      "triggerCb": {
+                        "type": "remove"
+                      },
+                      "slots": {
+                        "icon": {
+                          "tag": "Minus"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "slots": {
+              "icon": {
+                "tag": "Edit"
+              }
+            },
+            "attrs": {
+              "link": true
+            }
+          }
+        ]
+      },
+      "attrs": {}
+    },
+    {
+      "type": "field",
+      "key": "mediaReleaseInfos",
+      "valueType": "array",
+      "default": [],
+      "slots": {
+        "label": {
+          "tag": "span",
+          "value": "Release Date"
+        },
+        "default": [
+          {
+            "tag": "plain-text-comp"
+          },
+          {
+            "tag": "el-button",
+            "trigger": "click",
+            "triggerCb": {
+              "type": "dialog",
+              "tag": "el-dialog",
+              "config": {
+                "type": "list",
+                "config": {
+                  "header": null,
+                  "footer": {
+                    "tag": "el-button",
+                    "trigger": "click",
+                    "triggerCb": {
+                      "type": "insert",
+                      "value": {
+                        "attribute": "",
+                        "countryCode": "",
+                        "releaseDate": ""
+                      }
+                    },
+                    "slots": {
+                      "icon": {
+                        "tag": "Plus"
+                      }
+                    },
+                    "attrs": {
+                      "link": true,
+                      "key": "insert"
+                    }
+                  },
+                  "item": [
+                    {
+                      "type": "form",
+                      "tag": "el-form",
+                      "fields": [
+                        {
+                          "type": "field",
+                          "key": "countryCode",
+                          "valueType": "string",
+                          "default": "",
+                          "tag": "el-form-item",
+                          "slots": {
+                            "label": {
+                              "tag": "span",
+                              "value": "Country"
+                            },
+                            "default": {
+                              "tag": "el-select",
+                              "slots": {
+                                "default": [
+                                  {
+                                    "tag": "el-option",
+                                    "label": "UK",
+                                    "value": "gb"
+                                  },
+                                  {
+                                    "tag": "el-option",
+                                    "label": "USA",
+                                    "value": "us"
+                                  },
+                                  {
+                                    "tag": "el-option",
+                                    "label": "Vietnam",
+                                    "value": "vn"
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "key": "releaseDate",
+                          "valueType": "string",
+                          "default": "",
+                          "tag": "el-form-item",
+                          "slots": {
+                            "label": {
+                              "tag": "span",
+                              "value": "Release Date"
+                            },
+                            "default": {
+                              "tag": "el-date-picker",
+                              "attrs": {
+                                "type": "date",
+                                "value-format": "YYYY-MM-DD"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "key": "attribute",
+                          "valueType": "string",
+                          "default": "",
+                          "tag": "el-form-item",
+                          "slots": {
+                            "label": {
+                              "tag": "span",
+                              "value": "Remark"
+                            },
+                            "default": {
+                              "tag": "el-input"
+                            }
+                          }
+                        }
+                      ],
+                      "attrs": {
+                        "labelWidth": "180px"
+                      }
+                    },
+                    {
+                      "tag": "el-button",
+                      "trigger": "click",
+                      "triggerCb": {
+                        "type": "remove"
+                      },
+                      "slots": {
+                        "icon": {
+                          "tag": "Minus"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "slots": {
+              "icon": {
+                "tag": "Edit"
+              }
+            },
+            "attrs": {
+              "link": true
+            }
+          }
+        ]
+      },
+      "attrs": {}
+    },
+    {
+      "type": "field",
+      "key": "mediaCertications",
+      "valueType": "array",
+      "default": [],
+      "slots": {
+        "label": {
+          "tag": "span",
+          "value": "Certification"
+        },
+        "default": [
+          {
+            "tag": "plain-text-comp"
+          },
+          {
+            "tag": "el-button",
+            "trigger": "click",
+            "triggerCb": {
+              "type": "dialog",
+              "tag": "el-dialog",
+              "config": {
+                "type": "list",
+                "config": {
+                  "header": null,
+                  "footer": {
+                    "tag": "el-button",
+                    "trigger": "click",
+                    "triggerCb": {
+                      "type": "insert",
+                      "value": {
+                        "attribute": "",
+                        "countryCertification": [],
+                        "pos": ""
+                      }
+                    },
+                    "slots": {
+                      "icon": {
+                        "tag": "Plus"
+                      }
+                    },
+                    "attrs": {
+                      "link": true,
+                      "key": "insert"
+                    }
+                  },
+                  "item": [
+                    {
+                      "type": "form",
+                      "tag": "el-form",
+                      "fields": [
+                        {
+                          "type": "field",
+                          "key": "countryCertification",
+                          "valueType": "number",
+                          "default": null,
+                          "tag": "el-form-item",
+                          "slots": {
+                            "label": {
+                              "tag": "span",
+                              "value": "Country/Certification"
+                            },
+                            "default": {
+                              "tag": "el-cascader",
+                              "attrs": {
+                                "options": [
+                                  {
+                                    "label": "Argentina",
+                                    "value": "ar",
+                                    "children": [
+                                      {
+                                        "value": "13",
+                                        "label": "13"
+                                      },
+                                      {
+                                        "value": "14",
+                                        "label": "14"
+                                      },
+                                      {
+                                        "value": "16",
+                                        "label": "16"
+                                      },
+                                      {
+                                        "value": "18",
+                                        "label": "18"
+                                      },
+                                      {
+                                        "value": "Atp",
+                                        "label": "Atp"
+                                      },
+                                      {
+                                        "value": "E",
+                                        "label": "E"
+                                      },
+                                      {
+                                        "value": "M",
+                                        "label": "M"
+                                      },
+                                      {
+                                        "value": "RP",
+                                        "label": "RP"
+                                      },
+                                      {
+                                        "value": "T",
+                                        "label": "T"
+                                      },
+                                      {
+                                        "value": "Unrated",
+                                        "label": "Unrated"
+                                      },
+                                      {
+                                        "value": "X",
+                                        "label": "X"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "label": "Australia",
+                                    "value": "au",
+                                    "children": [
+                                      {
+                                        "value": "A",
+                                        "label": "A"
+                                      },
+                                      {
+                                        "value": "E",
+                                        "label": "E"
+                                      },
+                                      {
+                                        "value": "G",
+                                        "label": "G"
+                                      },
+                                      {
+                                        "value": "M",
+                                        "label": "M"
+                                      },
+                                      {
+                                        "value": "MA",
+                                        "label": "MA"
+                                      },
+                                      {
+                                        "value": "MA15+",
+                                        "label": "MA15+"
+                                      },
+                                      {
+                                        "value": "NRC",
+                                        "label": "NRC"
+                                      },
+                                      {
+                                        "value": "PG",
+                                        "label": "PG"
+                                      },
+                                      {
+                                        "value": "R",
+                                        "label": "R"
+                                      },
+                                      {
+                                        "value": "R18+",
+                                        "label": "R18+"
+                                      },
+                                      {
+                                        "value": "RC",
+                                        "label": "RC"
+                                      },
+                                      {
+                                        "value": "Revoked",
+                                        "label": "Revoked"
+                                      },
+                                      {
+                                        "value": "SOA",
+                                        "label": "SOA"
+                                      },
+                                      {
+                                        "value": "X",
+                                        "label": "X"
+                                      },
+                                      {
+                                        "value": "X18+",
+                                        "label": "X18+"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "label": "Austria",
+                                    "value": "at",
+                                    "children": [
+                                      {
+                                        "value": "(Banned)",
+                                        "label": "(Banned)"
+                                      },
+                                      {
+                                        "value": "0",
+                                        "label": "0"
+                                      },
+                                      {
+                                        "value": "10",
+                                        "label": "10"
+                                      },
+                                      {
+                                        "value": "12",
+                                        "label": "12"
+                                      },
+                                      {
+                                        "value": "14",
+                                        "label": "14"
+                                      },
+                                      {
+                                        "value": "16",
+                                        "label": "16"
+                                      },
+                                      {
+                                        "value": "18",
+                                        "label": "18"
+                                      },
+                                      {
+                                        "value": "6",
+                                        "label": "6"
+                                      },
+                                      {
+                                        "value": "8",
+                                        "label": "8"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "label": "Belgium",
+                                    "value": "be",
+                                    "children": [
+                                      {
+                                        "value": "KNT/ENA",
+                                        "label": "KNT/ENA"
+                                      },
+                                      {
+                                        "value": "KT/EA",
+                                        "label": "KT/EA"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "key": "attribute",
+                          "valueType": "string",
+                          "default": "",
+                          "tag": "el-form-item",
+                          "slots": {
+                            "label": {
+                              "tag": "span",
+                              "value": "Remark"
+                            },
+                            "default": {
+                              "tag": "el-input"
+                            }
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "key": "pos",
+                          "valueType": "string",
+                          "default": "",
+                          "tag": "el-form-item",
+                          "slots": {
+                            "label": {
+                              "tag": "span",
+                              "value": "Order"
+                            },
+                            "default": {
+                              "tag": "el-input"
+                            }
+                          }
+                        }
+                      ],
+                      "attrs": {
+                        "labelWidth": "180px"
+                      }
+                    },
+                    {
+                      "tag": "el-button",
+                      "trigger": "click",
+                      "triggerCb": {
+                        "type": "remove"
+                      },
+                      "slots": {
+                        "icon": {
+                          "tag": "Minus"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "slots": {
+              "icon": {
+                "tag": "Edit"
+              }
+            },
+            "attrs": {
+              "link": true
+            }
+          }
+        ]
+      },
+      "attrs": {}
+    },
+    {
+      "type": "field",
+      "key": "mediaParentGuides",
+      "valueType": "array",
+      "default": [
+        {
+          "label": "Sex & Nudity",
+          "labelId": 1,
+          "languageContentMap": {
+            "en": "",
+            "es": "",
+            "pt": ""
+          },
+          "level": ""
+        },
+        {
+          "label": "Violence & Gore",
+          "labelId": 2,
+          "languageContentMap": {
+            "en": "",
+            "es": "",
+            "pt": ""
+          },
+          "level": ""
+        },
+        {
+          "label": "Profanity",
+          "labelId": 3,
+          "languageContentMap": {
+            "en": "",
+            "es": "",
+            "pt": ""
+          },
+          "level": ""
+        },
+        {
+          "label": "Alcohol,Drugs & Smoking",
+          "labelId": 4,
+          "languageContentMap": {
+            "en": "",
+            "es": "",
+            "pt": ""
+          },
+          "level": ""
+        },
+        {
+          "label": "Frightening & Intense Scenes",
+          "labelId": 5,
+          "languageContentMap": {
+            "en": "",
+            "es": "",
+            "pt": ""
+          },
+          "level": ""
+        }
+      ],
+      "slots": {
+        "label": {
+          "tag": "span",
+          "value": "Parent Guide"
+        },
+        "default": [
+          {
+            "tag": "plain-text-comp"
+          },
+          {
+            "tag": "el-button",
+            "trigger": "click",
+            "triggerCb": {
+              "type": "dialog",
+              "tag": "el-dialog",
+              "config": {
+                "type": "list",
+                "config": {
+                  "header": null,
+                  "footer": null,
+                  "item": [
+                    {
+                      "type": "form",
+                      "tag": "el-form",
+                      "fields": [
+                        {
+                          "type": "field",
+                          "key": "label",
+                          "valueType": "string",
+                          "default": "",
+                          "tag": "el-form-item",
+                          "slots": {
+                            "label": {
+                              "tag": "plain-text-comp"
+                            }
+                          },
+                          "attrs": {
+                            "labelWidth": "240px"
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "key": "level",
+                          "valueType": "string",
+                          "default": "",
+                          "tag": "el-form-item",
+                          "slots": {
+                            "label": {
+                              "tag": "span",
+                              "value": "Level"
+                            },
+                            "default": {
+                              "tag": "el-select",
+                              "slots": {
+                                "default": [
+                                  {
+                                    "tag": "el-option",
+                                    "value": 1,
+                                    "label": "None"
+                                  },
+                                  {
+                                    "tag": "el-option",
+                                    "value": 2,
+                                    "label": "Mild"
+                                  },
+                                  {
+                                    "tag": "el-option",
+                                    "value": 3,
+                                    "label": "Moderate"
+                                  },
+                                  {
+                                    "tag": "el-option",
+                                    "value": 4,
+                                    "label": "Severe"
+                                  },
+                                  {
+                                    "tag": "el-option",
+                                    "value": 5,
+                                    "label": "(No rated)"
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "type": "field",
+                          "key": "languageContentMap",
+                          "valueType": "object",
+                          "default": {
+                            "en": "",
+                            "es": "",
+                            "pt": ""
+                          },
+                          "tag": "el-form-item",
+                          "slots": {
+                            "default": {
+                              "type": "form",
+                              "tag": "el-form",
+                              "fields": [
+                                {
+                                  "type": "field",
+                                  "key": "en",
+                                  "valueType": "string",
+                                  "default": "",
+                                  "tag": "el-form-item",
+                                  "slots": {
+                                    "label": {
+                                      "tag": "span",
+                                      "value": "detail_en"
+                                    },
+                                    "default": {
+                                      "tag": "el-input"
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "field",
+                                  "key": "es",
+                                  "valueType": "string",
+                                  "default": "",
+                                  "tag": "el-form-item",
+                                  "slots": {
+                                    "label": {
+                                      "tag": "span",
+                                      "value": "detail_es"
+                                    },
+                                    "default": {
+                                      "tag": "el-input"
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "field",
+                                  "key": "pt",
+                                  "valueType": "string",
+                                  "default": "",
+                                  "tag": "el-form-item",
+                                  "slots": {
+                                    "label": {
+                                      "tag": "span",
+                                      "value": "detail_pt"
+                                    },
+                                    "default": {
+                                      "tag": "el-input"
+                                    }
+                                  }
+                                }
+                              ],
+                              "attrs": {
+                                "labelWidth": "180px"
+                              }
+                            }
+                          },
+                          "attrs": {
+                            "labelWidth": "0"
+                          }
+                        }
+                      ],
+                      "attrs": {
+                        "labelWidth": "180px"
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "slots": {
+              "icon": {
+                "tag": "Edit"
+              }
+            },
+            "attrs": {
+              "link": true
+            }
+          }
+        ]
+      },
+      "attrs": {}
+    },
+    {
+      "type": "field",
+      "key": "mediaPersons",
+      "valueType": "object",
+      "default": {
+        "_1": [],
+        "_2": [],
+        "_5": []
+      },
+      "slots": {
+        "label": {
+          "tag": "span",
+          "value": "Cast & Crew"
+        },
+        "default": [
+          {
+            "tag": "plain-text-comp"
+          },
+          {
+            "tag": "el-button",
+            "trigger": "click",
+            "triggerCb": {
+              "type": "dialog",
+              "tag": "el-dialog",
+              "config": {
                 "type": "form",
                 "tag": "el-form",
                 "fields": [
                   {
                     "type": "field",
-                    "key": "name",
-                    "valueType": "string",
-                    "default": "children",
-                    "required": true,
+                    "key": "_1",
+                    "valueType": "array",
+                    "default": [],
                     "tag": "el-form-item",
                     "slots": {
                       "label": {
                         "tag": "span",
-                        "value": "Name"
+                        "value": "Directer"
                       },
-                      "default": {
-                        "tag": "el-input"
-                      }
+                      "default": [
+                        {
+                          "type": "list",
+                          "item": [
+                            {
+                              "type": "form",
+                              "tag": "el-form",
+                              "fields": [
+                                {
+                                  "type": "field",
+                                  "key": "pcId",
+                                  "valueType": "string",
+                                  "default": "children",
+                                  "tag": "el-form-item",
+                                  "slots": {
+                                    "label": {
+                                      "tag": "span",
+                                      "value": "Celeb ID or Name"
+                                    },
+                                    "default": {
+                                      "tag": "el-select",
+                                      "slots": {
+                                        "default": [
+                                          {
+                                            "tag": "el-option",
+                                            "value": 1234,
+                                            "label": "Jackie Chan"
+                                          },
+                                          {
+                                            "tag": "el-option",
+                                            "value": 4566,
+                                            "label": "Jim Carry"
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "attrs": {
+                                    "labelWidth": "180px"
+                                  }
+                                },
+                                {
+                                  "type": "field",
+                                  "key": "pos",
+                                  "valueType": "number",
+                                  "default": null,
+                                  "tag": "el-form-item",
+                                  "slots": {
+                                    "label": {
+                                      "tag": "span",
+                                      "value": "Order"
+                                    },
+                                    "default": {
+                                      "tag": "el-input"
+                                    }
+                                  }
+                                }
+                              ],
+                              "attrs": {
+                                "labelWidth": "100px",
+                                "inline": true
+                              }
+                            },
+                            {
+                              "tag": "el-button",
+                              "trigger": "click",
+                              "triggerCb": {
+                                "type": "remove"
+                              },
+                              "slots": {
+                                "icon": {
+                                  "tag": "Minus"
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "tag": "el-button",
+                          "trigger": "click",
+                          "triggerCb": {
+                            "type": "insert",
+                            "value": {
+                              "job": 1,
+                              "name": "",
+                              "pcId": "",
+                              "pos": "",
+                              "role": ""
+                            }
+                          },
+                          "slots": {
+                            "icon": {
+                              "tag": "Plus"
+                            }
+                          },
+                          "attrs": {
+                            "link": true,
+                            "key": "insert"
+                          }
+                        }
+                      ]
                     }
                   },
                   {
                     "type": "field",
-                    "key": "age",
-                    "valueType": "number",
-                    "default": null,
-                    "required": true,
+                    "key": "_5",
+                    "valueType": "array",
+                    "default": [],
                     "tag": "el-form-item",
                     "slots": {
                       "label": {
                         "tag": "span",
-                        "value": "Age"
+                        "value": "Writer"
                       },
-                      "default": {
-                        "tag": "el-input"
-                      }
+                      "default": [
+                        {
+                          "type": "list",
+                          "item": [
+                            {
+                              "type": "form",
+                              "tag": "el-form",
+                              "fields": [
+                                {
+                                  "type": "field",
+                                  "key": "pcId",
+                                  "valueType": "string",
+                                  "default": "children",
+                                  "tag": "el-form-item",
+                                  "slots": {
+                                    "label": {
+                                      "tag": "span",
+                                      "value": "Celeb ID or Name"
+                                    },
+                                    "default": {
+                                      "tag": "el-select",
+                                      "slots": {
+                                        "default": [
+                                          {
+                                            "tag": "el-option",
+                                            "value": 1234,
+                                            "label": "Jackie Chan"
+                                          },
+                                          {
+                                            "tag": "el-option",
+                                            "value": 4566,
+                                            "label": "Jim Carry"
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "attrs": {
+                                    "labelWidth": "180px"
+                                  }
+                                },
+                                {
+                                  "type": "field",
+                                  "key": "pos",
+                                  "valueType": "number",
+                                  "default": null,
+                                  "tag": "el-form-item",
+                                  "slots": {
+                                    "label": {
+                                      "tag": "span",
+                                      "value": "Order"
+                                    },
+                                    "default": {
+                                      "tag": "el-input"
+                                    }
+                                  }
+                                }
+                              ],
+                              "attrs": {
+                                "labelWidth": "100px",
+                                "inline": true
+                              }
+                            },
+                            {
+                              "tag": "el-button",
+                              "trigger": "click",
+                              "triggerCb": {
+                                "type": "remove"
+                              },
+                              "slots": {
+                                "icon": {
+                                  "tag": "Minus"
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "tag": "el-button",
+                          "trigger": "click",
+                          "triggerCb": {
+                            "type": "insert",
+                            "value": {
+                              "job": 2,
+                              "name": "",
+                              "pcId": "",
+                              "pos": "",
+                              "role": ""
+                            }
+                          },
+                          "slots": {
+                            "icon": {
+                              "tag": "Plus"
+                            }
+                          },
+                          "attrs": {
+                            "link": true,
+                            "key": "insert"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "type": "field",
+                    "key": "_2",
+                    "valueType": "array",
+                    "default": [],
+                    "tag": "el-form-item",
+                    "slots": {
+                      "label": {
+                        "tag": "span",
+                        "value": "Stars"
+                      },
+                      "default": [
+                        {
+                          "type": "list",
+                          "item": [
+                            {
+                              "type": "form",
+                              "tag": "el-form",
+                              "fields": [
+                                {
+                                  "type": "field",
+                                  "key": "pcId",
+                                  "valueType": "string",
+                                  "default": "children",
+                                  "tag": "el-form-item",
+                                  "slots": {
+                                    "label": {
+                                      "tag": "span",
+                                      "value": "Celeb ID or Name"
+                                    },
+                                    "default": {
+                                      "tag": "el-select",
+                                      "slots": {
+                                        "default": [
+                                          {
+                                            "tag": "el-option",
+                                            "value": 1234,
+                                            "label": "Jackie Chan"
+                                          },
+                                          {
+                                            "tag": "el-option",
+                                            "value": 4566,
+                                            "label": "Jim Carry"
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "attrs": {
+                                    "labelWidth": "180px"
+                                  }
+                                },
+                                {
+                                  "type": "field",
+                                  "key": "role",
+                                  "valueType": "number",
+                                  "default": null,
+                                  "tag": "el-form-item",
+                                  "slots": {
+                                    "label": {
+                                      "tag": "span",
+                                      "value": "Play"
+                                    },
+                                    "default": {
+                                      "tag": "el-input"
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "field",
+                                  "key": "pos",
+                                  "valueType": "number",
+                                  "default": null,
+                                  "tag": "el-form-item",
+                                  "slots": {
+                                    "label": {
+                                      "tag": "span",
+                                      "value": "Order"
+                                    },
+                                    "default": {
+                                      "tag": "el-input"
+                                    }
+                                  }
+                                }
+                              ],
+                              "attrs": {
+                                "labelWidth": "100px",
+                                "inline": true
+                              }
+                            },
+                            {
+                              "tag": "el-button",
+                              "trigger": "click",
+                              "triggerCb": {
+                                "type": "remove"
+                              },
+                              "slots": {
+                                "icon": {
+                                  "tag": "Minus"
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "tag": "el-button",
+                          "trigger": "click",
+                          "triggerCb": {
+                            "type": "insert",
+                            "value": {
+                              "job": 5,
+                              "name": "",
+                              "pcId": "",
+                              "pos": "",
+                              "role": ""
+                            }
+                          },
+                          "slots": {
+                            "icon": {
+                              "tag": "Plus"
+                            }
+                          },
+                          "attrs": {
+                            "link": true,
+                            "key": "insert"
+                          }
+                        }
+                      ]
                     }
                   }
                 ],
                 "attrs": {
-                  "labelWidth": "80px"
+                  "labelWidth": "120px"
                 }
               },
-              {
-                "tag": "el-button",
-                "trigger": "click",
-                "triggerCb": {
-                  "type": "remove"
-                },
-                "slots": {
-                  "icon": {
-                    "tag": "Minus"
-                  }
-                }
-              }
-            ]
-          },
-          {
-            "tag": "el-button",
-            "trigger": "click",
-            "triggerCb": {
-              "type": "insert",
-              "value": {
-                "name": "",
-                "age": null
+              "attrs": {
+                "width": "1000px"
               }
             },
             "slots": {
               "icon": {
-                "tag": "Plus"
+                "tag": "Edit"
               }
             },
             "attrs": {
-              "link": true,
-              "key": "insert"
+              "link": true
             }
           }
         ]
@@ -1480,109 +2997,307 @@
     },
     {
       "type": "field",
-      "key": "brother",
-      "valueType": "array",
-      "default": [],
+      "key": "mediaCompanys",
+      "valueType": "object",
+      "default": {
+        "_0": [],
+        "_1": []
+      },
       "slots": {
         "label": {
           "tag": "span",
-          "value": "Brother"
+          "value": "Company Credits"
         },
         "default": [
           {
-            "type": "list",
-            "item": [
-              {
-                "tag": "plain-text-comp"
-              },
-              {
-                "tag": "el-button",
-                "trigger": "click",
-                "triggerCb": {
-                  "type": "dialog",
-                  "tag": "el-dialog",
-                  "form": {
-                    "type": "form",
-                    "tag": "el-form",
-                    "fields": [
-                      {
-                        "type": "field",
-                        "key": "name",
-                        "valueType": "string",
-                        "default": "",
-                        "required": true,
-                        "tag": "el-form-item",
-                        "slots": {
-                          "label": {
-                            "tag": "span",
-                            "value": "Name"
-                          },
-                          "default": {
-                            "tag": "el-input"
-                          }
-                        }
-                      },
-                      {
-                        "type": "field",
-                        "key": "age",
-                        "valueType": "number",
-                        "default": null,
-                        "required": true,
-                        "tag": "el-form-item",
-                        "slots": {
-                          "label": {
-                            "tag": "span",
-                            "value": "Age"
-                          },
-                          "default": {
-                            "tag": "el-input"
-                          }
-                        }
-                      }
-                    ],
-                    "attrs": {
-                      "labelWidth": "120px"
-                    }
-                  }
-                },
-                "slots": {
-                  "icon": {
-                    "tag": "Edit"
-                  }
-                },
-                "attrs": {
-                  "link": true
-                }
-              },
-              {
-                "tag": "el-button",
-                "trigger": "click",
-                "triggerCb": {
-                  "type": "remove"
-                },
-                "slots": {
-                  "icon": {
-                    "tag": "Minus"
-                  }
-                }
-              }
-            ]
+            "tag": "plain-text-comp"
           },
           {
             "tag": "el-button",
             "trigger": "click",
             "triggerCb": {
-              "type": "insert",
-              "value": null
+              "type": "dialog",
+              "tag": "el-dialog",
+              "config": {
+                "type": "form",
+                "tag": "el-form",
+                "fields": [
+                  {
+                    "type": "field",
+                    "key": "_0",
+                    "valueType": "array",
+                    "default": [],
+                    "tag": "el-form-item",
+                    "slots": {
+                      "label": {
+                        "tag": "span",
+                        "value": "Production Companies"
+                      },
+                      "default": [
+                        {
+                          "type": "list",
+                          "item": [
+                            {
+                              "type": "form",
+                              "tag": "el-form",
+                              "fields": [
+                                {
+                                  "type": "field",
+                                  "key": "name",
+                                  "valueType": "string",
+                                  "default": "children",
+                                  "tag": "el-form-item",
+                                  "slots": {
+                                    "label": {
+                                      "tag": "span",
+                                      "value": "Celeb ID or Name"
+                                    },
+                                    "default": {
+                                      "tag": "el-select",
+                                      "slots": {
+                                        "default": [
+                                          {
+                                            "tag": "el-option",
+                                            "value": 1234,
+                                            "label": "Jackie Chan"
+                                          },
+                                          {
+                                            "tag": "el-option",
+                                            "value": 4566,
+                                            "label": "Jim Carry"
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "attrs": {
+                                    "labelWidth": "180px"
+                                  }
+                                },
+                                {
+                                  "type": "field",
+                                  "key": "attribute",
+                                  "valueType": "number",
+                                  "default": null,
+                                  "tag": "el-form-item",
+                                  "slots": {
+                                    "label": {
+                                      "tag": "span",
+                                      "value": "Remark"
+                                    },
+                                    "default": {
+                                      "tag": "el-input"
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "field",
+                                  "key": "pos",
+                                  "valueType": "number",
+                                  "default": null,
+                                  "tag": "el-form-item",
+                                  "slots": {
+                                    "label": {
+                                      "tag": "span",
+                                      "value": "Order"
+                                    },
+                                    "default": {
+                                      "tag": "el-input"
+                                    }
+                                  }
+                                }
+                              ],
+                              "attrs": {
+                                "labelWidth": "100px",
+                                "inline": true
+                              }
+                            },
+                            {
+                              "tag": "el-button",
+                              "trigger": "click",
+                              "triggerCb": {
+                                "type": "remove"
+                              },
+                              "slots": {
+                                "icon": {
+                                  "tag": "Minus"
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "tag": "el-button",
+                          "trigger": "click",
+                          "triggerCb": {
+                            "type": "insert",
+                            "value": {
+                              "attribute": "",
+                              "coId": "",
+                              "name": "",
+                              "pos": "",
+                              "type": "0"
+                            }
+                          },
+                          "slots": {
+                            "icon": {
+                              "tag": "Plus"
+                            }
+                          },
+                          "attrs": {
+                            "link": true,
+                            "key": "insert"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "type": "field",
+                    "key": "_1",
+                    "valueType": "array",
+                    "default": [],
+                    "tag": "el-form-item",
+                    "slots": {
+                      "label": {
+                        "tag": "span",
+                        "value": "Distributor Companies"
+                      },
+                      "default": [
+                        {
+                          "type": "list",
+                          "item": [
+                            {
+                              "type": "form",
+                              "tag": "el-form",
+                              "fields": [
+                                {
+                                  "type": "field",
+                                  "key": "name",
+                                  "valueType": "string",
+                                  "default": "children",
+                                  "tag": "el-form-item",
+                                  "slots": {
+                                    "label": {
+                                      "tag": "span",
+                                      "value": "Celeb ID or Name"
+                                    },
+                                    "default": {
+                                      "tag": "el-select",
+                                      "slots": {
+                                        "default": [
+                                          {
+                                            "tag": "el-option",
+                                            "value": 1234,
+                                            "label": "Jackie Chan"
+                                          },
+                                          {
+                                            "tag": "el-option",
+                                            "value": 4566,
+                                            "label": "Jim Carry"
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "attrs": {
+                                    "labelWidth": "180px"
+                                  }
+                                },
+                                {
+                                  "type": "field",
+                                  "key": "attribute",
+                                  "valueType": "number",
+                                  "default": null,
+                                  "tag": "el-form-item",
+                                  "slots": {
+                                    "label": {
+                                      "tag": "span",
+                                      "value": "Remark"
+                                    },
+                                    "default": {
+                                      "tag": "el-input"
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "field",
+                                  "key": "pos",
+                                  "valueType": "number",
+                                  "default": null,
+                                  "tag": "el-form-item",
+                                  "slots": {
+                                    "label": {
+                                      "tag": "span",
+                                      "value": "Order"
+                                    },
+                                    "default": {
+                                      "tag": "el-input"
+                                    }
+                                  }
+                                }
+                              ],
+                              "attrs": {
+                                "labelWidth": "100px",
+                                "inline": true
+                              }
+                            },
+                            {
+                              "tag": "el-button",
+                              "trigger": "click",
+                              "triggerCb": {
+                                "type": "remove"
+                              },
+                              "slots": {
+                                "icon": {
+                                  "tag": "Minus"
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "tag": "el-button",
+                          "trigger": "click",
+                          "triggerCb": {
+                            "type": "insert",
+                            "value": {
+                              "attribute": "",
+                              "coId": "",
+                              "name": "",
+                              "pos": "",
+                              "type": "1"
+                            }
+                          },
+                          "slots": {
+                            "icon": {
+                              "tag": "Plus"
+                            }
+                          },
+                          "attrs": {
+                            "link": true,
+                            "key": "insert"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "attrs": {
+                  "labelWidth": "220px"
+                }
+              },
+              "attrs": {
+                "width": "1000px"
+              }
             },
             "slots": {
               "icon": {
-                "tag": "Plus"
+                "tag": "Edit"
               }
             },
             "attrs": {
-              "link": true,
-              "key": "insert"
+              "link": true
             }
           }
         ]
