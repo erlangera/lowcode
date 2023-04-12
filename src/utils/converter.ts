@@ -53,7 +53,7 @@ export function config2Form(config: { type: 'form' | 'list', fields?: FieldConfi
   return res;
 }
 
-function setValueByPath(obj: { [x: string]: any }, path: string | number, val: any): void {
+export function setValueByPath(obj: { [x: string]: any }, path: string | number, val: any): void {
   if (typeof path === 'number') {
     obj[path] = val;
   } else if (typeof path === 'string') {
@@ -68,10 +68,13 @@ function setValueByPath(obj: { [x: string]: any }, path: string | number, val: a
   }
 }
 
-export function toRefConvert(obj: { [x: string]: any }, path: string | number): [object, string | number] | void {
+export function getValueByPath(obj: { [x: string]: any }, path: string | number): any {
   if (typeof path === 'number') {
-    return [obj, path];
+    return obj[path];
   } else if (typeof path === 'string') {
+    if (!path) {
+      return obj;
+    }
     const segments = path.split('.')
     for (let i = 0; i < segments.length - 1; i++) {
       if (!isObject(obj[segments[i]])) {
@@ -79,7 +82,7 @@ export function toRefConvert(obj: { [x: string]: any }, path: string | number): 
       }
       obj = obj[segments[i]];
     }
-    return [obj, segments[segments.length - 1]]
+    return obj[segments[segments.length - 1]]
   }
 }
 

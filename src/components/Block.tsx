@@ -4,12 +4,18 @@ import { Edit, Plus, Minus } from '@element-plus/icons-vue';
 import PlainTextComp from "./PlainTextComp";
 import FormComp from "./FormComp";
 import { formCompContextKey, formItemCompContextKey } from "./constant";
-import { upperFirstCharacter, toRefConvert } from "../utils/converter";
+import { upperFirstCharacter, getValueByPath } from "../utils/converter";
 import CustomInputComp from "./custom/CustomInputComp";
 import CustomTextareaComp from "./custom/CustomTextareaComp";
 import CustomImageUploadComp from "./custom/CustomImageUploadComp";
 
 const reserveTags = ['span', 'div', 'p']
+
+function toRefByPath(obj: object, path: string) : any {
+    const segments = path.split('.');
+    const key = segments.pop();
+    return toRef(getValueByPath(obj, segments.join('.')), key);
+}
 
 const Block = defineComponent({
     name: 'Block',
@@ -38,9 +44,9 @@ const Block = defineComponent({
         const { model, openDialog } = formInject;
         const { insert, remove } = inject(formItemCompContextKey);
 
-        const valueRef = fieldConfig?.key
-            ? (index !== undefined ? toRef(toRef(...toRefConvert(model, fieldConfig.key)), index) : toRef(...toRefConvert(model, fieldConfig.key)))
-            : (index !== undefined ? toRef(model, index) : toRef(formInject, 'model'));
+        const valueRef = index !== undefined
+            ? toRef(fieldConfig?.key ? getValueByPath(model, fieldConfig.key) : model, index)
+            : (fieldConfig?.key ? toRefByPath(model, fieldConfig.key) : toRef(formInject, 'model'));
 
         // list
         if (config.type === 'list') {

@@ -4,7 +4,7 @@ import FormItemComp from "./FormItemComp";
 import CustomTransferComp from "./custom/CustomTransferComp";
 import ListComp from "./ListComp";
 import { formCompContextKey } from "./constant";
-import { config2Form } from "../utils/converter";
+import { config2Form, getValueByPath, setValueByPath } from "../utils/converter";
 import { formatFromList } from "../utils/format";
 
 const FormComp = defineComponent({
@@ -43,9 +43,9 @@ const FormComp = defineComponent({
             dialog.attrs = cbConfig.attrs;
             dialog.index = index;
             if (dialog.index === undefined) {
-                dialog.model = model[key];
+                dialog.model = getValueByPath(model, key);
             } else {
-                dialog.model = model[key][dialog.index];
+                dialog.model = getValueByPath(model, key)[dialog.index];
             }
         };
         const closeDialog = () => {
@@ -61,18 +61,18 @@ const FormComp = defineComponent({
                 dialogFormRef.value.validate((valid) => {
                     if (valid) {
                         if (dialog.index === undefined) {
-                            model[dialog.key] = dialog.model;
+                            setValueByPath(model, dialog.key, dialog.model);
                         } else {
-                            model[dialog.key][dialog.index] = dialog.model;
+                            getValueByPath(model, dialog.key)[dialog.index] = dialog.model;
                         }
                         closeDialog();
                     }
                 })
             } else {
                 if (dialog.index === undefined) {
-                    model[dialog.key] = dialog.model;
+                    setValueByPath(model, dialog.key, dialog.model);
                 } else {
-                    model[dialog.key][dialog.index] = dialog.model;
+                    getValueByPath(model, dialog.key)[dialog.index] = dialog.model;
                 }
                 closeDialog();
             }

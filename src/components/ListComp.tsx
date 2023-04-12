@@ -33,24 +33,25 @@ export default defineComponent({
             index: undefined,
         });
         const openDialog = (key: string, cbConfig, index: undefined | number) => {
+            throw new Error('ListComp undefine openDialog');
             // ctx.emit('open-dialog', config)
-            dialog.key = key;
-            dialog.visible = true;
-            dialog.config = cbConfig.config;
-            dialog.attrs = cbConfig.attrs;
-            dialog.index = index;
-            if (dialog.index === undefined) {
-                dialog.model = model[key];
-            } else {
-                dialog.model = model[key][dialog.index];
-            }
+            // dialog.key = key;
+            // dialog.visible = true;
+            // dialog.config = cbConfig.config;
+            // dialog.attrs = cbConfig.attrs;
+            // dialog.index = index;
+            // if (dialog.index === undefined) {
+            //     dialog.model = model[key];
+            // } else {
+            //     dialog.model = model[key][dialog.index];
+            // }
         };
         const closeDialog = () => {
-            dialog.key = '';
-            dialog.visible = false;
-            dialog.config = null;
-            dialog.attrs = null;
-            dialog.model = {};
+            // dialog.key = '';
+            // dialog.visible = false;
+            // dialog.config = null;
+            // dialog.attrs = null;
+            // dialog.model = {};
         }
         const handleOk = () => {
             // 提交校验

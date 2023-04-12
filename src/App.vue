@@ -31,12 +31,12 @@ const formConfig = ref(null);
 let model = {};
 const configList = [
   {
-    value: '/demo.json',
-    label: 'Demo'
-  },
-  {
     value: '/movie.json',
     label: 'Movie'
+  },
+  {
+    value: '/demo.json',
+    label: 'Demo'
   },
   {
     value: '/tv.json',
