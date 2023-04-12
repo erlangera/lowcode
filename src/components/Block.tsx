@@ -4,7 +4,7 @@ import { Edit, Plus, Minus } from '@element-plus/icons-vue';
 import PlainTextComp from "./PlainTextComp";
 import FormComp from "./FormComp";
 import { formCompContextKey, formItemCompContextKey } from "./constant";
-import { upperFirstCharacter } from "../utils/converter";
+import { upperFirstCharacter, toRefConvert } from "../utils/converter";
 import CustomInputComp from "./custom/CustomInputComp";
 import CustomTextareaComp from "./custom/CustomTextareaComp";
 import CustomImageUploadComp from "./custom/CustomImageUploadComp";
@@ -38,8 +38,8 @@ const Block = defineComponent({
         const { model, openDialog } = formInject;
         const { insert, remove } = inject(formItemCompContextKey);
 
-        const valueRef = fieldConfig?.key 
-            ? (index !== undefined ? toRef(model[fieldConfig.key], index) : toRef(model, fieldConfig.key))
+        const valueRef = fieldConfig?.key
+            ? (index !== undefined ? toRef(toRef(...toRefConvert(model, fieldConfig.key)), index) : toRef(...toRefConvert(model, fieldConfig.key)))
             : (index !== undefined ? toRef(model, index) : toRef(formInject, 'model'));
 
         // list

@@ -19,11 +19,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, nextTick, onMounted } from "vue";
+import { ref, nextTick, onMounted } from "vue";
 import { ElButton, ElSelect, ElOption } from "element-plus";
 import FormComp from "./components/FormComp";
 import EditorComp from "./components/EditorComp";
-import { config2Form } from "./utils/converter";
 
 const flag = ref(false);
 const formConfig = ref(null);
@@ -32,12 +31,12 @@ const formConfig = ref(null);
 let model = {};
 const configList = [
   {
-    value: '/movie.json',
-    label: 'Movie'
-  },
-  {
     value: '/demo.json',
     label: 'Demo'
+  },
+  {
+    value: '/movie.json',
+    label: 'Movie'
   },
   {
     value: '/tv.json',
@@ -49,7 +48,7 @@ const loadConfig = (val) => {
   flag.value = false;
   fetch(val).then(data => data.json()).then(data => {
     formConfig.value = data;
-    model = reactive(config2Form(formConfig.value));
+    model = {};
     flag.value = true;
   })
 }
@@ -67,7 +66,7 @@ const render = () => {
     }
     if (json && json.type === "form") {
       formConfig.value = json;
-      model = reactive(config2Form(formConfig.value));
+      model = {};
     }
     flag.value = true;
   });

@@ -91,6 +91,131 @@
     },
     {
       "type": "field",
+      "key": "work.company",
+      "valueType": "string",
+      "default": "",
+      "tag": "el-form-item",
+      "slots": {
+        "label": {
+          "tag": "span",
+          "value": "Work Company"
+        },
+        "default": {
+          "tag": "el-select",
+          "slots": {
+            "default": [
+              {
+                "tag": "el-option",
+                "value": "Apple",
+                "label": "Apple"
+              },
+              {
+                "tag": "el-option",
+                "value": "Google",
+                "label": "Google"
+              },
+              {
+                "tag": "el-option",
+                "value": "Meta",
+                "label": "Meta"
+              }
+            ]
+          },
+          "attrs": {
+            "clearable": true
+          }
+        }
+      }
+    },
+    {
+      "type": "field",
+      "key": "work.address",
+      "valueType": "string",
+      "default": "",
+      "tag": "el-form-item",
+      "slots": {
+        "label": {
+          "tag": "span",
+          "value": "Work Address"
+        },
+        "default": {
+          "tag": "el-input"
+        }
+      }
+    },
+    {
+      "type": "field",
+      "key": "mother",
+      "valueType": "object",
+      "default": {},
+      "tag": "el-form-item",
+      "slots": {
+        "default": {
+          "type": "form",
+          "tag": "el-form",
+          "fields": [
+            {
+              "type": "field",
+              "key": "name",
+              "valueType": "string",
+              "default": "",
+              "tag": "el-form-item",
+              "slots": {
+                "label": {
+                  "tag": "span",
+                  "value": "Mother Name"
+                },
+                "default": {
+                  "tag": "el-input"
+                }
+              }
+            }
+          ],
+          "attrs": {
+            "labelWidth": "120px"
+          }
+        }
+      },
+      "attrs": {
+        "labelWidth": "0"
+      }
+    },
+    {
+      "type": "field",
+      "key": "work.type",
+      "valueType": "string",
+      "default": "",
+      "required": true,
+      "tag": "el-form-item",
+      "slots": {
+        "label": {
+          "tag": "span",
+          "value": "Work Type"
+        },
+        "default": {
+          "tag": "el-select",
+          "slots": {
+            "default": [
+              {
+                "tag": "el-option",
+                "value": "fullTime",
+                "label": "Full time"
+              },
+              {
+                "tag": "el-option",
+                "value": "partTime",
+                "label": "Part time"
+              }
+            ]
+          },
+          "attrs": {
+            "clearable": true
+          }
+        }
+      }
+    },
+    {
+      "type": "field",
       "key": "father",
       "valueType": "object",
       "default": null,
