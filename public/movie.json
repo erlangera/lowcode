@@ -90,6 +90,12 @@
       "valueType": "string",
       "default": "",
       "required": true,
+      "rules": [
+        {
+          "max": 8,
+          "message": "最大长度8"
+        }
+      ],
       "tag": "el-form-item",
       "slots": {
         "label": {
@@ -97,7 +103,11 @@
           "value": "Runtime(min)"
         },
         "default": {
-          "tag": "el-input"
+          "type": "custom",
+          "tag": "custom-input-comp",
+          "attrs": {
+            "maxLength": 8
+          }
         }
       }
     },
