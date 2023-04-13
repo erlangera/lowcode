@@ -9,6 +9,7 @@
       <ElButton @click="getRenderConfig">&gt;&gt;获取渲染配置</ElButton>
       <ElButton @click="render">&lt;&lt;渲染表单</ElButton>
       <ElButton @click="getForm">&gt;&gt;获取表单值</ElButton>
+      <ElButton @click="setForm">&lt;&lt;载入表单值</ElButton>
       <ElButton @click="validateForm">验证表单</ElButton>
       <ElButton @click="resetForm">重置表单</ElButton>
       <ElButton @click="clearValidate">清除表单验证</ElButton>
@@ -85,6 +86,21 @@ const getForm = () => {
     content.value = JSON.stringify(model, null, 2);
   });
 };
+const setForm = () => {
+  flag.value = false;
+  nextTick(() => {
+    let json;
+    try {
+      json = JSON.parse(content.value);
+    } catch (error) {
+      json = null;
+    }
+    if (json) {
+      model = json;
+    }
+    flag.value = true;
+  });
+}
 const formCompRef = ref(null);
 const validateForm = () => {
   formCompRef.value.validate((valid) => {
