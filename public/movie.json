@@ -800,7 +800,7 @@
       "default": {
         "en": "",
         "es": "",
-        "pt": "a"
+        "pt": ""
       },
       "slots": {
         "label": {
@@ -922,7 +922,7 @@
       "default": {
         "en": "",
         "es": "",
-        "pt": "a"
+        "pt": ""
       },
       "slots": {
         "label": {
@@ -2786,7 +2786,7 @@
                           "triggerCb": {
                             "type": "insert",
                             "value": {
-                              "job": 2,
+                              "job": 5,
                               "name": "",
                               "pcId": "",
                               "pos": "",
@@ -2916,7 +2916,7 @@
                           "triggerCb": {
                             "type": "insert",
                             "value": {
-                              "job": 5,
+                              "job": 2,
                               "name": "",
                               "pcId": "",
                               "pos": "",
