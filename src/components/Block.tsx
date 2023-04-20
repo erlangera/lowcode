@@ -41,7 +41,7 @@ const Block = defineComponent({
 
         // 处理FormComp FormItemComp provide的属性
         const formInject = inject(formCompContextKey);
-        const { model, openDialog, insert, remove } = formInject;
+        const { model, emit } = formInject;
 
         const valueRef = index !== undefined
             ? toRef(fieldConfig?.key ? getValueByPath(model, fieldConfig.key) : model, index)
@@ -68,17 +68,17 @@ const Block = defineComponent({
             listeners[`on${upperFirstCharacter(config.trigger)}`] = () => {
                 switch (config.triggerCb.type) {
                     case 'dialog':
-                        openDialog(fieldConfig.key, config.triggerCb, index);
+                        emit('dialog', fieldConfig.key, config.triggerCb, index);
                         break;
                     case 'insert':
                         let value = config.triggerCb.value;
                         if (Array.isArray(value) || (value !== null && typeof value === 'object')) {
                             value = JSON.parse(JSON.stringify(value));
                         }
-                        insert(value, index, fieldConfig?.key);
+                        emit('insert', value, index, fieldConfig?.key);
                         break;
                     case 'remove':
-                        remove(index, fieldConfig?.key);
+                        emit('remove', index, fieldConfig?.key);
                         break;
                     default:
                         break;

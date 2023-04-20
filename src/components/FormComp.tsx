@@ -35,19 +35,6 @@ const FormComp = defineComponent({
             model: {},
             index: undefined,
         });
-        const openDialog = (key: string, cbConfig, index: undefined | number) => {
-            // ctx.emit('open-dialog', config)
-            dialog.key = key;
-            dialog.visible = true;
-            dialog.config = cbConfig.config;
-            dialog.attrs = cbConfig.attrs;
-            dialog.index = index;
-            if (dialog.index === undefined) {
-                dialog.model = getValueByPath(model, key);
-            } else {
-                dialog.model = getValueByPath(model, key)[dialog.index];
-            }
-        };
         const closeDialog = () => {
             dialog.key = '';
             dialog.visible = false;
@@ -77,21 +64,35 @@ const FormComp = defineComponent({
                 closeDialog();
             }
         }
-        
-        // 列表项新增和删除
-        const insert = (value, index, key) => {
-            model[key].push(value);
+
+        const listeners: Record<string, Function> = {
+            insert: (value, index, key) => {
+                model[key].push(value);
+            },
+            remove: (index, key) => {
+                model[key].splice(index, 1);
+            },
+            dialog: (key: string, cbConfig, index: undefined | number) => {
+                dialog.key = key;
+                dialog.visible = true;
+                dialog.config = cbConfig.config;
+                dialog.attrs = cbConfig.attrs;
+                dialog.index = index;
+                if (dialog.index === undefined) {
+                    dialog.model = getValueByPath(model, key);
+                } else {
+                    dialog.model = getValueByPath(model, key)[dialog.index];
+                }
+            }
         }
-        const remove = (index, key) => {
-            model[key].splice(index, 1);
+        const emit = (event: string, ...params) => {
+            listeners[event]?.call(null, ...params)
         }
 
         // 后代组件暴露属性和方法
         provide(formCompContextKey, {
             model,
-            openDialog,
-            insert,
-            remove
+            emit
         });
 
         // 向父组件暴露属性
