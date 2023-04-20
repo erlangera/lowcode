@@ -1,6 +1,5 @@
 import { defineComponent, defineAsyncComponent, provide, inject } from "vue";
 import { ElFormItem } from "element-plus";
-import { formCompContextKey, formItemCompContextKey } from "./constant";
 
 function formatToElementRules(config) {
     let res = [];
@@ -33,18 +32,6 @@ export default defineComponent({
     setup(props, ctx) {
         const { config } = props;
 
-        // 处理FormComp provide的属性
-        const { model } = inject(formCompContextKey);
-        const insert = (value) => {
-            model[config.key].push(value);
-        }
-        const remove = (index) => {
-            model[config.key].splice(index, 1);
-        }
-        provide(formItemCompContextKey, {
-            insert,
-            remove,
-        })
         const rules = formatToElementRules(config) ?? [];
         
         // 处理插槽 利用了递归组件

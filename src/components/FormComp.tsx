@@ -1,4 +1,4 @@
-import { defineComponent, reactive, ref, provide, computed } from "vue";
+import { defineComponent, reactive, ref, provide } from "vue";
 import { ElForm, ElDialog, ElButton } from "element-plus";
 import FormItemComp from "./FormItemComp";
 import CustomTransferComp from "./custom/CustomTransferComp";
@@ -77,11 +77,21 @@ const FormComp = defineComponent({
                 closeDialog();
             }
         }
+        
+        // 列表项新增和删除
+        const insert = (value, index, key) => {
+            model[key].push(value);
+        }
+        const remove = (index, key) => {
+            model[key].splice(index, 1);
+        }
 
         // 后代组件暴露属性和方法
         provide(formCompContextKey, {
             model,
-            openDialog
+            openDialog,
+            insert,
+            remove
         });
 
         // 向父组件暴露属性

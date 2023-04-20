@@ -1,5 +1,5 @@
 import { defineComponent, defineAsyncComponent, ref, reactive, provide } from "vue";
-import { formCompContextKey, formItemCompContextKey } from "./constant";
+import { formCompContextKey } from "./constant";
 
 export default defineComponent({
     name: 'ListComp',
@@ -82,13 +82,11 @@ export default defineComponent({
             model.splice(index, 1);
         }
         // 后代组件暴露属性和方法
-        provide(formItemCompContextKey, {
-            insert,
-            remove,
-        })
         provide(formCompContextKey, {
             model,
-            openDialog
+            openDialog,
+            insert,
+            remove,
         });
         const {config} = props.config;
         return () => [

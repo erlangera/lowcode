@@ -3,7 +3,7 @@ import { ElInput, ElSelect, ElOption, ElDatePicker, ElButton, ElCascader } from 
 import { Edit, Plus, Minus } from '@element-plus/icons-vue';
 import PlainTextComp from "./PlainTextComp";
 import FormComp from "./FormComp";
-import { formCompContextKey, formItemCompContextKey } from "./constant";
+import { formCompContextKey } from "./constant";
 import { upperFirstCharacter, getValueByPath } from "../utils/converter";
 import CustomInputComp from "./custom/CustomInputComp";
 import CustomTextareaComp from "./custom/CustomTextareaComp";
@@ -41,8 +41,7 @@ const Block = defineComponent({
 
         // 处理FormComp FormItemComp provide的属性
         const formInject = inject(formCompContextKey);
-        const { model, openDialog } = formInject;
-        const { insert, remove } = inject(formItemCompContextKey);
+        const { model, openDialog, insert, remove } = formInject;
 
         const valueRef = index !== undefined
             ? toRef(fieldConfig?.key ? getValueByPath(model, fieldConfig.key) : model, index)
@@ -76,10 +75,10 @@ const Block = defineComponent({
                         if (Array.isArray(value) || (value !== null && typeof value === 'object')) {
                             value = JSON.parse(JSON.stringify(value));
                         }
-                        insert(value);
+                        insert(value, index, fieldConfig?.key);
                         break;
                     case 'remove':
-                        remove(index);
+                        remove(index, fieldConfig?.key);
                         break;
                     default:
                         break;
