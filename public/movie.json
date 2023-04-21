@@ -1,6 +1,6 @@
 {
   "type": "form",
-  "tag": "el-form",
+  "tag": "form-comp",
   "fields": [
     {
       "type": "field",
@@ -697,7 +697,7 @@
               "tag": "el-dialog",
               "config": {
                 "type": "form",
-                "tag": "el-form",
+                "tag": "form-comp",
                 "fields": [
                   {
                     "type": "field",
@@ -819,7 +819,7 @@
               "tag": "el-dialog",
               "config": {
                 "type": "form",
-                "tag": "el-form",
+                "tag": "form-comp",
                 "fields": [
                   {
                     "type": "field",
@@ -941,7 +941,7 @@
               "tag": "el-dialog",
               "config": {
                 "type": "form",
-                "tag": "el-form",
+                "tag": "form-comp",
                 "fields": [
                   {
                     "type": "field",
@@ -1066,7 +1066,7 @@
               "tag": "el-dialog",
               "config": {
                 "type": "form",
-                "tag": "el-form",
+                "tag": "form-comp",
                 "fields": [
                   {
                     "type": "field",
@@ -1208,6 +1208,7 @@
               "tag": "el-dialog",
               "config": {
                 "type": "list",
+                "tag": "list-comp",
                 "config": {
                   "header": null,
                   "footer": {
@@ -1235,7 +1236,7 @@
                   "item": [
                     {
                       "type": "form",
-                      "tag": "el-form",
+                      "tag": "form-comp",
                       "fields": [
                         {
                           "type": "field",
@@ -1402,6 +1403,7 @@
               "tag": "el-dialog",
               "config": {
                 "type": "list",
+                "tag": "list-comp",
                 "config": {
                   "header": null,
                   "footer": {
@@ -1433,7 +1435,7 @@
                   "item": [
                     {
                       "type": "form",
-                      "tag": "el-form",
+                      "tag": "form-comp",
                       "fields": [
                         {
                           "type": "field",
@@ -1683,8 +1685,8 @@
               "tag": "el-dialog",
               "config": {
                 "type": "list",
+                "tag": "list-comp",
                 "config": {
-                  "header": null,
                   "footer": {
                     "tag": "el-button",
                     "trigger": "click",
@@ -1709,7 +1711,7 @@
                   "item": [
                     {
                       "type": "form",
-                      "tag": "el-form",
+                      "tag": "form-comp",
                       "fields": [
                         {
                           "type": "field",
@@ -1873,6 +1875,7 @@
               "tag": "el-dialog",
               "config": {
                 "type": "list",
+                "tag": "list-comp",
                 "config": {
                   "header": null,
                   "footer": {
@@ -1899,7 +1902,7 @@
                   "item": [
                     {
                       "type": "form",
-                      "tag": "el-form",
+                      "tag": "form-comp",
                       "fields": [
                         {
                           "type": "field",
@@ -2028,6 +2031,7 @@
               "tag": "el-dialog",
               "config": {
                 "type": "list",
+                "tag": "list-comp",
                 "config": {
                   "header": null,
                   "footer": {
@@ -2054,7 +2058,7 @@
                   "item": [
                     {
                       "type": "form",
-                      "tag": "el-form",
+                      "tag": "form-comp",
                       "fields": [
                         {
                           "type": "field",
@@ -2387,13 +2391,14 @@
               "tag": "el-dialog",
               "config": {
                 "type": "list",
+                "tag": "list-comp",
                 "config": {
                   "header": null,
                   "footer": null,
                   "item": [
                     {
                       "type": "form",
-                      "tag": "el-form",
+                      "tag": "form-comp",
                       "fields": [
                         {
                           "type": "field",
@@ -2468,7 +2473,7 @@
                           "slots": {
                             "default": {
                               "type": "form",
-                              "tag": "el-form",
+                              "tag": "form-comp",
                               "fields": [
                                 {
                                   "type": "field",
@@ -2576,7 +2581,7 @@
               "tag": "el-dialog",
               "config": {
                 "type": "form",
-                "tag": "el-form",
+                "tag": "form-comp",
                 "fields": [
                   {
                     "type": "field",
@@ -2589,13 +2594,37 @@
                         "tag": "span",
                         "value": "Directer"
                       },
-                      "default": [
-                        {
-                          "type": "list",
+                      "default": {
+                        "type": "list",
+                        "tag": "list-comp",
+                        "config": {
+                          "footer": {
+                            "tag": "el-button",
+                            "trigger": "click",
+                            "triggerCb": {
+                              "type": "insert",
+                              "value": {
+                                "job": 1,
+                                "name": "",
+                                "pcId": "",
+                                "pos": "",
+                                "role": ""
+                              }
+                            },
+                            "slots": {
+                              "icon": {
+                                "tag": "Plus"
+                              }
+                            },
+                            "attrs": {
+                              "link": true,
+                              "key": "insert"
+                            }
+                          },
                           "item": [
                             {
                               "type": "form",
-                              "tag": "el-form",
+                              "tag": "form-comp",
                               "fields": [
                                 {
                                   "type": "field",
@@ -2665,31 +2694,8 @@
                               }
                             }
                           ]
-                        },
-                        {
-                          "tag": "el-button",
-                          "trigger": "click",
-                          "triggerCb": {
-                            "type": "insert",
-                            "value": {
-                              "job": 1,
-                              "name": "",
-                              "pcId": "",
-                              "pos": "",
-                              "role": ""
-                            }
-                          },
-                          "slots": {
-                            "icon": {
-                              "tag": "Plus"
-                            }
-                          },
-                          "attrs": {
-                            "link": true,
-                            "key": "insert"
-                          }
                         }
-                      ]
+                      }
                     }
                   },
                   {
@@ -2703,13 +2709,37 @@
                         "tag": "span",
                         "value": "Writer"
                       },
-                      "default": [
-                        {
-                          "type": "list",
+                      "default": {
+                        "type": "list",
+                        "tag": "list-comp",
+                        "config": {
+                          "footer": {
+                            "tag": "el-button",
+                            "trigger": "click",
+                            "triggerCb": {
+                              "type": "insert",
+                              "value": {
+                                "job": 5,
+                                "name": "",
+                                "pcId": "",
+                                "pos": "",
+                                "role": ""
+                              }
+                            },
+                            "slots": {
+                              "icon": {
+                                "tag": "Plus"
+                              }
+                            },
+                            "attrs": {
+                              "link": true,
+                              "key": "insert"
+                            }
+                          },
                           "item": [
                             {
                               "type": "form",
-                              "tag": "el-form",
+                              "tag": "form-comp",
                               "fields": [
                                 {
                                   "type": "field",
@@ -2779,31 +2809,8 @@
                               }
                             }
                           ]
-                        },
-                        {
-                          "tag": "el-button",
-                          "trigger": "click",
-                          "triggerCb": {
-                            "type": "insert",
-                            "value": {
-                              "job": 5,
-                              "name": "",
-                              "pcId": "",
-                              "pos": "",
-                              "role": ""
-                            }
-                          },
-                          "slots": {
-                            "icon": {
-                              "tag": "Plus"
-                            }
-                          },
-                          "attrs": {
-                            "link": true,
-                            "key": "insert"
-                          }
                         }
-                      ]
+                      }
                     }
                   },
                   {
@@ -2817,13 +2824,37 @@
                         "tag": "span",
                         "value": "Stars"
                       },
-                      "default": [
-                        {
-                          "type": "list",
+                      "default": {
+                        "type": "list",
+                        "tag": "list-comp",
+                        "config": {
+                          "footer": {
+                            "tag": "el-button",
+                            "trigger": "click",
+                            "triggerCb": {
+                              "type": "insert",
+                              "value": {
+                                "job": 2,
+                                "name": "",
+                                "pcId": "",
+                                "pos": "",
+                                "role": ""
+                              }
+                            },
+                            "slots": {
+                              "icon": {
+                                "tag": "Plus"
+                              }
+                            },
+                            "attrs": {
+                              "link": true,
+                              "key": "insert"
+                            }
+                          },
                           "item": [
                             {
                               "type": "form",
-                              "tag": "el-form",
+                              "tag": "form-comp",
                               "fields": [
                                 {
                                   "type": "field",
@@ -2909,31 +2940,8 @@
                               }
                             }
                           ]
-                        },
-                        {
-                          "tag": "el-button",
-                          "trigger": "click",
-                          "triggerCb": {
-                            "type": "insert",
-                            "value": {
-                              "job": 2,
-                              "name": "",
-                              "pcId": "",
-                              "pos": "",
-                              "role": ""
-                            }
-                          },
-                          "slots": {
-                            "icon": {
-                              "tag": "Plus"
-                            }
-                          },
-                          "attrs": {
-                            "link": true,
-                            "key": "insert"
-                          }
                         }
-                      ]
+                      }
                     }
                   }
                 ],
@@ -2982,7 +2990,7 @@
               "tag": "el-dialog",
               "config": {
                 "type": "form",
-                "tag": "el-form",
+                "tag": "form-comp",
                 "fields": [
                   {
                     "type": "field",
@@ -2995,13 +3003,37 @@
                         "tag": "span",
                         "value": "Production Companies"
                       },
-                      "default": [
-                        {
-                          "type": "list",
+                      "default": {
+                        "type": "list",
+                        "tag": "list-comp",
+                        "config": {
+                          "footer": {
+                            "tag": "el-button",
+                            "trigger": "click",
+                            "triggerCb": {
+                              "type": "insert",
+                              "value": {
+                                "attribute": "",
+                                "coId": "",
+                                "name": "",
+                                "pos": "",
+                                "type": "0"
+                              }
+                            },
+                            "slots": {
+                              "icon": {
+                                "tag": "Plus"
+                              }
+                            },
+                            "attrs": {
+                              "link": true,
+                              "key": "insert"
+                            }
+                          },
                           "item": [
                             {
                               "type": "form",
-                              "tag": "el-form",
+                              "tag": "form-comp",
                               "fields": [
                                 {
                                   "type": "field",
@@ -3087,31 +3119,8 @@
                               }
                             }
                           ]
-                        },
-                        {
-                          "tag": "el-button",
-                          "trigger": "click",
-                          "triggerCb": {
-                            "type": "insert",
-                            "value": {
-                              "attribute": "",
-                              "coId": "",
-                              "name": "",
-                              "pos": "",
-                              "type": "0"
-                            }
-                          },
-                          "slots": {
-                            "icon": {
-                              "tag": "Plus"
-                            }
-                          },
-                          "attrs": {
-                            "link": true,
-                            "key": "insert"
-                          }
                         }
-                      ]
+                      }
                     }
                   },
                   {
@@ -3125,13 +3134,37 @@
                         "tag": "span",
                         "value": "Distributor Companies"
                       },
-                      "default": [
-                        {
-                          "type": "list",
+                      "default": {
+                        "type": "list",
+                        "tag": "list-comp",
+                        "config": {
+                          "footer": {
+                            "tag": "el-button",
+                            "trigger": "click",
+                            "triggerCb": {
+                              "type": "insert",
+                              "value": {
+                                "attribute": "",
+                                "coId": "",
+                                "name": "",
+                                "pos": "",
+                                "type": "1"
+                              }
+                            },
+                            "slots": {
+                              "icon": {
+                                "tag": "Plus"
+                              }
+                            },
+                            "attrs": {
+                              "link": true,
+                              "key": "insert"
+                            }
+                          },
                           "item": [
                             {
                               "type": "form",
-                              "tag": "el-form",
+                              "tag": "form-comp",
                               "fields": [
                                 {
                                   "type": "field",
@@ -3217,31 +3250,8 @@
                               }
                             }
                           ]
-                        },
-                        {
-                          "tag": "el-button",
-                          "trigger": "click",
-                          "triggerCb": {
-                            "type": "insert",
-                            "value": {
-                              "attribute": "",
-                              "coId": "",
-                              "name": "",
-                              "pos": "",
-                              "type": "1"
-                            }
-                          },
-                          "slots": {
-                            "icon": {
-                              "tag": "Plus"
-                            }
-                          },
-                          "attrs": {
-                            "link": true,
-                            "key": "insert"
-                          }
                         }
-                      ]
+                      }
                     }
                   }
                 ],

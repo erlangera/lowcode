@@ -72,7 +72,7 @@ const FormComp = defineComponent({
             remove: (index, key) => {
                 model[key].splice(index, 1);
             },
-            dialog: (key: string, cbConfig, index: undefined | number) => {
+            dialog: (cbConfig, index: undefined | number, key: string) => {
                 dialog.key = key;
                 dialog.visible = true;
                 dialog.config = cbConfig.config;

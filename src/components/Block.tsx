@@ -3,6 +3,7 @@ import { ElInput, ElSelect, ElOption, ElDatePicker, ElButton, ElCascader } from 
 import { Edit, Plus, Minus } from '@element-plus/icons-vue';
 import PlainTextComp from "./PlainTextComp";
 import FormComp from "./FormComp";
+import ListComp from "./ListComp";
 import { formCompContextKey } from "./constant";
 import { upperFirstCharacter, getValueByPath } from "../utils/converter";
 import CustomInputComp from "./custom/CustomInputComp";
@@ -20,7 +21,7 @@ function toRefByPath(obj: object, path: string) : any {
 const Block = defineComponent({
     name: 'Block',
     components: {
-        ElInput, ElSelect, ElOption, ElDatePicker, ElButton, ElCascader, Edit, Plus, Minus, PlainTextComp, FormComp, CustomInputComp, CustomTextareaComp, CustomImageUploadComp
+        ElInput, ElSelect, ElOption, ElDatePicker, ElButton, ElCascader, Edit, Plus, Minus, ListComp, PlainTextComp, FormComp, CustomInputComp, CustomTextareaComp, CustomImageUploadComp
     },
     props: {
         config: {
@@ -39,6 +40,11 @@ const Block = defineComponent({
     setup(props, ctx) {
         const { config, field: fieldConfig, index } = props;
 
+        // 数组循环渲染
+        if (Array.isArray(config)) {
+            return () => config.map(item => <Block config={item} field={fieldConfig} index={index} {...item.attrs}></Block>)
+        }
+
         // 处理FormComp FormItemComp provide的属性
         const formInject = inject(formCompContextKey);
         const { model, emit } = formInject;
@@ -47,28 +53,13 @@ const Block = defineComponent({
             ? toRef(fieldConfig?.key ? getValueByPath(model, fieldConfig.key) : model, index)
             : (fieldConfig?.key ? toRefByPath(model, fieldConfig.key) : toRef(formInject, 'model'));
 
-        // list
-        if (config.type === 'list') {
-            return () => valueRef.value.map((_, i) => <Block config={config.item} field={fieldConfig} index={i} key={`${valueRef.value.length}-${i}`}></Block>)
-        }
-
-        // 子表单
-        if (config.type === 'form') {
-            return () => <FormComp v-model={valueRef.value} index={index} config={config} ></FormComp>;
-        }
-
-        if (Array.isArray(config)) {
-            return () => config.map(item => <Block config={item} field={fieldConfig} index={index} {...item.attrs}></Block>)
-        }
-
-
         // 处理监听
         const listeners = {};
         if (config.trigger) {
             listeners[`on${upperFirstCharacter(config.trigger)}`] = () => {
                 switch (config.triggerCb.type) {
                     case 'dialog':
-                        emit('dialog', fieldConfig.key, config.triggerCb, index);
+                        emit('dialog', config.triggerCb, index, fieldConfig?.key);
                         break;
                     case 'insert':
                         let value = config.triggerCb.value;
@@ -105,7 +96,8 @@ const Block = defineComponent({
         } else {
             // 组件
             const component = resolveComponent(config.tag);
-            return () => <component v-model={valueRef.value} index={index} {...config.attrs} {...listeners}>{{
+            // TODO 解析组件失败的情况
+            return () => <component v-model={valueRef.value} index={index} config={config} field={fieldConfig} {...ctx.attrs} {...config.attrs} {...listeners}>{{
                 ...slots
             }}</component>;
         }

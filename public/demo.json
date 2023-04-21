@@ -1,6 +1,6 @@
 {
   "type": "form",
-  "tag": "el-form",
+  "tag": "form-comp",
   "fields": [
     {
       "type": "field",
@@ -152,7 +152,7 @@
       "slots": {
         "default": {
           "type": "form",
-          "tag": "el-form",
+          "tag": "form-comp",
           "fields": [
             {
               "type": "field",
@@ -236,7 +236,7 @@
               "tag": "el-dialog",
               "config": {
                 "type": "form",
-                "tag": "el-form",
+                "tag": "form-comp",
                 "fields": [
                   {
                     "type": "field",
@@ -294,7 +294,7 @@
                             "tag": "el-dialog",
                             "config": {
                               "type": "form",
-                              "tag": "el-form",
+                              "tag": "form-comp",
                               "fields": [
                                 {
                                   "type": "field",
@@ -360,9 +360,27 @@
           "tag": "span",
           "value": "Nickname"
         },
-        "default": [
-          {
-            "type": "list",
+        "default": {
+          "type": "list",
+          "tag": "list-comp",
+          "config": {
+            "footer": {
+              "tag": "el-button",
+              "trigger": "click",
+              "triggerCb": {
+                "type": "insert",
+                "value": ""
+              },
+              "slots": {
+                "icon": {
+                  "tag": "Plus"
+                }
+              },
+              "attrs": {
+                "link": true,
+                "key": "insert"
+              }
+            },
             "item": [
               {
                 "tag": "el-input"
@@ -380,25 +398,8 @@
                 }
               }
             ]
-          },
-          {
-            "tag": "el-button",
-            "trigger": "click",
-            "triggerCb": {
-              "type": "insert",
-              "value": ""
-            },
-            "slots": {
-              "icon": {
-                "tag": "Plus"
-              }
-            },
-            "attrs": {
-              "link": true,
-              "key": "insert"
-            }
           }
-        ]
+        }
       }
     },
     {
@@ -411,13 +412,34 @@
           "tag": "span",
           "value": "Children"
         },
-        "default": [
-          {
-            "type": "list",
+        "default": {
+          "type": "list",
+          "tag": "list-comp",
+          "config": {
+            "footer": {
+              "tag": "el-button",
+              "trigger": "click",
+              "triggerCb": {
+                "type": "insert",
+                "value": {
+                  "name": "",
+                  "age": null
+                }
+              },
+              "slots": {
+                "icon": {
+                  "tag": "Plus"
+                }
+              },
+              "attrs": {
+                "link": true,
+                "key": "insert"
+              }
+            },
             "item": [
               {
                 "type": "form",
-                "tag": "el-form",
+                "tag": "form-comp",
                 "fields": [
                   {
                     "type": "field",
@@ -471,28 +493,8 @@
                 }
               }
             ]
-          },
-          {
-            "tag": "el-button",
-            "trigger": "click",
-            "triggerCb": {
-              "type": "insert",
-              "value": {
-                "name": "",
-                "age": null
-              }
-            },
-            "slots": {
-              "icon": {
-                "tag": "Plus"
-              }
-            },
-            "attrs": {
-              "link": true,
-              "key": "insert"
-            }
           }
-        ]
+        }
       }
     },
     {
@@ -505,9 +507,27 @@
           "tag": "span",
           "value": "Brother"
         },
-        "default": [
-          {
-            "type": "list",
+        "default": {
+          "type": "list",
+          "tag": "list-comp",
+          "config": {
+            "footer": {
+              "tag": "el-button",
+              "trigger": "click",
+              "triggerCb": {
+                "type": "insert",
+                "value": null
+              },
+              "slots": {
+                "icon": {
+                  "tag": "Plus"
+                }
+              },
+              "attrs": {
+                "link": true,
+                "key": "insert"
+              }
+            },
             "item": [
               {
                 "tag": "plain-text-comp"
@@ -520,7 +540,7 @@
                   "tag": "el-dialog",
                   "config": {
                     "type": "form",
-                    "tag": "el-form",
+                    "tag": "form-comp",
                     "fields": [
                       {
                         "type": "field",
@@ -555,6 +575,65 @@
                             "tag": "el-input"
                           }
                         }
+                      },
+                      {
+                        "type": "field",
+                        "key": "father",
+                        "valueType": "object",
+                        "default": null,
+                        "slots": {
+                          "label": {
+                            "tag": "span",
+                            "value": "Father"
+                          },
+                          "default": [
+                            {
+                              "tag": "plain-text-comp"
+                            },
+                            {
+                              "tag": "el-button",
+                              "trigger": "click",
+                              "triggerCb": {
+                                "type": "dialog",
+                                "tag": "el-dialog",
+                                "config": {
+                                  "type": "form",
+                                  "tag": "form-comp",
+                                  "fields": [
+                                    {
+                                      "type": "field",
+                                      "key": "name",
+                                      "valueType": "string",
+                                      "default": "",
+                                      "required": true,
+                                      "tag": "el-form-item",
+                                      "slots": {
+                                        "label": {
+                                          "tag": "span",
+                                          "value": "Name"
+                                        },
+                                        "default": {
+                                          "tag": "el-input"
+                                        }
+                                      }
+                                    }
+                                  ],
+                                  "attrs": {
+                                    "labelWidth": "120px"
+                                  }
+                                }
+                              },
+                              "slots": {
+                                "icon": {
+                                  "tag": "Edit"
+                                }
+                              },
+                              "attrs": {
+                                "link": true
+                              }
+                            }
+                          ]
+                        }
                       }
                     ],
                     "attrs": {
@@ -584,25 +663,8 @@
                 }
               }
             ]
-          },
-          {
-            "tag": "el-button",
-            "trigger": "click",
-            "triggerCb": {
-              "type": "insert",
-              "value": null
-            },
-            "slots": {
-              "icon": {
-                "tag": "Plus"
-              }
-            },
-            "attrs": {
-              "link": true,
-              "key": "insert"
-            }
           }
-        ]
+        }
       }
     }
   ],
