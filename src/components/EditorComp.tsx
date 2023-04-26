@@ -35,7 +35,7 @@ export default defineComponent({
 
         let view = new EditorView({
             state: startState,
-            parent: this.$refs.editorRef,
+            parent: this.$refs.editorRef as HTMLElement,
         });
     },
 });

@@ -13,18 +13,18 @@ export default defineComponent({
     },
     emits: ['update:modelValue'],
     setup(props, ctx) {
-        const handleChange = (value) => {
+        const handleChange = (value: string) => {
             ctx.emit('update:modelValue', value)
         }
 
-        const imageRef = ref(null);
+        const imageRef = ref();
         const loading = ref(false);
         const progress = ref(0);
-        const onBeforeUpload = (file) => {
+        const onBeforeUpload = (file: File) => {
             console.log('可校验文件', file);
         }
-        let timer;
-        const httpRequest = (option) => {
+        let timer: number | null;
+        const httpRequest = (option: any) => {
             console.log(option);
             loading.value = true;
             progress.value = 0;
@@ -34,7 +34,7 @@ export default defineComponent({
             }
             timer = setInterval(() => {
                 if (progress.value >= 100) {
-                    clearInterval(timer);
+                    clearInterval(timer as number);
                     timer = null;
                     loading.value = false;
                     const url = URL.createObjectURL(option.file);
@@ -46,7 +46,7 @@ export default defineComponent({
             }, 40)
         }
         const abort = () => {
-            clearInterval(timer);
+            clearInterval(timer as number);
             timer = null;
             loading.value = false;
         }

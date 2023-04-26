@@ -26,7 +26,7 @@ const FormComp = defineComponent({
         ctx.emit('update:model-value', model);
 
         // 实现弹窗的功能可放到FormComp组件此时可实现多层弹窗
-        const dialogFormRef = ref(null);
+        const dialogFormRef = ref();
         const dialog = reactive({
             key: '',
             visible: false,
@@ -45,7 +45,7 @@ const FormComp = defineComponent({
         const handleOk = () => {
             // 提交校验
             if (dialogFormRef.value) {
-                dialogFormRef.value.validate((valid) => {
+                dialogFormRef.value.validate((valid: boolean) => {
                     if (valid) {
                         if (dialog.index === undefined) {
                             setValueByPath(model, dialog.key, dialog.model);
@@ -69,7 +69,7 @@ const FormComp = defineComponent({
             insert: (value, index, key) => {
                 model[key].push(value);
             },
-            remove: (index, key) => {
+            remove: (index: number, key) => {
                 model[key].splice(index, 1);
             },
             dialog: (cbConfig, index: undefined | number, key: string) => {
@@ -96,7 +96,7 @@ const FormComp = defineComponent({
         });
 
         // 向父组件暴露属性
-        const formRef = ref(null);
+        const formRef = ref();
         ctx.expose({
             get validate() {
                 return formRef.value.validate
@@ -123,9 +123,9 @@ const FormComp = defineComponent({
                 default: () => {
                     switch (dialog.config.type) {
                         case 'form':
-                            return <FormComp ref={dialogFormRef} v-model={dialog.model} config={dialog.config}></FormComp>;
+                            return <FormComp ref={dialogFormRef} v-model={dialog.model} config={dialog.config!}></FormComp>;
                         case 'transfer':
-                            return <CustomTransferComp v-model={dialog.model} config={dialog.config}></CustomTransferComp>;
+                            return <CustomTransferComp v-model={dialog.model} config={dialog.config!}></CustomTransferComp>;
                         case 'list':
                             return <ListComp v-model={dialog.model} config={dialog.config}></ListComp>;
                         default:

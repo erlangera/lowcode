@@ -26,7 +26,7 @@ import FormComp from "./components/FormComp";
 import EditorComp from "./components/EditorComp";
 
 const flag = ref(false);
-const formConfig = ref(null);
+const formConfig = ref();
 // 因为会使用v-model更新model所以不能使用const，此处也可以使用ref或者对象的字段代替
 // 后期将仿照el-form使用model属性，届时将无此限制，不过使用model时字段值双向绑定时时将会比较困难 TODO
 let model = {};
@@ -44,8 +44,8 @@ const configList = [
     label: 'TV'
   }
 ]
-const currentConfig = ref(null)
-const loadConfig = (val) => {
+const currentConfig = ref()
+const loadConfig = (val: string) => {
   flag.value = false;
   fetch(val).then(data => data.json()).then(data => {
     formConfig.value = data;
@@ -101,9 +101,9 @@ const setForm = () => {
     flag.value = true;
   });
 }
-const formCompRef = ref(null);
+const formCompRef = ref();
 const validateForm = () => {
-  formCompRef.value.validate((valid) => {
+  formCompRef.value.validate((valid: boolean) => {
     if (valid) {
       console.log("submit!");
     } else {

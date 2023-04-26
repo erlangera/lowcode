@@ -1,7 +1,7 @@
-import { defineComponent, defineAsyncComponent, provide, inject } from "vue";
+import { defineComponent, defineAsyncComponent } from "vue";
 import { ElFormItem } from "element-plus";
 
-function formatToElementRules(config) {
+function formatToElementRules(config: Record<string, any>) {
     let res = [];
     if (config.required) {
         res.push({
@@ -42,6 +42,7 @@ export default defineComponent({
                 if (!Array.isArray(slot)) {
                     slot = [slot]
                 }
+                // @ts-ignore
                 slots[key] = () => slot.map(item => <Block config={item} field={config} key={item.key || item.value} {...item.attrs}></Block>);
             }
         }

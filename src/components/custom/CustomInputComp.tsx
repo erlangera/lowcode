@@ -15,12 +15,12 @@ export default defineComponent({
     },
     emits: ['update:modelValue'],
     setup(props, ctx) {
-        const handleChange = (value) => {
+        const handleChange = (value: string) => {
             ctx.emit('update:modelValue', value)
         }
         return () => <ElInput modelValue={props.modelValue} onUpdate:modelValue={handleChange}>{{
-            append: () => <div style={{ color: props.modelValue.length > props.maxLength ? 'red' : '' }}>
-                {props.modelValue.length + '/' + props.maxLength}
+            append: () => props.maxLength && <div style={{ color: props.modelValue?.length! > props.maxLength ? 'red' : '' }}>
+                {props.modelValue?.length + '/' + props.maxLength}
             </div>
         }}</ElInput >
     },

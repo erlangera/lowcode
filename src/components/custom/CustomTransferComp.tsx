@@ -15,10 +15,10 @@ export default defineComponent({
     },
     emits: ['update:modelValue'],
     setup(props, ctx) {
-        const handleChange = (value) => {
+        const handleChange = (value: any[]) => {
             ctx.emit('update:modelValue', value)
         }
         return () => <ElTransfer modelValue={props.modelValue} onUpdate:modelValue={handleChange}
-            titles={['Select items', 'Selected']} filterable filter-placeholder={"Search..."} data={props.config.data} />
+            titles={['Select items', 'Selected']} filterable filter-placeholder={"Search..."} data={props.config?.data} />
     }
 });

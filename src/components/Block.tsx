@@ -46,7 +46,7 @@ const Block = defineComponent({
         }
 
         // 处理FormComp FormItemComp provide的属性
-        const formInject = inject(formCompContextKey);
+        const formInject: Record<string, any> = inject(formCompContextKey);
         const { model, emit } = formInject;
 
         const valueRef = index !== undefined
@@ -54,7 +54,7 @@ const Block = defineComponent({
             : (fieldConfig?.key ? toRefByPath(model, fieldConfig.key) : toRef(formInject, 'model'));
 
         // 处理监听
-        const listeners = {};
+        const listeners: Record<string, Function> = {};
         if (config.trigger) {
             listeners[`on${upperFirstCharacter(config.trigger)}`] = () => {
                 switch (config.triggerCb.type) {
