@@ -97,7 +97,7 @@ const Block = defineComponent({
             // 组件
             const component = resolveComponent(config.tag);
             // TODO 解析组件失败的情况
-            return () => <component v-model={valueRef.value} index={index} config={config} field={fieldConfig} {...ctx.attrs} {...config.attrs} {...listeners}>{{
+            return () => <component v-model={valueRef.value} index={index} config={config} field={fieldConfig} {...ctx.attrs} {...config.attrs} {...listeners} disabled={fieldConfig && fieldConfig.disabled}>{{
                 ...slots
             }}</component>;
         }

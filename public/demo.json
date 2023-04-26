@@ -8,6 +8,7 @@
       "valueType": "string",
       "default": "",
       "required": true,
+      "disabled": true,
       "rules": [
         {
           "max": 10,
@@ -37,6 +38,7 @@
       "valueType": "string",
       "default": "",
       "required": true,
+      "disabled": true,
       "tag": "el-form-item",
       "slots": {
         "label": {
@@ -94,6 +96,7 @@
       "key": "work.company",
       "valueType": "string",
       "default": "",
+      "disabled": true,
       "tag": "el-form-item",
       "slots": {
         "label": {
