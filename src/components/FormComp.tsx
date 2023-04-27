@@ -17,6 +17,10 @@ const FormComp = defineComponent({
         config: {
             type: Object,
             required: true
+        },
+        disabled: {
+            type: Boolean,
+            required: false
         }
     },
     emits: ['update:model-value'],
@@ -92,7 +96,10 @@ const FormComp = defineComponent({
         // 后代组件暴露属性和方法
         provide(formCompContextKey, {
             model,
-            emit
+            emit,
+            get disabled(){
+                return props.disabled
+            }
         });
 
         // 向父组件暴露属性
@@ -118,7 +125,7 @@ const FormComp = defineComponent({
         // 渲染模板，此处使用了递归组件的方式渲染对话框中的表单
         const { fields, attrs } = props.config;
         return () => <ElForm ref={formRef} model={model} {...attrs}>{[
-            ...fields.map(field => <FormItemComp config={field}></FormItemComp>),
+            ...fields.map(field => <FormItemComp config={field} disabled={props.disabled}></FormItemComp>),
             dialog.visible ? <ElDialog v-model={dialog.visible} title={formatFromList(dialog.key, fields)} center close-on-click-modal={false} appendToBody {...dialog.attrs}>{{
                 default: () => {
                     switch (dialog.config.type) {

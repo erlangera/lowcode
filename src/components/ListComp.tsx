@@ -22,6 +22,10 @@ const ListComp: any = defineComponent({
         field: {
             type: Object,
             required: false
+        },
+        disabled: {
+            type: Boolean,
+            required: false,
         }
     },
     emits: ['update:modelValue'],
@@ -83,7 +87,10 @@ const ListComp: any = defineComponent({
         // 后代组件暴露属性和方法
         provide(formCompContextKey, {
             model,
-            emit
+            emit,
+            get disabled(){
+                return props.disabled
+            }
         });
         const {config} = props.config;
         return () => <div class="list-comp">{[
@@ -91,7 +98,7 @@ const ListComp: any = defineComponent({
             config.header ? <Block config={config.header} {...config.header.attrs}></Block> : null,
             // 此处key为特殊设置保证删除项时不渲染错误
             // @ts-ignore
-            config.item ? model.map((item, i) => <Block config={config.item} index={i} key={`${model.length}-${i}`} {...config.item.attrs}></Block>) : null,
+            config.item ? model.map((item, i) => <Block config={config.item} index={i} key={`${model.length}-${i}`} {...config.item.attrs} disabled={props.disabled}></Block>) : null,
             // @ts-ignore
             config.footer ? <Block config={config.footer} {...config.footer.attrs}></Block> : null,
             dialog.visible ? <ElDialog v-model={dialog.visible} title={`${props.field?.slots?.label?.value} ${dialog.index + 1}`} center close-on-click-modal={false} appendToBody {...dialog.attrs}>{{

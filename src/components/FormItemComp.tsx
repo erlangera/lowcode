@@ -23,6 +23,10 @@ export default defineComponent({
         config: {
             type: Object,
             required: true
+        },
+        disabled: {
+            type: Boolean,
+            required: false
         }
     },
     components: {

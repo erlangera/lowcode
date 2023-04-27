@@ -12,7 +12,7 @@ import CustomImageUploadComp from "./custom/CustomImageUploadComp";
 
 const reserveTags = ['span', 'div', 'p']
 
-function toRefByPath(obj: object, path: string) : any {
+function toRefByPath(obj: object, path: string): any {
     const segments = path.split('.');
     const key = segments.pop();
     return toRef(getValueByPath(obj, segments.join('.')), key);
@@ -97,7 +97,7 @@ const Block = defineComponent({
             // 组件
             const component = resolveComponent(config.tag);
             // TODO 解析组件失败的情况
-            return () => <component v-model={valueRef.value} index={index} config={config} field={fieldConfig} {...ctx.attrs} {...config.attrs} {...listeners} disabled={fieldConfig && fieldConfig.disabled}>{{
+            return () => <component v-model={valueRef.value} index={index} config={config} field={fieldConfig} {...ctx.attrs} {...config.attrs} {...listeners} disabled={formInject.disabled || (fieldConfig && fieldConfig.disabled)}>{{
                 ...slots
             }}</component>;
         }

@@ -150,6 +150,7 @@
       "type": "field",
       "key": "mother",
       "valueType": "object",
+      "disabled": true,
       "default": {},
       "tag": "el-form-item",
       "slots": {
@@ -222,6 +223,7 @@
       "key": "father",
       "valueType": "object",
       "default": null,
+      "disabled": true,
       "slots": {
         "label": {
           "tag": "span",
